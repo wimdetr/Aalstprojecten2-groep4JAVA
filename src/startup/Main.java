@@ -27,7 +27,7 @@ public class Main extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                System.out.println("Hello World! hahahahaa");
             }
         });
         
@@ -46,6 +46,7 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        System.out.println("lol");
     }
     
 }
