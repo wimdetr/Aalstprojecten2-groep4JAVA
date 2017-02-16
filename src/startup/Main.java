@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project.pkg2.administrator;
+package startup;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author ~dreeki~
  */
-public class Project2Administrator extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
