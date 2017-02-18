@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="GridPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints vgrow="NEVER" />
+      <RowConstraints vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints vgrow="NEVER" />
+    <RowConstraints vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+  </rowConstraints>
+   <children>
+      <Label text="Gebruikersnaam" />
+      <Label text="Wachtwoord" GridPane.rowIndex="3" />
+      <TextField fx:id="tfGebruikersnaam" GridPane.rowIndex="1" />
+      <TextField fx:id="tfWachtwoord" GridPane.rowIndex="4" />
+      <Hyperlink fx:id="hlWachtwoordVergeten" text="Wachtwoord vergeten?" GridPane.rowIndex="7" />
+      <GridPane GridPane.rowIndex="6">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnInloggen" mnemonicParsing="false" text="Inloggen" GridPane.columnIndex="1" />
+            <CheckBox fx:id="checkBoxOnthoudWachtwoord" mnemonicParsing="false" text="Wachtwoord onthouden" />
+         </children>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</fx:root>
