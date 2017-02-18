@@ -24,5 +24,6 @@ public class Main extends Application {
         stage.setTitle("Administrator login");
         stage.setResizable(false);
         stage.show();
+        
     }
 }
