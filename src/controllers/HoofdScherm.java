@@ -54,7 +54,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonAdminToevoegenScherm(ActionEvent event) {
-
+        this.setCenter(new AdminToevoegenScherm());
     }
 
     @FXML

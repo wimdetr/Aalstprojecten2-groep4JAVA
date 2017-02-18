@@ -6,13 +6,16 @@
 package controllers;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -40,14 +43,20 @@ public class LoginScherm extends GridPane {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try{
+        try {
             loader.load();
-        }catch(IOException ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
     }
-    
-    
-     
-    
+
+    @FXML
+    void logIn(ActionEvent event) {
+        Stage st = (Stage) this.getScene().getWindow();
+        HoofdScherm hoofd = new HoofdScherm();
+        Scene sc = new Scene(hoofd);
+        st.setScene(sc);
+        st.setResizable(true);
+    }
+
 }
