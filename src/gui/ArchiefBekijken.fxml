@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="595.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="607.0" type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
@@ -20,25 +21,20 @@
       <ColumnConstraints hgrow="ALWAYS" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints vgrow="ALWAYS" />
     <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="30.0" vgrow="NEVER" />
     <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
       <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
       <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
       <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="8.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-    <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="NEVER" />
       <RowConstraints vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <Label text="Profiel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Label text="Profiel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label text="Naam:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <Label text="Naam:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -46,7 +42,7 @@
             <Insets left="50.0" right="15.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Voornaam:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label text="Voornaam:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -54,7 +50,7 @@
             <Insets left="50.0" right="15.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Email adres:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <Label text="Email adres:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -62,53 +58,22 @@
             <Insets left="50.0" right="15.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Adres Organisatie:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+      <TextField fx:id="tfNaam" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+      <TextField fx:id="tfVoornaam" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+      <TextField fx:id="tfEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+      <Button fx:id="btnOpslaan" mnemonicParsing="false" prefHeight="28.0" prefWidth="180.0" text="Opslaan" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="15.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Straat &amp; nummer:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="15.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Wachtwoord:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="15.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Plaats &amp; Postcode:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="50.0" right="15.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="7" />
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="8" />
-      <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="180.0" text="Button" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="9" />
-      <ImageView fitHeight="113.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="3" GridPane.valignment="TOP">
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <ImageView fx:id="ivAfbeelding" fitHeight="113.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="3" GridPane.valignment="TOP">
          <image>
-            <Image url="@../../../../maxresdefault.jpg" />
+            <Image url="@maxresdefault.jpg" />
          </image>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </ImageView>
-      <Label text="naam persoon" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+      <Label fx:id="lblHuidigProfielNaam" text="naam persoon" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+      <Hyperlink fx:id="hlWachtwoordWijzigen" text="Wachtwoord wijzigen?" GridPane.columnIndex="3" GridPane.rowIndex="4" />
    </children>
-</GridPane>
+</fx:root>
