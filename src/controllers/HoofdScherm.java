@@ -37,6 +37,7 @@ public class HoofdScherm extends BorderPane {
     private Button logOutButton;
 
     public HoofdScherm() {
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -74,7 +75,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonProfielScherm(ActionEvent event) {
-
+        this.setCenter(new Archiefbekijken());
     }
 
 }
