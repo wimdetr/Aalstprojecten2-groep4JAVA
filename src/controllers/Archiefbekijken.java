@@ -19,7 +19,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author niels
  */
-public class Archiefbekijken extends GridPane{
+public class Archiefbekijken extends GridPane {
     @FXML
     private TextField tfNaam;
 
