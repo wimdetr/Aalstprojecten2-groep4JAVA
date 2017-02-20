@@ -15,22 +15,24 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
       <RowConstraints vgrow="NEVER" />
       <RowConstraints vgrow="NEVER" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-      <RowConstraints vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
     <RowConstraints vgrow="NEVER" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
     <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
   </rowConstraints>
    <children>
-      <Label text="Gebruikersnaam" />
-      <Label text="Wachtwoord" GridPane.rowIndex="3" />
-      <TextField fx:id="tfGebruikersnaam" GridPane.rowIndex="1" />
-      <TextField fx:id="tfWachtwoord" GridPane.rowIndex="4" />
-      <Hyperlink fx:id="hlWachtwoordVergeten" text="Wachtwoord vergeten?" GridPane.rowIndex="7" />
-      <GridPane GridPane.rowIndex="6">
+      <Label text="Gebruikersnaam" GridPane.rowIndex="1" />
+      <Label text="Wachtwoord" GridPane.rowIndex="5" />
+      <TextField fx:id="tfGebruikersnaam" onKeyPressed="#keyPressedGebruikersnaamVeld" GridPane.rowIndex="2" />
+      <TextField fx:id="tfWachtwoord" onKeyPressed="#keyPressedWachtwoordVeld" GridPane.rowIndex="5" />
+      <Hyperlink fx:id="hlWachtwoordVergeten" onKeyPressed="#keyPressedWachtwoordVergeten" text="Wachtwoord vergeten?" GridPane.rowIndex="9" />
+      <GridPane GridPane.rowIndex="8">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="RIGHT" minWidth="10.0" prefWidth="100.0" />
@@ -39,13 +41,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnInloggen" mnemonicParsing="false" onAction="#logIn" text="Inloggen" GridPane.columnIndex="1" />
-            <CheckBox fx:id="checkBoxOnthoudWachtwoord" mnemonicParsing="false" text="Wachtwoord onthouden" />
+            <Button fx:id="btnInloggen" mnemonicParsing="false" onAction="#klikKnop" onKeyPressed="#keyPressedLoginKnop" text="Inloggen" GridPane.columnIndex="1" />
+            <CheckBox fx:id="checkBoxOnthoudWachtwoord" mnemonicParsing="false" onKeyPressed="#keyPressedCheckBox" text="Wachtwoord onthouden" />
          </children>
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </GridPane>
+      <Label fx:id="lblErrorBericht" text="-Gebruikersnaam of Wachtwoord incorrect!" textFill="#f50505" GridPane.halignment="LEFT" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
