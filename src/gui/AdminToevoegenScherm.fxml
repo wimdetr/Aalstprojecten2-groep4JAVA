@@ -6,10 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root hgap="10.0" type="GridPane" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<fx:root hgap="10.0" type="GridPane" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
@@ -33,11 +34,15 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label text="E-mail:" GridPane.rowIndex="3">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
+      <HBox alignment="TOP_RIGHT" GridPane.rowIndex="3">
+         <children>
+            <Label text="E-mail:">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
       <TextField fx:id="emailVeld" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -48,16 +53,24 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextField>
-      <Label text="Voornaam:" GridPane.rowIndex="1">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label text="Naam:" GridPane.rowIndex="2">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1">
+         <children>
+            <Label text="Voornaam:">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" GridPane.rowIndex="2">
+         <children>
+            <Label text="Naam:">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
       <TextField fx:id="naamVeld" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
