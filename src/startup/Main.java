@@ -6,6 +6,7 @@
 package startup;
 
 import controllers.LoginScherm;
+import domein.DomeinController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,7 +19,7 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) {
-        LoginScherm root = new LoginScherm();
+        LoginScherm root = new LoginScherm(new DomeinController());
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.setTitle("Administrator login");

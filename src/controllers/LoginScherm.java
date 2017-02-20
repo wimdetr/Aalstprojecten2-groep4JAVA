@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import domein.DomeinController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,8 +39,11 @@ public class LoginScherm extends GridPane {
 
     @FXML
     private CheckBox checkBoxOnthoudWachtwoord;
+    private DomeinController dc;
 
-    public LoginScherm() {
+    public LoginScherm(DomeinController dc) {
+        this.dc = dc;
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
