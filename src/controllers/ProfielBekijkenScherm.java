@@ -20,7 +20,7 @@ import javafx.scene.layout.GridPane;
  * @author niels
  */
 
-public class ProfielBekijken extends GridPane {
+public class ProfielBekijkenScherm extends GridPane {
     @FXML
     private TextField tfNaam;
 
@@ -42,10 +42,8 @@ public class ProfielBekijken extends GridPane {
     @FXML
     private Hyperlink hlWachtwoordWijzigen;
     
-    public ProfielBekijken() {
-        this.setId("test");
-        this.getStylesheets().add("/css/test.css");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ArchiefBekijken.fxml"));
+    public ProfielBekijkenScherm() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ProfielBekijkenScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
