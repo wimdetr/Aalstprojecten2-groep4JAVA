@@ -10,8 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -23,6 +21,9 @@ public class HoofdScherm extends BorderPane {
     @FXML
     private Button homeButton;
 
+    @FXML
+    private Button profielButton;
+    
     @FXML
     private Button analyseButton;
 
@@ -68,6 +69,11 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonJobcoachesScherm(ActionEvent event) {
+
+    }
+
+    @FXML
+    void toonProfielScherm(ActionEvent event) {
 
     }
 
