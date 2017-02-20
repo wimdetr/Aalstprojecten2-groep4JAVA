@@ -17,11 +17,11 @@ public class AdminMapper {
     }
     
     public boolean controleerOfAdminKanInloggen(String username, String wachtwoord){
-        return true;
+        return username.equals("dreeki") && wachtwoord.equals("test");
     }
     
     public Admin geefAdmin(String username){
-        return null;
+        return new Admin("De Witte", "Andreas", "dreeki");
     }
 
 }
