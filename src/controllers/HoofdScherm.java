@@ -74,7 +74,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonProfielScherm(ActionEvent event) {
-
+        
     }
 
 }
