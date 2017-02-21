@@ -19,7 +19,7 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) {
-        LoginScherm root = new LoginScherm(new DomeinController());
+        LoginScherm root = new LoginScherm(new DomeinController(), stage);
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.setTitle("Administrator login");
