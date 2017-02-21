@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -28,13 +29,13 @@ import javafx.stage.Stage;
  *
  * @author ~dreeki~
  */
-public class LoginScherm extends GridPane {
+public class LoginScherm extends GridPane{
 
     @FXML
     private TextField tfGebruikersnaam;
 
     @FXML
-    private TextField tfWachtwoord;
+    private PasswordField pfWachtwoord;
 
     @FXML
     private Hyperlink hlWachtwoordVergeten;
@@ -49,9 +50,12 @@ public class LoginScherm extends GridPane {
     private Label lblErrorBericht;
     
     private DomeinController dc;
+    
+    private Stage stage;
 
-    public LoginScherm(DomeinController dc) {
+    public LoginScherm(DomeinController dc, Stage stage) {
         this.dc = dc;
+        this.stage = stage;
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
         loader.setRoot(this);
@@ -75,10 +79,10 @@ public class LoginScherm extends GridPane {
     @FXML
     private void keyPressedGebruikersnaamVeld(KeyEvent event) {
         if(event.getCode() == KeyCode.ENTER){
-            veranderFocus(tfWachtwoord);
+            veranderFocus(pfWachtwoord);
         }
         if(event.getCode().equals(KeyCode.TAB)){
-            veranderFocus(tfWachtwoord);
+            veranderFocus(pfWachtwoord);
         }
     }
 
@@ -119,14 +123,13 @@ public class LoginScherm extends GridPane {
     }
     
     private void logIn(){
-        if(dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), tfWachtwoord.getText().trim())){
+        if(dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())){
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
             
-            Stage st = (Stage) this.getScene().getWindow();
-            HoofdScherm hoofd = new HoofdScherm();
+            HoofdScherm hoofd = new HoofdScherm(stage);
             Scene sc = new Scene(hoofd);
-            st.setScene(sc);
-            st.setResizable(true);
+            stage.setScene(sc);
+            stage.setResizable(true);
         }else{
             lblErrorBericht.setVisible(true);
         }

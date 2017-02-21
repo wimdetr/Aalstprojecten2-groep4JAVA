@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,7 +20,7 @@
       <RowConstraints vgrow="NEVER" />
       <RowConstraints vgrow="NEVER" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
     <RowConstraints vgrow="NEVER" />
       <RowConstraints vgrow="NEVER" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
@@ -28,9 +29,8 @@
   </rowConstraints>
    <children>
       <Label text="Gebruikersnaam" GridPane.rowIndex="1" />
-      <Label text="Wachtwoord" GridPane.rowIndex="5" />
+      <Label text="Wachtwoord" GridPane.rowIndex="4" />
       <TextField fx:id="tfGebruikersnaam" onKeyPressed="#keyPressedGebruikersnaamVeld" GridPane.rowIndex="2" />
-      <TextField fx:id="tfWachtwoord" onKeyPressed="#keyPressedWachtwoordVeld" GridPane.rowIndex="5" />
       <Hyperlink fx:id="hlWachtwoordVergeten" onKeyPressed="#keyPressedWachtwoordVergeten" text="Wachtwoord vergeten?" GridPane.rowIndex="9" />
       <GridPane GridPane.rowIndex="8">
         <columnConstraints>
@@ -49,6 +49,7 @@
          </GridPane.margin>
       </GridPane>
       <Label fx:id="lblErrorBericht" text="-Gebruikersnaam of Wachtwoord incorrect!" textFill="#f50505" GridPane.halignment="LEFT" />
+      <PasswordField fx:id="pfWachtwoord" onKeyPressed="#keyPressedWachtwoordVeld" GridPane.rowIndex="5" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
