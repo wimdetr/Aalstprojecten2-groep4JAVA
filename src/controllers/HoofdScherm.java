@@ -7,10 +7,13 @@ package controllers;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -35,8 +38,12 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     private Button logOutButton;
+    
+    private Stage stage;
 
-    public HoofdScherm() {
+    public HoofdScherm(Stage stage) {
+        this.stage = stage;
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -45,8 +52,14 @@ public class HoofdScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        
+        stage.setOnCloseRequest(this::sluitScherm);
     }
 
+    private void sluitScherm(Event event){
+        System.exit(0);
+    }
+    
     @FXML
     void logOut(ActionEvent event) {
         System.exit(0);
@@ -64,7 +77,14 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonHomeScherm(ActionEvent event) {
-
+        Stage stage = new Stage();
+        BevestigVerwijderenScherm bvs = new BevestigVerwijderenScherm("Bevestig Verwijderen Jobcoach Mark", "Bent u zeker dat u Jobcoach Mark wilt verwijderen?", this, stage);
+        Scene scene = new Scene(bvs, 700, 250);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setAlwaysOnTop(true);
+        stage.show();
+        //hoe verhinderen dat main stage kan gebruikt worden?
     }
 
     @FXML
