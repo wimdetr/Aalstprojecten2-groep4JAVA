@@ -15,9 +15,11 @@ import domein.repository.JobCoachRepository;
  * @author ~dreeki~
  */
 public class DomeinController {
+
     private Admin admin;
     private final AdminRepository adminRepo;
     private final JobCoachRepository jobCoachRepo;
+
     private final AnalyseRepository analyseRepo;
     private final WerkgeverRepository bedrijfRepo;
 
@@ -31,12 +33,16 @@ public class DomeinController {
     public Admin getAdmin() {
         return admin;
     }
-    
-    public boolean controleerOfAdminKanInloggen(String username, String wachtwoord){
+
+    public JobCoachRepository getJobCoachRepo() {
+        return jobCoachRepo;
+    }
+
+    public boolean controleerOfAdminKanInloggen(String username, String wachtwoord) {
         return adminRepo.controleerOfAdminKanInloggen(username, wachtwoord);
     }
-    
-    public void logAdminIn(String username){
+
+    public void logAdminIn(String username) {
         admin = adminRepo.geefAdmin(username);
     }
 }

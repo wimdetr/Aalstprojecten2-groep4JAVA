@@ -7,12 +7,17 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author ~dreeki~
  */
-public class JobCoach extends Persoon{
+public class JobCoach extends Persoon {
+
     private String naamBedrijf;
     private String straatBedrijf;
     private String nummerBedrijf;
@@ -20,61 +25,119 @@ public class JobCoach extends Persoon{
     private String gemeenteBedrijf;
     private List<Analyse> analyses;
 
+    private final StringProperty naam = new SimpleStringProperty();
+
+    public String getNaam() {
+        return naam.get();
+    }
+
+    public void setNaam(String value) {
+        naam.set(value);
+    }
+
+    public StringProperty naamProperty() {
+        return naam;
+    }
+    private final StringProperty voornaam = new SimpleStringProperty();
+
+    @Override
+    public String getVoornaam() {
+        return voornaam.get();
+    }
+
+    @Override
+    public void setVoornaam(String value) {
+        voornaam.set(value);
+    }
+
+    public StringProperty voornaamProperty() {
+        return voornaam;
+    }
+    private final StringProperty email = new SimpleStringProperty();
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public void setEmail(String value) {
+        email.set(value);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+    private final StringProperty bedrijf = new SimpleStringProperty();
+
+    public String getBedrijf() {
+        return bedrijf.get();
+    }
+
+    public void setBedrijf(String value) {
+        bedrijf.set(value);
+    }
+
+    public StringProperty bedrijfProperty() {
+        return bedrijf;
+    }
+    private final StringProperty straat = new SimpleStringProperty();
+
+    public String getStraat() {
+        return straat.get();
+    }
+
+    public void setStraat(String value) {
+        straat.set(value);
+    }
+
+    public StringProperty straatProperty() {
+        return straat;
+    }
+    private final IntegerProperty postcode = new SimpleIntegerProperty();
+
+    public int getPostcode() {
+        return postcode.get();
+    }
+
+    public void setPostcode(int value) {
+        postcode.set(value);
+    }
+
+    public IntegerProperty postcodeProperty() {
+        return postcode;
+    }
+    private final StringProperty gemeente = new SimpleStringProperty();
+
+    public String getGemeente() {
+        return gemeente.get();
+    }
+
+    public void setGemeente(String value) {
+        gemeente.set(value);
+    }
+
+    public StringProperty gemeenteProperty() {
+        return gemeente;
+    }
+
     public JobCoach(String naam, String voornaam, String email, String naamBedrijf, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
-        super(naam, voornaam, email);
-        this.naamBedrijf = naamBedrijf;
-        this.straatBedrijf = straatBedrijf;
-        this.nummerBedrijf = nummerBedrijf;
-        this.postcodeBedrijf = postcodeBedrijf;
-        this.gemeenteBedrijf = gemeenteBedrijf;
+        super(naam,voornaam,email);
+        setNaam(naam);
+        setVoornaam(voornaam);
+        setEmail(email);
+        setBedrijf(naamBedrijf);
+        setStraat(straatBedrijf + " " + nummerBedrijf);
+        setPostcode(postcodeBedrijf);
+        setGemeente(gemeenteBedrijf);
         analyses = new ArrayList<>();
+
     }
 
-    public String getNaamBedrijf() {
-        return naamBedrijf;
-    }
-
-    public void setNaamBedrijf(String naamBedrijf) {
-        this.naamBedrijf = naamBedrijf;
-    }
-
-    public String getStraatBedrijf() {
-        return straatBedrijf;
-    }
-
-    public void setStraatBedrijf(String straatBedrijf) {
-        this.straatBedrijf = straatBedrijf;
-    }
-
-    public String getNummerBedrijf() {
-        return nummerBedrijf;
-    }
-
-    public void setNummerBedrijf(String nummerBedrijf) {
-        this.nummerBedrijf = nummerBedrijf;
-    }
-
-    public int getPostcodeBedrijf() {
-        return postcodeBedrijf;
-    }
-
-    public void setPostcodeBedrijf(int postcodeBedrijf) {
-        this.postcodeBedrijf = postcodeBedrijf;
-    }
-
-    public String getGemeenteBedrijf() {
-        return gemeenteBedrijf;
-    }
-
-    public void setGemeenteBedrijf(String gemeenteBedrijf) {
-        this.gemeenteBedrijf = gemeenteBedrijf;
-    }
 
     public List<Analyse> getAnalyses() {
         return analyses;
     }
-    
-    public void voegAnalyseToe(Analyse a){
+
+    public void voegAnalyseToe(Analyse a) {
         analyses.add(a);
     }
 }

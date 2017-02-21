@@ -126,7 +126,7 @@ public class LoginScherm extends GridPane{
         if(dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())){
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
             
-            HoofdScherm hoofd = new HoofdScherm(stage);
+            HoofdScherm hoofd = new HoofdScherm(stage,dc);
             Scene sc = new Scene(hoofd);
             stage.setScene(sc);
             stage.setResizable(true);

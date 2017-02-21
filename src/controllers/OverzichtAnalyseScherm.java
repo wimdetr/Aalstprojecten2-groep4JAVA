@@ -17,7 +17,7 @@ import javafx.scene.control.TableView;
  *
  * @author iSayBoom
  */
-public class OverzichtAnalyses extends TabPane{
+public class OverzichtAnalyseScherm extends TabPane{
     @FXML
     private TableView<?> tvBaten;
 
@@ -87,7 +87,7 @@ public class OverzichtAnalyses extends TabPane{
     @FXML
     private Label lblTitelVanAnalyseKosten;
     
-    public OverzichtAnalyses() {
+    public OverzichtAnalyseScherm() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OverzichtAnalyses.fxml"));
         loader.setRoot(this);
         loader.setController(this);
