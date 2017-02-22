@@ -19,7 +19,6 @@ public class DomeinController {
     private Admin admin;
     private final AdminRepository adminRepo;
     private final JobCoachRepository jobCoachRepo;
-
     private final AnalyseRepository analyseRepo;
     private final WerkgeverRepository bedrijfRepo;
 
