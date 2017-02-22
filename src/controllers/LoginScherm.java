@@ -49,13 +49,14 @@ public class LoginScherm extends GridPane{
     @FXML
     private Label lblErrorBericht;
     
+    private final int myWidth = 300;
+    private final int myHeight = 280;
     private DomeinController dc;
-    
-    private Stage stage;
+    private SchermBeheer schermBeheer;
 
-    public LoginScherm(DomeinController dc, Stage stage) {
+    public LoginScherm(DomeinController dc, SchermBeheer schermBeheer) {
         this.dc = dc;
-        this.stage = stage;
+        this.schermBeheer = schermBeheer;
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
         loader.setRoot(this);
@@ -126,13 +127,21 @@ public class LoginScherm extends GridPane{
         if(dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())){
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
             
-            HoofdScherm hoofd = new HoofdScherm(stage,dc);
-            Scene sc = new Scene(hoofd);
-            stage.setScene(sc);
-            stage.setResizable(true);
+            HoofdScherm hoofd = new HoofdScherm(dc, schermBeheer);
+            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", 800, 600);
+            schermBeheer.zetStageResizable(true);
         }else{
             lblErrorBericht.setVisible(true);
         }
     }
 
+    public int getMyWidth() {
+        return myWidth;
+    }
+
+    public int getmyHeight() {
+        return myHeight;
+    }
+
+    
 }
