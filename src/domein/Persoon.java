@@ -5,44 +5,61 @@
  */
 package domein;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author ~dreeki~
  */
 public abstract class Persoon {
-    private String naam;
-    private String voornaam;
-    private String email;
 
-    public Persoon(String naam, String voornaam, String email) {
-        this.naam = naam;
-        this.voornaam = voornaam;
-        this.email = email;
-    }
+    private final StringProperty naam = new SimpleStringProperty();
 
     public String getNaam() {
+        return naam.get();
+    }
+
+    public void setNaam(String value) {
+        naam.set(value);
+    }
+
+    public StringProperty naamProperty() {
         return naam;
     }
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
+    private final StringProperty voornaam = new SimpleStringProperty();
 
     public String getVoornaam() {
+        return voornaam.get();
+    }
+
+    public void setVoornaam(String value) {
+        voornaam.set(value);
+    }
+
+    public StringProperty voornaamProperty() {
         return voornaam;
     }
-
-    public void setVoornaam(String voornaam) {
-        this.voornaam = voornaam;
-    }
+    private final StringProperty email = new SimpleStringProperty();
 
     public String getEmail() {
+        return email.get();
+    }
+
+    public void setEmail(String value) {
+        email.set(value);
+    }
+
+    public StringProperty emailProperty() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
     
+    public Persoon(String naam, String voornaam, String email) {
+        setNaam(naam);
+        setVoornaam(voornaam);
+        setEmail(email);
+    }
+
     
 }
