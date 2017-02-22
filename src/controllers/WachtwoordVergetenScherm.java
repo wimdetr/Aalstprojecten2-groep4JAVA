@@ -59,7 +59,6 @@ public class WachtwoordVergetenScherm  extends AnchorPane{
     
     @FXML
     void klikAnnuleer(ActionEvent event) {
-
     }
     
     private void sluitScherm(Event event){
