@@ -36,14 +36,14 @@ public class SchermBeheer extends VBox{
     }
     
     public void zetStageResizable(boolean resizable){
-        myStage.setResizable(true);
+        myStage.setResizable(resizable);
     }
     
     public void plaatsScherm(Node node, String schermId, String cssLocatie, String paginaTitel, int width, int height){
         getChildren().setAll(node);
         //node.setId(schermId);
         //myStage.getScene().getStylesheets().setAll(cssLocatie);
-        //VBox.setVgrow(node, Priority.ALWAYS);
+        VBox.setVgrow(node, Priority.ALWAYS);
         myStage.setWidth(width);
         myStage.setHeight(height);
         myStage.setTitle(paginaTitel);

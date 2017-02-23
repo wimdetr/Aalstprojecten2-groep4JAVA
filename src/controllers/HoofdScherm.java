@@ -12,6 +12,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -62,6 +63,7 @@ public class HoofdScherm extends BorderPane {
     void logOut(ActionEvent event) {
         dc.logAdminUit();
         LoginScherm ls = new LoginScherm(schermBeheer.getDc(), schermBeheer);
+        schermBeheer.zetStageResizable(false);
         schermBeheer.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
     }
 
@@ -71,14 +73,9 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonHomeScherm(ActionEvent event) {
-        Stage stage = new Stage();
-        BevestigVerwijderenScherm bvs = new BevestigVerwijderenScherm(schermBeheer, "Bevestig Verwijderen Jobcoach Mark", "Bent u zeker dat u Jobcoach Mark wilt verwijderen?");
-        schermBeheer.openPopUpScherm(bvs);
-        Scene scene = new Scene(bvs, 700, 250);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setAlwaysOnTop(true);
-        stage.show();
+        OverzichtScherm os = new OverzichtScherm(schermBeheer);
+        BorderPane.setAlignment(os, Pos.TOP_LEFT);
+        this.setCenter(os);
     }
 
     @FXML
