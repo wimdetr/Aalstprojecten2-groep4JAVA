@@ -4,8 +4,6 @@ import domein.DomeinController;
 import domein.JobCoach;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,8 +51,10 @@ public class GebruikerAccountsBeherenScherm extends BorderPane {
 
     private ObservableList<JobCoach> data;
     private final DomeinController dc;
+    private SchermBeheer schermBeheer;
 
-    public GebruikerAccountsBeherenScherm(DomeinController dc) {
+    public GebruikerAccountsBeherenScherm(SchermBeheer schermbeheer) {
+        this.schermBeheer = schermbeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikerAccountsBeherenScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -64,7 +64,7 @@ public class GebruikerAccountsBeherenScherm extends BorderPane {
             throw new RuntimeException(ex.getMessage());
         }
         HoofdScherm parent = (HoofdScherm) this.getParent();
-        this.dc = dc;
+        this.dc = schermbeheer.getDc();
         data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
 
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
@@ -98,41 +98,54 @@ public class GebruikerAccountsBeherenScherm extends BorderPane {
     }
 
     public void zoekVoornaam(String query) {
-        data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst().stream()
-                .filter(p -> p.getVoornaam().contains(query))
-                .collect(Collectors.toList()));
+        data = FXCollections.observableArrayList(dc.getJobCoachRepo().zoekVoornaam(query));
         gebruikersTableView.setItems(data);
 
     }
 
     public void zoekNaam(String query) {
-        data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst().stream()
-                .filter(p -> p.getNaam().contains(query))
-                .collect(Collectors.toList()));
+        data = FXCollections.observableArrayList(dc.getJobCoachRepo().zoekNaam(query));
         gebruikersTableView.setItems(data);
-
     }
 
     public void zoekBedrijf(String query) {
-        data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst().stream()
-                .filter(p -> p.getBedrijf().contains(query))
-                .collect(Collectors.toList()));
+        data = FXCollections.observableArrayList(dc.getJobCoachRepo().zoekBedrijf(query));
         gebruikersTableView.setItems(data);
 
     }
 
     public void zoekEmail(String query) {
-        data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst().stream()
-                .filter(p -> p.getEmail().contains(query))
-                .collect(Collectors.toList()));
+        data = FXCollections.observableArrayList(dc.getJobCoachRepo().zoekEmail(query));
         gebruikersTableView.setItems(data);
 
     }
 
     public void zoekPostcode(String query) {
-        data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst().stream()
-                .filter(p -> Integer.toString(p.getPostcode()).equals(query))
-                .collect(Collectors.toList()));
+        data = FXCollections.observableArrayList(dc.getJobCoachRepo().zoekPostCode(query));
         gebruikersTableView.setItems(data);
     }
+
+    @FXML
+    public void doDelete(ActionEvent event) {
+        JobCoach j = gebruikersTableView.getSelectionModel().getSelectedItem();
+        if (j != null) {
+            BevestigVerwijderenScherm bvs = new BevestigVerwijderenScherm(schermBeheer, "Bevestig Verwijderen Jobcoach Mark", "Bent u zeker dat u Jobcoach Mark wilt verwijderen?");
+            schermBeheer.openPopUpScherm(bvs);
+            Stage stage = new Stage();
+            Scene scene = new Scene(bvs, 700, 250);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.showAndWait();
+            if (!schermBeheer.popUpOpen()) {
+                data.remove(j);
+                // verwijderen in domein!
+            }
+
+        }
+    }
+
+    @FXML
+    public void doExporteer(ActionEvent event) {
+    }
+
 }

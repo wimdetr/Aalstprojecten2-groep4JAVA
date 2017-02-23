@@ -17,7 +17,7 @@
       <Label fx:id="lblDetail" text="bent u zeker?" />
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
-            <Button fx:id="btnAnnuleer" mnemonicParsing="false" onAction="#klikAnuleer" onKeyPressed="#enterAnuleer" text="Annuleren" />
+            <Button fx:id="btnAnnuleer" mnemonicParsing="false" onAction="#klikAnnuleer" onKeyPressed="#enterAnnuleer" text="Annuleren" />
             <Button fx:id="btnBevestig" mnemonicParsing="false" onAction="#klikBevestig" onKeyPressed="#enterBevestig" text="Bevestigen" />
          </children>
          <opaqueInsets>
