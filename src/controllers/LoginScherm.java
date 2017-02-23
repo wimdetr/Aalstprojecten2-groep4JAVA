@@ -49,18 +49,15 @@ public class LoginScherm extends GridPane {
     @FXML
     private Label lblErrorBericht;
 
-    
     private final int myWidth = 300;
     private final int myHeight = 280;
     private DomeinController dc;
     private SchermBeheer schermBeheer;
 
-
-    public LoginScherm(DomeinController dc, SchermBeheer schermBeheer) {
-        this.dc = dc;
-
+    public LoginScherm(SchermBeheer schermBeheer) {
+        this.dc = schermBeheer.getDc();
         this.schermBeheer = schermBeheer;
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -130,11 +127,10 @@ public class LoginScherm extends GridPane {
         if (dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())) {
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
 
-            
-            HoofdScherm hoofd = new HoofdScherm(dc, schermBeheer);
+            HoofdScherm hoofd = new HoofdScherm(schermBeheer);
             schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", 800, 600);
             schermBeheer.zetStageResizable(true);
-        }else{
+        } else {
 
             lblErrorBericht.setVisible(true);
         }
@@ -148,4 +144,7 @@ public class LoginScherm extends GridPane {
         return myHeight;
     }
 
+    public void klikWachtwoordVergeten(ActionEvent event) {
+
+    }
 }

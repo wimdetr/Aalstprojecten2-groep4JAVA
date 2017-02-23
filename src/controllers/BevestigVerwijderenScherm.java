@@ -21,8 +21,8 @@ import javafx.stage.Stage;
  *
  * @author ~dreeki~
  */
-public class BevestigVerwijderenScherm extends VBox implements IsPopUpScherm{
-    
+public class BevestigVerwijderenScherm extends VBox implements IsPopUpScherm {
+
     @FXML
     private Label lblTitel;
 
@@ -34,10 +34,12 @@ public class BevestigVerwijderenScherm extends VBox implements IsPopUpScherm{
 
     @FXML
     private Button btnBevestig;
-    
+
     private SchermBeheer schermBeheer;
 
-    public BevestigVerwijderenScherm(SchermBeheer schermBeheer, String titel, String detail){
+    private boolean magVerwijderdWorden;
+
+    public BevestigVerwijderenScherm(SchermBeheer schermBeheer, String titel, String detail) {
         this.schermBeheer = schermBeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BevestigVerwijderenScherm.fxml"));
         loader.setRoot(this);
@@ -47,29 +49,27 @@ public class BevestigVerwijderenScherm extends VBox implements IsPopUpScherm{
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-        
+
         lblTitel.setText(titel);
         lblDetail.setText(detail);
     }
-    
-    
 
     @FXML
-    private void enterAnuleer(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER){
+    private void enterAnnuleer(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
             bevestig(false);
         }
     }
 
     @FXML
     private void enterBevestig(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER){
+        if (event.getCode() == KeyCode.ENTER) {
             bevestig(true);
         }
     }
 
     @FXML
-    private void klikAnuleer(ActionEvent event) {
+    private void klikAnnuleer(ActionEvent event) {
         bevestig(false);
     }
 
@@ -77,20 +77,20 @@ public class BevestigVerwijderenScherm extends VBox implements IsPopUpScherm{
     private void klikBevestig(ActionEvent event) {
         bevestig(true);
     }
-    
-    private void sluitScherm(Event event){
+
+    private void bevestig(boolean bevestigd) {
+        magVerwijderdWorden = bevestigd;
         schermBeheer.sluitPopUpScherm();
     }
-    
-    private void bevestig(boolean bevestigd){
-        
-        
-        schermBeheer.sluitPopUpScherm();
-    }
-    
+
     @Override
-    public void sluit(){
+    public void sluit() {
         Stage stage = (Stage) this.getScene().getWindow();
         stage.close();
     }
+
+    public boolean getMagVerwijderdWorden() {
+        return magVerwijderdWorden;
+    }
+
 }

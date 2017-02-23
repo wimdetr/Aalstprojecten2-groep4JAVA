@@ -44,9 +44,9 @@ public class HoofdScherm extends BorderPane {
     private SchermBeheer schermBeheer;
     private DomeinController dc;
 
-    public HoofdScherm(DomeinController dc, SchermBeheer schermBeheer) {
+    public HoofdScherm(SchermBeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
-        this.dc = dc;
+        this.dc = schermBeheer.getDc();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -61,7 +61,7 @@ public class HoofdScherm extends BorderPane {
     @FXML
     void logOut(ActionEvent event) {
         dc.logAdminUit();
-        LoginScherm ls = new LoginScherm(schermBeheer.getDc(), schermBeheer);
+        LoginScherm ls = new LoginScherm(schermBeheer);
         schermBeheer.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
     }
 
@@ -83,7 +83,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonJobcoachesScherm(ActionEvent event) {
-        GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(dc);
+        GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(schermBeheer);
         BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
         this.setCenter(scherm);
     }
