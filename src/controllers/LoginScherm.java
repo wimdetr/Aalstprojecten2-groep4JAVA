@@ -121,6 +121,11 @@ public class LoginScherm extends GridPane {
     private void klikKnop(ActionEvent event) {
         logIn();
     }
+    
+    @FXML
+    private void klikWachtwoordVergeten(ActionEvent event){
+        
+    }
 
     private void veranderFocus(Node node) {
         Platform.runLater(() -> node.requestFocus());
