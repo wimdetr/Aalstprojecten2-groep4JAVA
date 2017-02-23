@@ -149,7 +149,4 @@ public class LoginScherm extends GridPane {
         return myHeight;
     }
 
-    public void klikWachtwoordVergeten(ActionEvent event) {
-
-    }
 }
