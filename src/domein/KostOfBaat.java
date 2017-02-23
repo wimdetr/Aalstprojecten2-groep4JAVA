@@ -17,6 +17,7 @@ public class KostOfBaat {
     private int id;
     private Map<Integer, KOBRij> rijen;
     private KOBEnum kostOfBaatEnum;
+    //resultaat met command ontwerppatroon berekenen
 
     public KostOfBaat(int id, KOBEnum kobEnum) {
         this.id = id;

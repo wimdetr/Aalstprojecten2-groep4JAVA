@@ -41,11 +41,11 @@ public class HoofdScherm extends BorderPane {
     @FXML
     private Button logOutButton;
 
-    private Stage stage;
+    private SchermBeheer schermBeheer;
     private DomeinController dc;
 
-    public HoofdScherm(Stage stage, DomeinController dc) {
-        this.stage = stage;
+    public HoofdScherm(DomeinController dc, SchermBeheer schermBeheer) {
+        this.schermBeheer = schermBeheer;
         this.dc = dc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
         loader.setRoot(this);
@@ -56,20 +56,13 @@ public class HoofdScherm extends BorderPane {
             throw new RuntimeException(ex.getMessage());
         }
 
-        stage.setOnCloseRequest(this::sluitScherm);
-    }
-
-    public DomeinController getDc() {
-        return dc;
-    }
-
-    private void sluitScherm(Event event) {
-        System.exit(0);
     }
 
     @FXML
     void logOut(ActionEvent event) {
-        System.exit(0);
+        dc.logAdminUit();
+        LoginScherm ls = new LoginScherm(schermBeheer.getDc(), schermBeheer);
+        schermBeheer.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
     }
 
     @FXML
@@ -79,13 +72,13 @@ public class HoofdScherm extends BorderPane {
     @FXML
     public void toonHomeScherm(ActionEvent event) {
         Stage stage = new Stage();
-        BevestigVerwijderenScherm bvs = new BevestigVerwijderenScherm("Bevestig Verwijderen Jobcoach Mark", "Bent u zeker dat u Jobcoach Mark wilt verwijderen?", this, stage);
+        BevestigVerwijderenScherm bvs = new BevestigVerwijderenScherm(schermBeheer, "Bevestig Verwijderen Jobcoach Mark", "Bent u zeker dat u Jobcoach Mark wilt verwijderen?");
+        schermBeheer.openPopUpScherm(bvs);
         Scene scene = new Scene(bvs, 700, 250);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setAlwaysOnTop(true);
         stage.show();
-        //hoe verhinderen dat main stage kan gebruikt worden?
     }
 
     @FXML

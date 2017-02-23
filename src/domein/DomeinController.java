@@ -44,4 +44,8 @@ public class DomeinController {
     public void logAdminIn(String username) {
         admin = adminRepo.geefAdmin(username);
     }
+    
+    public void logAdminUit(){
+        admin = null;
+    }
 }

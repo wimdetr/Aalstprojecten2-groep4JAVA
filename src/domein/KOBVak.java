@@ -12,6 +12,7 @@ package domein;
 public class KOBVak {
     private int id;
     private String data;
+    private boolean isGetal;
 
     public KOBVak(int id) {
         this.id = id;

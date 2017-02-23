@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -22,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author ~dreeki~
  */
-public class BevestigVerwijderenScherm extends VBox{
+public class BevestigVerwijderenScherm extends VBox implements IsPopUpScherm{
     
     @FXML
     private Label lblTitel;
@@ -36,13 +35,10 @@ public class BevestigVerwijderenScherm extends VBox{
     @FXML
     private Button btnBevestig;
     
-    private Node node;
-    
-    private Stage myStage;
+    private SchermBeheer schermBeheer;
 
-    public BevestigVerwijderenScherm(String titel, String detail, Node node, Stage s){
-        this.node = node;
-        myStage = s;
+    public BevestigVerwijderenScherm(SchermBeheer schermBeheer, String titel, String detail){
+        this.schermBeheer = schermBeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/BevestigVerwijderenScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -54,8 +50,6 @@ public class BevestigVerwijderenScherm extends VBox{
         
         lblTitel.setText(titel);
         lblDetail.setText(detail);
-        node.setDisable(true);
-        myStage.setOnCloseRequest(this::sluitScherm);
     }
     
     
@@ -85,13 +79,18 @@ public class BevestigVerwijderenScherm extends VBox{
     }
     
     private void sluitScherm(Event event){
-        node.setDisable(false);
+        schermBeheer.sluitPopUpScherm();
     }
     
     private void bevestig(boolean bevestigd){
+        
+        
+        schermBeheer.sluitPopUpScherm();
+    }
+    
+    @Override
+    public void sluit(){
         Stage stage = (Stage) this.getScene().getWindow();
         stage.close();
-        
-        node.setDisable(false);
     }
 }
