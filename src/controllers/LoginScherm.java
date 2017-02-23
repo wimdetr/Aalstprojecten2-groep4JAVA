@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  *
  * @author ~dreeki~
  */
-public class LoginScherm extends GridPane{
+public class LoginScherm extends GridPane {
 
     @FXML
     private TextField tfGebruikersnaam;
@@ -45,17 +45,20 @@ public class LoginScherm extends GridPane{
 
     @FXML
     private CheckBox checkBoxOnthoudWachtwoord;
-    
+
     @FXML
     private Label lblErrorBericht;
+
     
     private final int myWidth = 300;
     private final int myHeight = 280;
     private DomeinController dc;
     private SchermBeheer schermBeheer;
 
+
     public LoginScherm(DomeinController dc, SchermBeheer schermBeheer) {
         this.dc = dc;
+
         this.schermBeheer = schermBeheer;
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
@@ -66,71 +69,73 @@ public class LoginScherm extends GridPane{
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-        
+
         lblErrorBericht.setVisible(false);
     }
-    
+
     @FXML
-    private void keyPressedCheckBox(KeyEvent event){
-        if(event.getCode().equals(KeyCode.TAB)){
+    private void keyPressedCheckBox(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.TAB)) {
             veranderFocus(hlWachtwoordVergeten);
         }
     }
-    
+
     @FXML
     private void keyPressedGebruikersnaamVeld(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER){
+        if (event.getCode() == KeyCode.ENTER) {
             veranderFocus(pfWachtwoord);
         }
-        if(event.getCode().equals(KeyCode.TAB)){
+        if (event.getCode().equals(KeyCode.TAB)) {
             veranderFocus(pfWachtwoord);
         }
     }
 
     @FXML
-    private void keyPressedLoginKnop(KeyEvent event){
-        if(event.getCode() == KeyCode.ENTER){
+    private void keyPressedLoginKnop(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
             logIn();
         }
-        if(event.getCode().equals(KeyCode.TAB)){
+        if (event.getCode().equals(KeyCode.TAB)) {
             veranderFocus(tfGebruikersnaam);
         }
     }
-    
+
     @FXML
-    private void keyPressedWachtwoordVergeten(KeyEvent event){
-        if(event.getCode() == KeyCode.TAB){
+    private void keyPressedWachtwoordVergeten(KeyEvent event) {
+        if (event.getCode() == KeyCode.TAB) {
             veranderFocus(btnInloggen);
         }
     }
-    
+
     @FXML
     private void keyPressedWachtwoordVeld(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER){
+        if (event.getCode() == KeyCode.ENTER) {
             logIn();
         }
-        if(event.getCode().equals(KeyCode.TAB)){
+        if (event.getCode().equals(KeyCode.TAB)) {
             veranderFocus(checkBoxOnthoudWachtwoord);
-        } 
+        }
     }
-    
+
     @FXML
     private void klikKnop(ActionEvent event) {
         logIn();
     }
-    
-    private void veranderFocus(Node node){
+
+    private void veranderFocus(Node node) {
         Platform.runLater(() -> node.requestFocus());
     }
-    
-    private void logIn(){
-        if(dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())){
+
+    private void logIn() {
+        if (dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())) {
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
+
             
             HoofdScherm hoofd = new HoofdScherm(dc, schermBeheer);
             schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", 800, 600);
             schermBeheer.zetStageResizable(true);
         }else{
+
             lblErrorBericht.setVisible(true);
         }
     }
@@ -143,5 +148,4 @@ public class LoginScherm extends GridPane{
         return myHeight;
     }
 
-    
 }
