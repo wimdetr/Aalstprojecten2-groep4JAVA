@@ -40,8 +40,9 @@ public class SchermBeheer extends VBox {
     public boolean popUpOpen(){
         return heeftPopUpGeopend;
     }
-    public void zetStageResizable(boolean resizable) {
-        myStage.setResizable(true);
+    
+    public void zetStageResizable(boolean resizable){
+        myStage.setResizable(resizable);
     }
 
     public void plaatsScherm(Node node, String schermId, String cssLocatie, String paginaTitel, int width, int height) {
