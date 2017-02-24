@@ -18,11 +18,6 @@ import javafx.beans.property.StringProperty;
  */
 public class JobCoach extends Persoon {
 
-    private String naamBedrijf;
-    private String straatBedrijf;
-    private String nummerBedrijf;
-    private int postcodeBedrijf;
-    private String gemeenteBedrijf;
     private List<Analyse> analyses;
 
 
@@ -96,5 +91,13 @@ public class JobCoach extends Persoon {
 
     public void voegAnalyseToe(Analyse a) {
         analyses.add(a);
+    }
+    
+    public boolean controleerOfAnalyseAanwezigIs(int id){
+        return analyses.stream().anyMatch(a -> a.getId() == id);
+    }
+    
+    public Analyse geefAnalyseMetId(int id){
+        return analyses.stream().filter(a -> a.getId() == id).findFirst().get();
     }
 }

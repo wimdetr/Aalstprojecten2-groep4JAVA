@@ -15,10 +15,12 @@ import java.util.Map;
 public class KOBRij {
     private int id;
     private Map<Integer, KOBVak> vakken;
+    private double resultaat;
 
     public KOBRij(int id) {
         this.id = id;
         vakken = new HashMap<>();
+        resultaat = 0;
     }
 
     public int getId() {
@@ -36,8 +38,12 @@ public class KOBRij {
     public boolean controleerOfKOBVakMetNummerAlIngevuldIs(int nummer){
         return vakken.keySet().stream().anyMatch(k -> k == nummer);
     }
-    
-    public double geefResultaat(){
-        return 0;
+
+    public double getResultaat() {
+        return resultaat;
+    }
+
+    public void setResultaat(double resultaat) {
+        this.resultaat = resultaat;
     }
 }

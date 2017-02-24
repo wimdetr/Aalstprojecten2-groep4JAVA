@@ -68,12 +68,13 @@ public class Analyse {
     }
     
     public double geefSubtotaalKosten(){
-        return kosten.values().stream().mapToDouble(k -> k.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
-                
+        //return kosten.values().stream().mapToDouble(k -> k.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
+          return 0;      
     }
     
     public double geefSubtotaalBaten(){
-        return baten.values().stream().mapToDouble(b -> b.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
+        //return baten.values().stream().mapToDouble(b -> b.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
+        return 0;
     }
     
     public double geefResultaat(){
@@ -86,6 +87,14 @@ public class Analyse {
 
     public Date getLaatsteAanpasDatum() {
         return laatsteAanpasDatum;
+    }
+
+    public Map<Integer, KostOfBaat> getBaten() {
+        return baten;
+    }
+
+    public Map<Integer, KostOfBaat> getKosten() {
+        return kosten;
     }
     
     
