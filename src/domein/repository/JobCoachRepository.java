@@ -58,9 +58,9 @@ public class JobCoachRepository {
                 .collect(Collectors.toList());
     }
 
-    public List<JobCoach> zoekBedrijf(String query) {
+    public List<JobCoach> zoekOrganisatie(String query) {
         return lijst.stream()
-                .filter(p -> p.getBedrijf().contains(query))
+                .filter(p -> p.getOrganisatie().contains(query))
                 .collect(Collectors.toList());
     }
 
@@ -76,4 +76,9 @@ public class JobCoachRepository {
                 .collect(Collectors.toList());
     }
 
+    public List<JobCoach> zoekGemeente(String query) {
+        return lijst.stream()
+                .filter(p -> p.getGemeente().contains(query))
+                .collect(Collectors.toList());
+    }
 }
