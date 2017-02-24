@@ -54,9 +54,9 @@ public class HoofdScherm extends BorderPane {
     private final int myWidth = 925;
     private final int myHeight = 715;
 
-    public HoofdScherm(DomeinController dc, SchermBeheer schermBeheer) {
+    public HoofdScherm(SchermBeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
-        this.dc = dc;
+        this.dc = schermBeheer.getDc();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -71,7 +71,9 @@ public class HoofdScherm extends BorderPane {
     @FXML
     void logOut(ActionEvent event) {
         dc.logAdminUit();
-        LoginScherm ls = new LoginScherm(schermBeheer.getDc(), schermBeheer);
+        LoginScherm ls = new LoginScherm(schermBeheer);
+
+          schermBeheer.zetStageResizable(false);
         schermBeheer.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
     }
 
@@ -84,19 +86,14 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonHomeScherm(ActionEvent event) {
-        Stage stage = new Stage();
-        BevestigVerwijderenScherm bvs = new BevestigVerwijderenScherm(schermBeheer, "Bevestig Verwijderen Jobcoach Mark", "Bent u zeker dat u Jobcoach Mark wilt verwijderen?");
-        schermBeheer.openPopUpScherm(bvs);
-        Scene scene = new Scene(bvs, 700, 250);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setAlwaysOnTop(true);
-        stage.show();
+        OverzichtScherm os = new OverzichtScherm(schermBeheer);
+        BorderPane.setAlignment(os, Pos.TOP_LEFT);
+        this.setCenter(os);
     }
 
     @FXML
     public void toonJobcoachesScherm(ActionEvent event) {
-        GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(dc);
+        GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(schermBeheer);
         BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
         this.setCenter(scherm);
         BorderPane.setAlignment(scherm, Pos.TOP_LEFT);

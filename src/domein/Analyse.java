@@ -5,6 +5,7 @@
  */
 package domein;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +18,13 @@ public class Analyse {
     private Map<Integer, KostOfBaat> kosten;
     private Map<Integer, KostOfBaat> baten;
     private Werkgever werkgever;
+    private Date laatsteAanpasDatum;
 
-    public Analyse(int id) {
+    public Analyse(int id, Date date) {
         this.id = id;
         kosten = new HashMap<>();
         baten = new HashMap<>();
+        laatsteAanpasDatum = date;
     }
     
     public boolean controleerOfKostMetNummerAlIngevuldIs(int nummer){
@@ -76,4 +79,14 @@ public class Analyse {
     public double geefResultaat(){
         return geefSubtotaalBaten() - geefSubtotaalKosten();
     }
+    
+    public void vernieuwDatum(){
+        laatsteAanpasDatum = new Date();
+    }
+
+    public Date getLaatsteAanpasDatum() {
+        return laatsteAanpasDatum;
+    }
+    
+    
 }

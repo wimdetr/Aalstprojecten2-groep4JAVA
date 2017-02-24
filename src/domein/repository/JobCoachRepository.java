@@ -8,6 +8,9 @@ package domein.repository;
 import domein.JobCoach;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
 import persistentie.JobCoachMapper;
 
 /**
@@ -41,5 +44,41 @@ public class JobCoachRepository {
 
     public List<JobCoach> getLijst() {
         return lijst;
+    }
+
+    public List<JobCoach> zoekVoornaam(String query) {
+        return lijst.stream()
+                .filter(p -> p.getVoornaam().contains(query))
+                .collect(Collectors.toList());
+    }
+
+    public List<JobCoach> zoekNaam(String query) {
+        return lijst.stream()
+                .filter(p -> p.getNaam().contains(query))
+                .collect(Collectors.toList());
+    }
+
+    public List<JobCoach> zoekOrganisatie(String query) {
+        return lijst.stream()
+                .filter(p -> p.getOrganisatie().contains(query))
+                .collect(Collectors.toList());
+    }
+
+    public List<JobCoach> zoekEmail(String query) {
+        return lijst.stream()
+                .filter(p -> p.getEmail().contains(query))
+                .collect(Collectors.toList());
+    }
+
+    public List<JobCoach> zoekPostCode(String query) {
+        return lijst.stream()
+                .filter(p -> Integer.toString(p.getPostcode()).equals(query))
+                .collect(Collectors.toList());
+    }
+
+    public List<JobCoach> zoekGemeente(String query) {
+        return lijst.stream()
+                .filter(p -> p.getGemeente().contains(query))
+                .collect(Collectors.toList());
     }
 }
