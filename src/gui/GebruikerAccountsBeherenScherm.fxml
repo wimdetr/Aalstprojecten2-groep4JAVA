@@ -30,7 +30,8 @@
           <TableColumn fx:id="voorNaamCol" prefWidth="128.0" text="Voornaam" />
           <TableColumn fx:id="naamCol" prefWidth="186.0" text="Naam" />
             <TableColumn fx:id="organisatieCol" prefWidth="225.0" text="Organisatie" />
-            <TableColumn fx:id="adresCol" prefWidth="193.0" text="Adres" />
+            <TableColumn fx:id="straatCol" prefWidth="193.0" text="Straat" />
+            <TableColumn fx:id="gemeenteCol" prefWidth="75.0" text="Gemeente" />
             <TableColumn fx:id="emailCol" prefWidth="193.0" text="Email" />
             <TableColumn fx:id="postcodeCol" prefWidth="75.0" text="Postcode" />
         </columns>

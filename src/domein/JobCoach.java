@@ -26,18 +26,18 @@ public class JobCoach extends Persoon {
     private List<Analyse> analyses;
 
 
-    private final StringProperty bedrijf = new SimpleStringProperty();
+    private final StringProperty organisatie = new SimpleStringProperty();
 
-    public String getBedrijf() {
-        return bedrijf.get();
+    public String getOrganisatie() {
+        return organisatie.get();
     }
 
-    public void setBedrijf(String value) {
-        bedrijf.set(value);
+    public void setOrganisatie(String value) {
+        organisatie.set(value);
     }
 
-    public StringProperty bedrijfProperty() {
-        return bedrijf;
+    public StringProperty organisatieProperty() {
+        return organisatie;
     }
     private final StringProperty straat = new SimpleStringProperty();
 
@@ -79,9 +79,9 @@ public class JobCoach extends Persoon {
         return gemeente;
     }
 
-    public JobCoach(String naam, String voornaam, String email, String naamBedrijf, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
+    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
         super(naam,voornaam,email);
-        setBedrijf(naamBedrijf);
+        setOrganisatie(naamOrganisatie);
         setStraat(straatBedrijf + " " + nummerBedrijf);
         setPostcode(postcodeBedrijf);
         setGemeente(gemeenteBedrijf);
