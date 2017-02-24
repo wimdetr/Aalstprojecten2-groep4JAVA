@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="609.0" tabClosingPolicy="UNAVAILABLE" type="TabPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="609.0" tabClosingPolicy="UNAVAILABLE" type="TabPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
       <Tab text="Baten">
          <content>
@@ -28,9 +28,9 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnVerwijderBaten" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnVerzendenBaten" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" AnchorPane.bottomAnchor="376.0" />
-                  <Button fx:id="btnArchiveerBaten" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnVerwijderBaten" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerwijder" onKeyPressed="#keyVerwijder" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnVerzendenBaten" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerstuur" onKeyPressed="#keyVerstuur" prefHeight="25.0" prefWidth="25.0" text="Button" AnchorPane.bottomAnchor="376.0" />
+                  <Button fx:id="btnArchiveerBaten" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikDownload" onKeyPressed="#keyDownload" prefHeight="25.0" prefWidth="25.0" text="Button" />
                   <Label fx:id="lblTitelAnalyseBaten" layoutX="165.0" layoutY="14.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -61,9 +61,9 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnVerwijderOverzicht" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnArchiveerOverzicht" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnVerzendenOverzicht" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnVerwijderOverzicht" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerwijder" onKeyPressed="#keyVerwijder" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnArchiveerOverzicht" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikDownload" onKeyPressed="#keyDownload" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnVerzendenOverzicht" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerstuur" onKeyPressed="#keyVerstuur" prefHeight="25.0" prefWidth="25.0" text="Button" />
                   <Label fx:id="lblTitelAnalyseOverzicht" layoutX="164.0" layoutY="14.0">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -90,9 +90,9 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnVerwijderKosten" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnArchiveerKosten" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnVerzendenKosten" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnVerwijderKosten" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerwijder" onKeyPressed="#keyVerwijder" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnArchiveerKosten" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikDownload" onKeyPressed="#keyDownload" prefHeight="25.0" prefWidth="25.0" text="Button" />
+                  <Button fx:id="btnVerzendenKosten" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerstuur" onKeyPressed="#keyVerstuur" prefHeight="25.0" prefWidth="25.0" text="Button" />
                   <Label fx:id="lblTitelVanAnalyseKosten" layoutX="165.0" layoutY="14.0">
                      <font>
                         <Font name="System Bold" size="18.0" />

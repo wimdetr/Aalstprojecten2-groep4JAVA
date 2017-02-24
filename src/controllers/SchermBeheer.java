@@ -81,5 +81,5 @@ public class SchermBeheer extends VBox {
     public DomeinController getDc() {
         return dc;
     }
-
+    
 }

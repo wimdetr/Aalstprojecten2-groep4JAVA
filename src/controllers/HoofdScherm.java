@@ -11,11 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -31,8 +35,11 @@ public class HoofdScherm extends BorderPane {
     private Button profielButton;
 
     @FXML
-    private Button analyseButton;
+    private Button toonProfielButton;
 
+    @FXML
+    private Label lblProfiel;
+    
     @FXML
     private Button jobcoachButton;
 
@@ -44,6 +51,8 @@ public class HoofdScherm extends BorderPane {
 
     private SchermBeheer schermBeheer;
     private DomeinController dc;
+    private final int myWidth = 925;
+    private final int myHeight = 715;
 
     public HoofdScherm(SchermBeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
@@ -70,6 +79,9 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonProfielScherm(ActionEvent event) {
+        Archiefbekijken ab = new Archiefbekijken();
+        this.setCenter(ab);
+        BorderPane.setAlignment(ab, Pos.TOP_LEFT);
     }
 
     @FXML
@@ -84,17 +96,38 @@ public class HoofdScherm extends BorderPane {
         GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(schermBeheer);
         BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
         this.setCenter(scherm);
+        BorderPane.setAlignment(scherm, Pos.TOP_LEFT);
     }
 
     @FXML
     public void toonAnalyseScherm(ActionEvent event) {
-
+        ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
+        this.setCenter(scherm);
+        GridPane.setHalignment(scherm, HPos.LEFT);
     }
 
     @FXML
+    void klikToonProfiel(MouseEvent event) {
+        ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
+        this.setCenter(scherm);
+        GridPane.setHalignment(scherm, HPos.LEFT);
+    }
+    
+    @FXML
     public void toonAdminToevoegenScherm(ActionEvent event) {
         AdminToevoegenScherm scherm = new AdminToevoegenScherm();
-        BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
+        //BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
         this.setCenter(scherm);
+        GridPane.setHalignment(scherm, HPos.LEFT);
     }
+
+    public int getMyWidth() {
+        return myWidth;
+    }
+
+    public int getMyHeight() {
+        return myHeight;
+    }
+    
+    
 }

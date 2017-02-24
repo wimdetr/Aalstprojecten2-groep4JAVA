@@ -11,6 +11,7 @@ import domein.DomeinController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.scenicview.ScenicView;
 
 /**
  *
@@ -28,6 +29,6 @@ public class Main extends Application {
         stage.setTitle("Administrator login");
         stage.setResizable(false);
         stage.show();
-        
+        //ScenicView.show(scene);
     }
 }

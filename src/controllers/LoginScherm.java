@@ -131,9 +131,10 @@ public class LoginScherm extends GridPane {
     private void logIn() {
         if (dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())) {
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
+            
+            HoofdScherm hoofd = new HoofdScherm(dc, schermBeheer);
+            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", hoofd.getMyWidth(), hoofd.getMyHeight());
 
-            HoofdScherm hoofd = new HoofdScherm(schermBeheer);
-            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", 800, 600);
             schermBeheer.zetStageResizable(true);
         } else {
 
