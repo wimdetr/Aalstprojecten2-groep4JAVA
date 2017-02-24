@@ -10,28 +10,26 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="607.0" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="GridPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
-      <ColumnConstraints hgrow="ALWAYS" />
+      <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+    <ColumnConstraints hgrow="ALWAYS" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="30.0" vgrow="NEVER" />
-    <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="8.0" vgrow="NEVER" />
-      <RowConstraints vgrow="ALWAYS" />
+    <RowConstraints vgrow="NEVER" />
+      <RowConstraints vgrow="NEVER" />
+      <RowConstraints vgrow="NEVER" />
+      <RowConstraints vgrow="NEVER" />
+      <RowConstraints vgrow="NEVER" />
   </rowConstraints>
    <children>
-      <Label text="Profiel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label text="Profiel" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label text="Naam:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+      <Label text="Naam:" GridPane.halignment="LEFT" GridPane.rowIndex="1">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -39,7 +37,7 @@
             <Insets left="50.0" right="15.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Voornaam:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <Label text="Voornaam:" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -47,7 +45,7 @@
             <Insets left="50.0" right="15.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Email adres:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label text="Email adres:" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -55,13 +53,13 @@
             <Insets left="50.0" right="15.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="tfNaam" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
-      <TextField fx:id="tfVoornaam" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-      <TextField fx:id="tfEmail" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-      <Button fx:id="btnOpslaan" mnemonicParsing="false" prefHeight="28.0" prefWidth="180.0" text="Opslaan" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
+      <TextField fx:id="tfNaam" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+      <TextField fx:id="tfVoornaam" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+      <TextField fx:id="tfEmail" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+      <Button fx:id="btnOpslaan" mnemonicParsing="false" prefHeight="28.0" prefWidth="180.0" text="Opslaan" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Hyperlink fx:id="hlWachtwoordWijzigen" text="Wachtwoord wijzigen?" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Hyperlink fx:id="hlWachtwoordWijzigen" text="Wachtwoord wijzigen?" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </fx:root>

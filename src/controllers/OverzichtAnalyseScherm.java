@@ -6,12 +6,14 @@
 package controllers;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -96,5 +98,35 @@ public class OverzichtAnalyseScherm extends TabPane{
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+    }
+    
+    @FXML
+    void keyDownload(KeyEvent event) {
+
+    }
+
+    @FXML
+    void keyVerstuur(KeyEvent event) {
+
+    }
+
+    @FXML
+    void keyVerwijder(KeyEvent event) {
+
+    }
+
+    @FXML
+    void klikDownload(ActionEvent event) {
+
+    }
+
+    @FXML
+    void klikVerstuur(ActionEvent event) {
+
+    }
+
+    @FXML
+    void klikVerwijder(ActionEvent event) {
+
     }
 }

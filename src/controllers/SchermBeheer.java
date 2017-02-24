@@ -43,7 +43,7 @@ public class SchermBeheer extends VBox{
         getChildren().setAll(node);
         //node.setId(schermId);
         //myStage.getScene().getStylesheets().setAll(cssLocatie);
-        //VBox.setVgrow(node, Priority.ALWAYS);
+        VBox.setVgrow(node, Priority.ALWAYS);
         myStage.setWidth(width);
         myStage.setHeight(height);
         myStage.setTitle(paginaTitel);
@@ -69,6 +69,5 @@ public class SchermBeheer extends VBox{
     public DomeinController getDc() {
         return dc;
     }
-    
     
 }

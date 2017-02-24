@@ -121,6 +121,11 @@ public class LoginScherm extends GridPane {
     private void klikKnop(ActionEvent event) {
         logIn();
     }
+    
+    @FXML
+    private void klikWachtwoordVergeten(ActionEvent event){
+        
+    }
 
     private void veranderFocus(Node node) {
         Platform.runLater(() -> node.requestFocus());
@@ -132,7 +137,7 @@ public class LoginScherm extends GridPane {
 
             
             HoofdScherm hoofd = new HoofdScherm(dc, schermBeheer);
-            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", 800, 600);
+            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", hoofd.getMyWidth(), hoofd.getMyHeight());
             schermBeheer.zetStageResizable(true);
         }else{
 
