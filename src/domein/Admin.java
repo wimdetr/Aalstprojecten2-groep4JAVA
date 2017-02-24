@@ -28,6 +28,10 @@ public class Admin extends Persoon{
         coaches = lijst;
     }
     
+    public boolean controleerOfCoachMetEmailBestaat(String email){
+        return coaches.stream().anyMatch(c -> c.getEmail().equals(email));
+    }
+    
     public JobCoach geefCoachMetEmail(String email){
         return coaches.stream().filter(c -> c.getEmail().equals(email)).findFirst().get();
     }
