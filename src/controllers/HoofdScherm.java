@@ -8,19 +8,16 @@ package controllers;
 import domein.DomeinController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 /**
  *
@@ -39,7 +36,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     private Label lblProfiel;
-    
+
     @FXML
     private Button jobcoachButton;
 
@@ -66,6 +63,9 @@ public class HoofdScherm extends BorderPane {
             throw new RuntimeException(ex.getMessage());
         }
 
+        HomeScherm os = new HomeScherm(schermBeheer);
+        BorderPane.setAlignment(os, Pos.TOP_LEFT);
+        this.setCenter(os);
     }
 
     @FXML
@@ -73,20 +73,21 @@ public class HoofdScherm extends BorderPane {
         dc.logAdminUit();
         LoginScherm ls = new LoginScherm(schermBeheer);
 
-          schermBeheer.zetStageResizable(false);
+        schermBeheer.zetStageResizable(false);
         schermBeheer.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
     }
 
     @FXML
     public void toonProfielScherm(ActionEvent event) {
-        Archiefbekijken ab = new Archiefbekijken();
-        this.setCenter(ab);
-        BorderPane.setAlignment(ab, Pos.TOP_LEFT);
+
+        ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
+        this.setCenter(scherm);
+        GridPane.setHalignment(scherm, HPos.LEFT);
     }
 
     @FXML
     public void toonHomeScherm(ActionEvent event) {
-        OverzichtScherm os = new OverzichtScherm(schermBeheer);
+        HomeScherm os = new HomeScherm(schermBeheer);
         BorderPane.setAlignment(os, Pos.TOP_LEFT);
         this.setCenter(os);
     }
@@ -94,7 +95,6 @@ public class HoofdScherm extends BorderPane {
     @FXML
     public void toonJobcoachesScherm(ActionEvent event) {
         GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(schermBeheer);
-        BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
         this.setCenter(scherm);
         BorderPane.setAlignment(scherm, Pos.TOP_LEFT);
     }
@@ -108,15 +108,14 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void klikToonProfiel(MouseEvent event) {
-        ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
-        this.setCenter(scherm);
-        GridPane.setHalignment(scherm, HPos.LEFT);
+        Archiefbekijken ab = new Archiefbekijken();
+        this.setCenter(ab);
+        BorderPane.setAlignment(ab, Pos.TOP_LEFT);
     }
-    
+
     @FXML
     public void toonAdminToevoegenScherm(ActionEvent event) {
         AdminToevoegenScherm scherm = new AdminToevoegenScherm();
-        //BorderPane.setMargin(scherm, new Insets(0, 0, 0, 10));
         this.setCenter(scherm);
         GridPane.setHalignment(scherm, HPos.LEFT);
     }
@@ -128,6 +127,5 @@ public class HoofdScherm extends BorderPane {
     public int getMyHeight() {
         return myHeight;
     }
-    
-    
+
 }

@@ -15,15 +15,15 @@ import javafx.scene.layout.VBox;
  *
  * @author ~dreeki~
  */
-public class OverzichtScherm extends VBox{   
+public class HomeScherm extends VBox{   
     @FXML
     private FlowPane flowPaneRecenteAnalyses;
     
     private SchermBeheer schermBeheer;
 
-    public OverzichtScherm(SchermBeheer schermBeheer) {
+    public HomeScherm(SchermBeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OverzichtScherm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
