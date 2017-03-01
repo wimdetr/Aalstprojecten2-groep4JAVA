@@ -17,7 +17,7 @@ public class AdminMapper {
     }
     
     public boolean controleerOfAdminKanInloggen(String username, String wachtwoord){
-        return username.equals("dreeki") && wachtwoord.equals("test");
+        return username.equals("admin@gmail.com") && wachtwoord.equals("test");
     }
     
     public Admin geefAdmin(String username){
