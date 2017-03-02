@@ -48,7 +48,7 @@ public class HoofdScherm extends BorderPane {
 
     private SchermBeheer schermBeheer;
     private DomeinController dc;
-    private final int myWidth = 925;
+    private final int myWidth = 1000;
     private final int myHeight = 715;
 
     public HoofdScherm(SchermBeheer schermBeheer) {
@@ -101,14 +101,14 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonAnalyseScherm(ActionEvent event) {
-        ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
+        Archiefbekijken scherm = new Archiefbekijken();
         this.setCenter(scherm);
         GridPane.setHalignment(scherm, HPos.LEFT);
     }
 
     @FXML
     void klikToonProfiel(MouseEvent event) {
-        Archiefbekijken ab = new Archiefbekijken();
+        ProfielBekijkenScherm ab = new ProfielBekijkenScherm();
         this.setCenter(ab);
         BorderPane.setAlignment(ab, Pos.TOP_LEFT);
     }
