@@ -1,0 +1,45 @@
+/* 
+    Created on : Mar 7, 2017, 8:23:18 PM
+    Author     : wim
+*/
+
+.table-view:focused {
+    -fx-background-color:transparent,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    -fx-padding: 1;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(133, 190, 184, 1);
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+    -fx-table-cell-border-color: transparent;
+
+}
+
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.exportButton{
+    -fx-background-color: rgba(0, 128, 0, 0.8);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.deleteButton{
+    -fx-background-color: rgba(255, 0, 0, 0.8);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.selectAllButton{
+    -fx-background-color: rgba(0, 0, 255, 0.8);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}

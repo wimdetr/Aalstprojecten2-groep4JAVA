@@ -36,10 +36,27 @@ public class JobCoachRepository {
                 "Juan Peronstraat", "1", 1200, "Buenos Aires");
         JobCoach alan = new JobCoach("Turing", "Alan", "alan@gmail.com", "Enigma Inc.",
                 "Great Britainstraat", "1", 1000, "London");
+        JobCoach jos2 = new JobCoach("Vermeulen", "Jos", "joske@gmail.com", "Dalificom NV",
+                "Gaston Berghmansstraat", "12", 9300, "Aalst");
+        JobCoach anita2 = new JobCoach("Peron", "Anita", "anita@gmail.com", "BVBA Argentina",
+                "Juan Peronstraat", "1", 1200, "Buenos Aires");
+        JobCoach alan2 = new JobCoach("Turing", "Alan", "alan@gmail.com", "Enigma Inc.",
+                "Great Britainstraat", "1", 1000, "London");
+        JobCoach jos3 = new JobCoach("Vermeulen", "Jos", "joske@gmail.com", "Dalificom NV",
+                "Gaston Berghmansstraat", "12", 9300, "Aalst");
+        JobCoach anita3 = new JobCoach("Peron", "Anita", "anita@gmail.com", "BVBA Argentina",
+                "Juan Peronstraat", "1", 1200, "Buenos Aires");
+        JobCoach alan3 = new JobCoach("Turing", "Alan", "alan@gmail.com", "Enigma Inc.",
+                "Great Britainstraat", "1", 1000, "London");
         lijst.add(jos);
         lijst.add(anita);
         lijst.add(alan);
-
+        lijst.add(jos2);
+        lijst.add(anita2);
+        lijst.add(alan2);
+        lijst.add(jos3);
+        lijst.add(anita3);
+        lijst.add(alan3);
     }
 
     public List<JobCoach> getLijst() {
@@ -58,6 +75,12 @@ public class JobCoachRepository {
                 .collect(Collectors.toList());
     }
 
+    public List<JobCoach> zoekStraat(String query) {
+        return lijst.stream()
+                .filter(p -> p.getStraat().contains(query))
+                .collect(Collectors.toList());
+    }
+
     public List<JobCoach> zoekOrganisatie(String query) {
         return lijst.stream()
                 .filter(p -> p.getOrganisatie().contains(query))
@@ -72,7 +95,7 @@ public class JobCoachRepository {
 
     public List<JobCoach> zoekPostCode(String query) {
         return lijst.stream()
-                .filter(p -> Integer.toString(p.getPostcode()).equals(query))
+                .filter(p -> Integer.toString(p.getPostcode()).startsWith(query))
                 .collect(Collectors.toList());
     }
 
