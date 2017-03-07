@@ -1,0 +1,19 @@
+/* 
+    Created on : Mar 6, 2017, 3:32:18 PM
+    Author     : wim
+*/
+
+.topbar{
+    -fx-background-color:  #85BEB8;
+}
+
+.sidebar{
+    -fx-background-color: silver;
+}
+
+.sidebarbutton{
+    -fx-background-color: silver;
+}
+.sidebarbutton:hover{
+    -fx-background-color: white;
+}

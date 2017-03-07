@@ -25,27 +25,6 @@ import javafx.scene.layout.GridPane;
  */
 public class HoofdScherm extends BorderPane {
 
-    @FXML
-    private Button homeButton;
-
-    @FXML
-    private Button profielButton;
-
-    @FXML
-    private Button toonProfielButton;
-
-    @FXML
-    private Label lblProfiel;
-
-    @FXML
-    private Button jobcoachButton;
-
-    @FXML
-    private Button admintvgnButton;
-
-    @FXML
-    private Button logOutButton;
-
     private SchermBeheer schermBeheer;
     private DomeinController dc;
     private final int myWidth = 1000;
@@ -62,14 +41,14 @@ public class HoofdScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-
-        HomeScherm os = new HomeScherm(schermBeheer);
-        BorderPane.setAlignment(os, Pos.TOP_LEFT);
-        this.setCenter(os);
+//
+//        HomeScherm os = new HomeScherm(schermBeheer);
+//        BorderPane.setAlignment(os, Pos.TOP_LEFT);
+//        this.setCenter(os);
     }
 
     @FXML
-    void logOut(ActionEvent event) {
+    void doLogOut(ActionEvent event) {
         dc.logAdminUit();
         LoginScherm ls = new LoginScherm(schermBeheer);
 
@@ -94,7 +73,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonJobcoachesScherm(ActionEvent event) {
-        GebruikerAccountsBeherenScherm scherm = new GebruikerAccountsBeherenScherm(schermBeheer);
+        GebruikersBeherenScherm scherm = new GebruikersBeherenScherm(schermBeheer);
         this.setCenter(scherm);
         BorderPane.setAlignment(scherm, Pos.TOP_LEFT);
     }
