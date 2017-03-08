@@ -77,7 +77,6 @@ public class GebruikersBeherenScherm extends BorderPane {
     private final DomeinController dc;
     private SchermBeheer schermBeheer;
 
-
     public GebruikersBeherenScherm(SchermBeheer schermbeheer) {
         this.schermBeheer = schermbeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikersBeherenScherm.fxml"));
@@ -90,6 +89,7 @@ public class GebruikersBeherenScherm extends BorderPane {
         }
         this.dc = schermbeheer.getDc();
         data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
+        
         gebruikersTableView.setPlaceholder(new Label("Geen gebruikers aanwezig."));
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
@@ -170,6 +170,7 @@ public class GebruikersBeherenScherm extends BorderPane {
         ObservableList<JobCoach> coaches = gebruikersTableView.getSelectionModel().getSelectedItems();
         //todo wegschrijven naar excel bestand
     }
+
     @FXML
     private void doSelectAll(ActionEvent event) {
         gebruikersTableView.getSelectionModel().selectAll();
