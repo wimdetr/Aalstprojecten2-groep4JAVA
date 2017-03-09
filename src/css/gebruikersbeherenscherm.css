@@ -24,7 +24,7 @@
     -fx-table-cell-border-color: transparent;
 }
 .table-row-cell:selected {
-    -fx-background-color: rgba(133, 190, 184, 0.7);
+    -fx-background-color: rgba(133, 190, 184, 0.4);
     -fx-background-insets: 0;
     -fx-background-radius: 1;
     -fx-table-cell-border-color: transparent;
