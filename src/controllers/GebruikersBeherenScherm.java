@@ -90,13 +90,27 @@ public class GebruikersBeherenScherm extends BorderPane {
         data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
 
         gebruikersTableView.setPlaceholder(new Label("Geen gebruikers gevonden."));
+
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
         organisatieCol.setCellValueFactory(new PropertyValueFactory<>("organisatie"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        straatCol.setCellValueFactory(new PropertyValueFactory<>("straat"));
+        straatCol.setCellValueFactory(cellData -> Bindings.concat(cellData.getValue().getStraat(),
+                " ", cellData.getValue().getHuisnummer())); // 2 properties bijeen binden voor UX
         postcodeCol.setCellValueFactory(new PropertyValueFactory<>("postcode"));
         gemeenteCol.setCellValueFactory(new PropertyValueFactory<>("gemeente"));
+
+        gebruikersTableView.setRowFactory((p) -> {
+            TableRow<JobCoach> rij = new TableRow<>();
+            rij.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !rij.isEmpty()) {
+                    JobCoach j = rij.getItem();
+                    schermBeheer.plaatsPopUpScherm(new GebruikerDetailScherm(schermbeheer, j), "Gebruiker ");
+
+                }
+            });
+            return rij;
+        });
 
         gebruikersTableView.setItems(data);
         JobCoachRepository jcr = new JobCoachRepository();

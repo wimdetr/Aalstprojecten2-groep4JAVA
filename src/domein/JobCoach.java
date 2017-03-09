@@ -20,7 +20,6 @@ public class JobCoach extends Persoon {
 
     private List<Analyse> analyses;
 
-
     private final StringProperty organisatie = new SimpleStringProperty();
 
     public String getOrganisatie() {
@@ -42,6 +41,19 @@ public class JobCoach extends Persoon {
 
     public void setStraat(String value) {
         straat.set(value);
+    }
+    private final IntegerProperty huisnummer = new SimpleIntegerProperty();
+
+    public int getHuisnummer() {
+        return huisnummer.get();
+    }
+
+    public void setHuisnummer(int value) {
+        huisnummer.set(value);
+    }
+
+    public IntegerProperty huisnummerProperty() {
+        return huisnummer;
     }
 
     public StringProperty straatProperty() {
@@ -74,16 +86,16 @@ public class JobCoach extends Persoon {
         return gemeente;
     }
 
-    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
-        super(naam,voornaam,email);
+    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, int nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
+        super(naam, voornaam, email);
         setOrganisatie(naamOrganisatie);
-        setStraat(straatBedrijf + " " + nummerBedrijf);
+        setStraat(straatBedrijf);
+        setHuisnummer(nummerBedrijf);
         setPostcode(postcodeBedrijf);
         setGemeente(gemeenteBedrijf);
         analyses = new ArrayList<>();
 
     }
-
 
     public List<Analyse> getAnalyses() {
         return analyses;
@@ -92,12 +104,12 @@ public class JobCoach extends Persoon {
     public void voegAnalyseToe(Analyse a) {
         analyses.add(a);
     }
-    
-    public boolean controleerOfAnalyseAanwezigIs(int id){
+
+    public boolean controleerOfAnalyseAanwezigIs(int id) {
         return analyses.stream().anyMatch(a -> a.getId() == id);
     }
-    
-    public Analyse geefAnalyseMetId(int id){
+
+    public Analyse geefAnalyseMetId(int id) {
         return analyses.stream().filter(a -> a.getId() == id).findFirst().get();
     }
 }

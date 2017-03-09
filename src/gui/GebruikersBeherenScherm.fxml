@@ -60,7 +60,7 @@
                </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="440.0" spacing="10.0">
+            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="590.0" spacing="10.0">
                <children>
                   <TextField fx:id="zoekTextField" prefHeight="26.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />
                   <ChoiceBox fx:id="zoekChoiceBox" prefWidth="150.0" />

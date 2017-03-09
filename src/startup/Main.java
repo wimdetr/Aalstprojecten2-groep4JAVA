@@ -23,7 +23,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         SchermBeheer root = new SchermBeheer(new DomeinController(), stage);
         LoginScherm ls = new LoginScherm(root);
-        root.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
+        root.plaatsScherm(ls, "Login", ls.getMyWidth(), ls.getmyHeight());
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.setTitle("Administrator login");

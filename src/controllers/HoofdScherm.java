@@ -53,7 +53,7 @@ public class HoofdScherm extends BorderPane {
         LoginScherm ls = new LoginScherm(schermBeheer);
 
         schermBeheer.zetStageResizable(false);
-        schermBeheer.plaatsScherm(ls, "loginSchermId", "/css/loginScherm.css", "Login", ls.getMyWidth(), ls.getmyHeight());
+        schermBeheer.plaatsScherm(ls, "Login", ls.getMyWidth(), ls.getmyHeight());
     }
 
     @FXML
