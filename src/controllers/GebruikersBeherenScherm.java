@@ -187,27 +187,27 @@ public class GebruikersBeherenScherm extends BorderPane {
             File chosenDir = dirChooser.showDialog(this.getScene().getWindow());
             if (chosenDir != null) {
                 StringBuilder csvBuilder = new StringBuilder();
-                csvBuilder.append("Voornaam,")
-                        .append("Naam,")
-                        .append("Organisatie,")
-                        .append("Straat,")
-                        .append("Postcode,")
-                        .append("Gemeente,")
+                csvBuilder.append("Voornaam;")
+                        .append("Naam;")
+                        .append("Organisatie;")
+                        .append("Straat;")
+                        .append("Postcode;")
+                        .append("Gemeente;")
                         .append("Email")
                         .append("\n");
                 coaches.forEach((coach) -> {
                     csvBuilder.append(coach.getVoornaam())
-                            .append(",")
+                            .append(";")
                             .append(coach.getNaam())
-                            .append(",")
+                            .append(";")
                             .append(coach.getOrganisatie())
-                            .append(",")
+                            .append(";")
                             .append(coach.getGemeente())
-                            .append(",")
+                            .append(";")
                             .append(coach.getPostcode())
-                            .append(",")
+                            .append(";")
                             .append(coach.getGemeente())
-                            .append(",")
+                            .append(";")
                             .append(coach.getEmail())
                             .append("\n");
                 });
@@ -218,7 +218,7 @@ public class GebruikersBeherenScherm extends BorderPane {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("");
                     alert.setHeaderText("Exporteren succesvol!");
-                    alert.setContentText("Het bestand " + naamBestand + " is succesvol geëxporteerd! \n \n" + "Locatie: " + location);
+                    alert.setContentText("Het bestand " + naamBestand + " is succesvol geëxporteerd! \n \n" + "Locatie:" + location);
 
                     alert.showAndWait();
                 } catch (IOException ex) {
