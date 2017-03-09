@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/gebruikerdetailscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <VBox prefHeight="49.0" prefWidth="570.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Gebruikergegevens" textFill="#85beb8">
+               <font>
+                  <Font name="Likhan" size="32.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="-5.0" />
+               </VBox.margin>
+            </Separator>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <center>
+      <GridPane alignment="TOP_CENTER" hgap="15.0" vgap="15.0" BorderPane.alignment="TOP_LEFT">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" maxWidth="282.0" minWidth="10.0" prefWidth="152.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="368.0" minWidth="10.0" prefWidth="223.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="textlabel" text="Voornaam" />
+            <Label styleClass="textlabel" text="Naam" GridPane.rowIndex="1" />
+            <Label styleClass="textlabel" text="Organisatie" GridPane.rowIndex="2" />
+            <Label styleClass="textlabel" text="Straat" GridPane.rowIndex="3" />
+            <Label styleClass="textlabel" text="Huisnummer" GridPane.rowIndex="4" />
+            <Label styleClass="textlabel" text="Postcode" GridPane.rowIndex="5" />
+            <Label styleClass="textlabel" text="Gemeente" GridPane.rowIndex="6" />
+            <HBox alignment="BOTTOM_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#doCancel" prefHeight="32.0" prefWidth="114.0" styleClass="goBackButton" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#doOpslaan" styleClass="saveButton" text="Opslaan" />
+               </children>
+            </HBox>
+            <TextField fx:id="voorNaamVeld" prefHeight="26.0" prefWidth="214.0" GridPane.columnIndex="1" />
+            <TextField fx:id="naamVeld" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="organisatieVeld" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="straatVeld" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="huisnrVeld" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="postcodeVeld" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="gemeenteVeld" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+   </center>
+   <left>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
+         <image>
+            <Image url="@../img/icons/output.png" />
+         </image>
+      </ImageView>
+   </left>
+</fx:root>

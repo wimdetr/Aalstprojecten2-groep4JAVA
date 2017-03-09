@@ -1,0 +1,21 @@
+/* 
+    Created on : Mar 9, 2017, 1:39:34 PM
+    Author     : wim
+*/
+
+.goBackButton{
+    -fx-background-color: rgba(0, 0, 255, 0.5);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+.textlabel{
+    -fx-font-size: 22px;
+    -fx-text-fill: rgba(133, 190, 184, 1);
+}
+
+.saveButton{
+    -fx-background-color: rgba(0, 128, 0, 0.8);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
