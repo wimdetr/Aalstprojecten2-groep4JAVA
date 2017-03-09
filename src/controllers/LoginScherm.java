@@ -133,7 +133,7 @@ public class LoginScherm extends GridPane {
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
             
             HoofdScherm hoofd = new HoofdScherm(schermBeheer);
-            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "DashBoard", hoofd.getMyWidth(), hoofd.getMyHeight());
+            schermBeheer.plaatsScherm(hoofd, "hoofdSchermId", "/ccs/hoofdscherm.css", "Kairos - Administratie", hoofd.getMyWidth(), hoofd.getMyHeight());
 
             schermBeheer.zetStageResizable(true);
         } else {

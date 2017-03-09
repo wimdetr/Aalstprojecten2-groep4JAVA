@@ -3,12 +3,17 @@ package controllers;
 import domein.DomeinController;
 import domein.JobCoach;
 import domein.repository.JobCoachRepository;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -29,8 +34,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -106,7 +113,7 @@ public class GebruikersBeherenScherm extends BorderPane {
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekOrganisatie, "Organisatie"));
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekStraat, "Straat"));
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekPostCode, "Postcode"));
-        zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekEmail, "Voornaam"));
+        zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekEmail, "Email"));
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekGemeente, "Gemeente"));
         zoekChoiceBox.setValue(zoekChoiceBox.getItems().get(0));
 
@@ -168,7 +175,61 @@ public class GebruikersBeherenScherm extends BorderPane {
     @FXML
     private void doExporteer(ActionEvent event) {
         ObservableList<JobCoach> coaches = gebruikersTableView.getSelectionModel().getSelectedItems();
-        //todo wegschrijven naar excel bestand
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Exporteer gebruiker(s)");
+        dialog.setHeaderText("Bestandsnaam invoeren");
+        dialog.setContentText("Voer een passende bestaandsnaam in:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent() && !result.get().isEmpty()) {
+            String naamBestand = result.get() + ".csv";
+            DirectoryChooser dirChooser = new DirectoryChooser();
+            File chosenDir = dirChooser.showDialog(this.getScene().getWindow());
+            if (chosenDir != null) {
+                StringBuilder csvBuilder = new StringBuilder();
+                csvBuilder.append("Voornaam,")
+                        .append("Naam,")
+                        .append("Organisatie,")
+                        .append("Straat,")
+                        .append("Postcode,")
+                        .append("Gemeente,")
+                        .append("Email")
+                        .append("\n");
+                coaches.forEach((coach) -> {
+                    csvBuilder.append(coach.getVoornaam())
+                            .append(",")
+                            .append(coach.getNaam())
+                            .append(",")
+                            .append(coach.getOrganisatie())
+                            .append(",")
+                            .append(coach.getGemeente())
+                            .append(",")
+                            .append(coach.getPostcode())
+                            .append(",")
+                            .append(coach.getGemeente())
+                            .append(",")
+                            .append(coach.getEmail())
+                            .append("\n");
+                });
+                String csvString = csvBuilder.toString();
+                String location = chosenDir.toString() + "/" + naamBestand;
+                try {
+                    Files.write(Paths.get(location), csvString.getBytes());
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText("Exporteren succesvol!");
+                    alert.setContentText("Het bestand " + naamBestand + " is succesvol geëxporteerd! \n \n" + "Locatie: " + location);
+
+                    alert.showAndWait();
+                } catch (IOException ex) {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Exporteren mislukt!");
+                    alert.setContentText("Er is iets foutgelopen, probeer het nog eens.");
+
+                }
+            }
+        }
     }
 
     @FXML
