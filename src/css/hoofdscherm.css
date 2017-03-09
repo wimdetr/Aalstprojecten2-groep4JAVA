@@ -8,11 +8,11 @@
 }
 
 .sidebar{
-    -fx-background-color: silver;
+    -fx-background-color: #DCDCDC;
 }
 
 .sidebarbutton{
-    -fx-background-color: silver;
+    -fx-background-color: #DCDCDC;
 }
 .sidebarbutton:hover{
     -fx-background-color: white;

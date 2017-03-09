@@ -43,9 +43,6 @@ public class Archiefbekijken extends GridPane {
     private Hyperlink hlWachtwoordWijzigen;
     
     public Archiefbekijken() {
-        System.out.println("test");
-        this.setId("test");
-        this.getStylesheets().add("/css/test.css");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ArchiefBekijkenScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);

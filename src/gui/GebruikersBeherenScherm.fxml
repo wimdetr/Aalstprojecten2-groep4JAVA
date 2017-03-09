@@ -15,7 +15,7 @@
 
 <fx:root stylesheets="@../css/gebruikersbeherenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox alignment="TOP_RIGHT" prefHeight="38.0" prefWidth="590.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox alignment="TOP_RIGHT" prefHeight="38.0" prefWidth="590.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#doSelectAll" styleClass="selectAllButton" text="Selecteer Alle" />
             <Button fx:id="exporteerBtn" mnemonicParsing="false" onAction="#doExporteer" styleClass="exportButton" text="Exporteer" />
@@ -38,7 +38,7 @@
             <TableColumn fx:id="postcodeCol" prefWidth="35.0" text="Postcode" />
         </columns>
          <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" />
          </BorderPane.margin>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -56,14 +56,10 @@
                   <Font name="Likhan" size="32.0" />
                </font>
                <VBox.margin>
-                  <Insets left="5.0" />
+                  <Insets />
                </VBox.margin>
             </Label>
-            <Separator prefWidth="200.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </Separator>
+            <Separator prefWidth="200.0" />
             <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="440.0" spacing="10.0">
                <children>
                   <TextField fx:id="zoekTextField" prefHeight="26.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />

@@ -5,23 +5,17 @@ import domein.JobCoach;
 import domein.repository.JobCoachRepository;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -29,7 +23,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -38,7 +31,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 
 /**
  *
@@ -97,7 +89,7 @@ public class GebruikersBeherenScherm extends BorderPane {
         this.dc = schermbeheer.getDc();
         data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
 
-        gebruikersTableView.setPlaceholder(new Label("Geen gebruikers aanwezig."));
+        gebruikersTableView.setPlaceholder(new Label("Geen gebruikers gevonden."));
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
         organisatieCol.setCellValueFactory(new PropertyValueFactory<>("organisatie"));
@@ -218,7 +210,7 @@ public class GebruikersBeherenScherm extends BorderPane {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("");
                     alert.setHeaderText("Exporteren succesvol!");
-                    alert.setContentText("Het bestand " + naamBestand + " is succesvol geëxporteerd! \n \n" + "Locatie:" + location);
+                    alert.setContentText("Het bestand is succesvol geëxporteerd! \n \n" + "Locatie:" + location);
 
                     alert.showAndWait();
                 } catch (IOException ex) {
