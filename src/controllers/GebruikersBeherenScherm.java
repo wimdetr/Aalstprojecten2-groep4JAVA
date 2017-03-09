@@ -89,7 +89,7 @@ public class GebruikersBeherenScherm extends BorderPane {
         }
         this.dc = schermbeheer.getDc();
         data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
-        
+
         gebruikersTableView.setPlaceholder(new Label("Geen gebruikers aanwezig."));
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
