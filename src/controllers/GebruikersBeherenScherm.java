@@ -74,9 +74,9 @@ public class GebruikersBeherenScherm extends BorderPane {
 
     private ObservableList<JobCoach> data;
     private final DomeinController dc;
-    private SchermBeheer schermBeheer;
+    private Schermbeheer schermBeheer;
 
-    public GebruikersBeherenScherm(SchermBeheer schermbeheer) {
+    public GebruikersBeherenScherm(Schermbeheer schermbeheer) {
         this.schermBeheer = schermbeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikersBeherenScherm.fxml"));
         loader.setRoot(this);

@@ -50,9 +50,9 @@ public class Mark extends VBox{
     @FXML
     private Label lblJobcoach;
     
-    private SchermBeheer schermBeheer;
+    private Schermbeheer schermBeheer;
     
-    public Mark(SchermBeheer schermBeheer) {
+    public Mark(Schermbeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Mark.fxml"));

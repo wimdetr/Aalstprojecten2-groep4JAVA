@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefWidth="707.0" stylesheets="@../css/hoofdscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600.0" minWidth="800.0" stylesheets="@../css/hoofdscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <GridPane styleClass="topbar" BorderPane.alignment="CENTER">
          <BorderPane.margin>

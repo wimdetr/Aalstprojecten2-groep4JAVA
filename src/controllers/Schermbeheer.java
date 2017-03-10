@@ -6,59 +6,52 @@
 package controllers;
 
 import domein.DomeinController;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
  *
  * @author ~dreeki~
  */
-public class SchermBeheer extends VBox {
+public class Schermbeheer {
 
     private final DomeinController dc;
     private final Stage mainStage;
-    private Stage popUpStage;
+    private final Stage popUpStage;
 
-    public Stage getPopUpStage() {
-        return popUpStage;
-    }
-
-    public SchermBeheer(DomeinController dc, Stage stage) {
+    public Schermbeheer(DomeinController dc, Stage stage) {
         this.dc = dc;
         mainStage = stage;
-
+        popUpStage = new Stage();
+        mainStage.getIcons().add(new Image(getClass().getResource("/img/kairos_icon_black.png").toString()));
+        popUpStage.getIcons().add(new Image(getClass().getResource("/img/kairos_icon_black.png").toString()));
         mainStage.setOnCloseRequest(e -> {
-            if (popUpStage != null) {
-                popUpStage.close();
-                this.setDisable(false);
-            }
+            sluitPopUpScherm();
         });
     }
 
-    public void zetStageResizable(boolean resizable) {
+    public void setMainStageResizable(boolean resizable) {
         mainStage.setResizable(resizable);
     }
 
-    public void plaatsScherm(Node node, String schermTitel, int width, int height) {
-        getChildren().setAll(node);
-        VBox.setVgrow(node, Priority.ALWAYS);
-        mainStage.setWidth(width);
-        mainStage.setHeight(height);
-        mainStage.setTitle(schermTitel);
+    private void setDisableMainStage(boolean disabled) {
+        mainStage.getScene().getRoot().setDisable(disabled);
+    }
 
+    public void plaatsScherm(Parent screen, String schermTitel) {
+        Scene scene = new Scene(screen);
+        mainStage.setScene(scene);
+        mainStage.setTitle(schermTitel);
         mainStage.centerOnScreen();
+        mainStage.show();
     }
 
     public void plaatsPopUpScherm(Parent popUpScreen, String schermTitel) {
-        this.setDisable(true);
-        popUpStage = new Stage();
+        setDisableMainStage(true);
         Scene scene = new Scene(popUpScreen);
         popUpStage.setScene(scene);
-        popUpStage.setAlwaysOnTop(true);
         popUpStage.setTitle(schermTitel);
         popUpStage.show();
         popUpStage.setOnCloseRequest(e -> {
@@ -68,7 +61,7 @@ public class SchermBeheer extends VBox {
 
     public void sluitPopUpScherm() {
         popUpStage.close();
-        this.setDisable(false);
+        setDisableMainStage(false);
     }
 
     public DomeinController getDc() {
