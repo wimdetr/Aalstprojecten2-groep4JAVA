@@ -99,50 +99,23 @@ public class GebruikerDetailScherm extends BorderPane {
     }
 
     private boolean isValid() {
-        boolean flag = true;
-        if (Pattern.matches("[ a-zA-Z'-]+", voorNaamVeld.getText())) {
-            removeIncorrectStyling(voorNaamVeld);
+        return checkTextField("[ a-zA-Z'-]+", naamVeld)
+                && checkTextField("[ a-zA-Z'-]+", voorNaamVeld)
+                && checkTextField(".+", organisatieVeld)
+                && checkTextField("[ a-zA-Z'-]+", straatVeld)
+                && checkTextField("[0-9]+[a-zA-Z]?", huisnrVeld)
+                && checkTextField("^[1-9][0-9]{3}$", postcodeVeld)
+                && checkTextField("[ a-zA-Z'-]+", gemeenteVeld);
+    }
+
+    private boolean checkTextField(String pattern, TextField txf) {
+        if (Pattern.matches(pattern, txf.getText())) {
+            removeIncorrectStyling(txf);
+            return true;
         } else {
-            addIncorrectStyling(voorNaamVeld);
-            flag = false;
+            addIncorrectStyling(txf);
+            return false;
         }
-        if (Pattern.matches("[ a-zA-Z'-]+", naamVeld.getText())) {
-            removeIncorrectStyling(naamVeld);
-        } else {
-            addIncorrectStyling(naamVeld);
-            flag = false;
-        }
-        if (Pattern.matches(".+", organisatieVeld.getText())) {
-            removeIncorrectStyling(organisatieVeld);
-        } else {
-            addIncorrectStyling(organisatieVeld);
-            flag = false;
-        }
-        if (Pattern.matches("[ a-zA-Z'-]+", straatVeld.getText())) {
-            removeIncorrectStyling(straatVeld);
-        } else {
-            addIncorrectStyling(straatVeld);
-            flag = false;
-        }
-        if (Pattern.matches("[0-9]+[a-zA-Z]?", huisnrVeld.getText())) {
-            removeIncorrectStyling(huisnrVeld);
-        } else {
-            addIncorrectStyling(huisnrVeld);
-            flag = false;
-        }
-        if (Pattern.matches("^[1-9][0-9]{3}$", postcodeVeld.getText())) {
-            removeIncorrectStyling(postcodeVeld);
-        } else {
-            addIncorrectStyling(postcodeVeld);
-            flag = false;
-        }
-        if (Pattern.matches("[ a-zA-Z'-]+", gemeenteVeld.getText())) {
-            removeIncorrectStyling(gemeenteVeld);
-        } else {
-            addIncorrectStyling(gemeenteVeld);
-            flag = false;
-        }
-        return flag;
     }
 
     private void addIncorrectStyling(TextField txf) {
