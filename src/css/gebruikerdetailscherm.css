@@ -19,3 +19,7 @@
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
+
+.textfieldIncorrect{
+    -fx-border-color: red;
+}

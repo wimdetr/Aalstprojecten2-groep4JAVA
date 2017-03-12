@@ -19,9 +19,9 @@ public class HomeScherm extends VBox{
     @FXML
     private FlowPane flowPaneRecenteAnalyses;
     
-    private SchermBeheer schermBeheer;
+    private Schermbeheer schermBeheer;
 
-    public HomeScherm(SchermBeheer schermBeheer) {
+    public HomeScherm(Schermbeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeScherm.fxml"));
         loader.setRoot(this);

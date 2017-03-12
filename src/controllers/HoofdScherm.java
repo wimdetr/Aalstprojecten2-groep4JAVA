@@ -11,10 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -25,12 +22,10 @@ import javafx.scene.layout.GridPane;
  */
 public class HoofdScherm extends BorderPane {
 
-    private SchermBeheer schermBeheer;
+    private Schermbeheer schermBeheer;
     private DomeinController dc;
-    private final int myWidth = 1000;
-    private final int myHeight = 715;
 
-    public HoofdScherm(SchermBeheer schermBeheer) {
+    public HoofdScherm(Schermbeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
         this.dc = schermBeheer.getDc();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdScherm.fxml"));
@@ -51,9 +46,8 @@ public class HoofdScherm extends BorderPane {
     void doLogOut(ActionEvent event) {
         dc.logAdminUit();
         LoginScherm ls = new LoginScherm(schermBeheer);
-
-        schermBeheer.zetStageResizable(false);
-        schermBeheer.plaatsScherm(ls, "Login", ls.getMyWidth(), ls.getmyHeight());
+        schermBeheer.plaatsScherm(ls, "Login");
+        schermBeheer.setMainStageResizable(false);
     }
 
     @FXML
@@ -97,14 +91,6 @@ public class HoofdScherm extends BorderPane {
         AdminToevoegenScherm scherm = new AdminToevoegenScherm();
         this.setCenter(scherm);
         GridPane.setHalignment(scherm, HPos.LEFT);
-    }
-
-    public int getMyWidth() {
-        return myWidth;
-    }
-
-    public int getMyHeight() {
-        return myHeight;
     }
 
 }

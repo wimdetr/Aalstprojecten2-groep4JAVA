@@ -91,4 +91,7 @@
          </image>
       </ImageView>
    </left>
+   <bottom>
+      <Label fx:id="errorLabel" text="Gelieve alle velden correct in te vullen!" textFill="RED" visible="false" BorderPane.alignment="CENTER" />
+   </bottom>
 </fx:root>

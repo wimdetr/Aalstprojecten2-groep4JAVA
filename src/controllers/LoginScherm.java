@@ -49,12 +49,10 @@ public class LoginScherm extends GridPane {
     @FXML
     private Label lblErrorBericht;
 
-    private final int myWidth = 300;
-    private final int myHeight = 280;
     private DomeinController dc;
-    private SchermBeheer schermBeheer;
+    private Schermbeheer schermBeheer;
 
-    public LoginScherm(SchermBeheer schermBeheer) {
+    public LoginScherm(Schermbeheer schermBeheer) {
         this.dc = schermBeheer.getDc();
         this.schermBeheer = schermBeheer;
 
@@ -133,21 +131,14 @@ public class LoginScherm extends GridPane {
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
             
             HoofdScherm hoofd = new HoofdScherm(schermBeheer);
-            schermBeheer.plaatsScherm(hoofd, "Kairos - Administratie", hoofd.getMyWidth(), hoofd.getMyHeight());
+            schermBeheer.plaatsScherm(hoofd, "Kairos - Administratie");
 
-            schermBeheer.zetStageResizable(true);
+            schermBeheer.setMainStageResizable(true);
         } else {
 
             lblErrorBericht.setVisible(true);
         }
     }
 
-    public int getMyWidth() {
-        return myWidth;
-    }
-
-    public int getmyHeight() {
-        return myHeight;
-    }
 
 }
