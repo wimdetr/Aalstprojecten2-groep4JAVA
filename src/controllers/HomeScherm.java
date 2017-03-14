@@ -8,6 +8,8 @@ package controllers;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 
@@ -15,10 +17,11 @@ import javafx.scene.layout.VBox;
  *
  * @author ~dreeki~
  */
-public class HomeScherm extends VBox{   
+public class HomeScherm extends VBox {
+
     @FXML
     private FlowPane flowPaneRecenteAnalyses;
-    
+
     private Schermbeheer schermBeheer;
 
     public HomeScherm(Schermbeheer schermBeheer) {
@@ -31,10 +34,10 @@ public class HomeScherm extends VBox{
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-        
-        for(int i = 0; i< 6; i++)
-        flowPaneRecenteAnalyses.getChildren().add(new Mark(this.schermBeheer));
+
+        for (int i = 0; i < 8; i++) {
+            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer));
+        }
     }
-    
-    
+
 }

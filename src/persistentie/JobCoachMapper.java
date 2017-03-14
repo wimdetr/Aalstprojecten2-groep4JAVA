@@ -18,6 +18,7 @@ public class JobCoachMapper {
     }
     
     public List<JobCoach> geefCoaches(String naam){
+        // connectie met DB
         return null;
     }
 }
