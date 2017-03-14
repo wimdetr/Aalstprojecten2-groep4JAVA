@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
@@ -19,50 +20,44 @@ import javafx.scene.shape.Rectangle;
  *
  * @author ~dreeki~
  */
-public class Mark extends VBox{
-    @FXML
-    private ImageView imgVIewLogo;
+public class AnalyseCard extends VBox {
 
     @FXML
-    private Label lblWerkgeverNaam;
+    private Label kostenLabel;
 
     @FXML
-    private Label lblLocatie;
+    private Label batenLabel;
 
     @FXML
-    private Label lblDatum;
+    private Label resultaatLabel;
 
     @FXML
-    private Label lblResultaat;
+    private Label jobcoachLabel;
 
     @FXML
-    private Label lblKost;
+    private Label datumLabel;
 
     @FXML
-    private Rectangle vierkantKost;
+    private Label onderdeelLabel;
 
-    @FXML
-    private Label lblBaat;
-
-    @FXML
-    private Rectangle viekantBaat;
-
-    @FXML
-    private Label lblJobcoach;
-    
     private Schermbeheer schermBeheer;
-    
-    public Mark(Schermbeheer schermBeheer) {
+
+    public AnalyseCard(Schermbeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Mark.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AnalyseCard.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
             loader.load();
+
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+    }
+
+    @FXML
+    void showDetails(ActionEvent event) {
+
     }
 
     @FXML
@@ -94,6 +89,5 @@ public class Mark extends VBox{
     void klikVerwijderKnop(ActionEvent event) {
 
     }
-    
-    
+
 }

@@ -7,9 +7,12 @@ package controllers;
 
 import domein.DomeinController;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
@@ -36,10 +39,6 @@ public class HoofdScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-//
-//        HomeScherm os = new HomeScherm(schermBeheer);
-//        BorderPane.setAlignment(os, Pos.TOP_LEFT);
-//        this.setCenter(os);
     }
 
     @FXML
@@ -61,7 +60,6 @@ public class HoofdScherm extends BorderPane {
     @FXML
     public void toonHomeScherm(ActionEvent event) {
         HomeScherm os = new HomeScherm(schermBeheer);
-        BorderPane.setAlignment(os, Pos.TOP_LEFT);
         this.setCenter(os);
     }
 

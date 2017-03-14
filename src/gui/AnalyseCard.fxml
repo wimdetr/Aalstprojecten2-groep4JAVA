@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="250.0" maxWidth="285.0" minHeight="250.0" minWidth="285.0" styleClass="card" stylesheets="@../css/analysecard.css" type="VBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <children>
+      <HBox fx:id="cardTop" alignment="CENTER" maxHeight="62.0" maxWidth="285.0" minHeight="62.0" minWidth="273.0" prefHeight="62.0" prefWidth="273.0" styleClass="cardTop">
+         <children>
+            <Region prefHeight="52.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="216.0" style="-fx-background-color: white;" text="Dalificom">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Region prefHeight="52.0" prefWidth="9.0" />
+            <Button mnemonicParsing="false" onAction="#showDetails" prefHeight="35.0" prefWidth="50.0" style="-fx-background-color: white; -fx-background-radius: 0;">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="23.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/icons/return.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <VBox maxHeight="186.0" maxWidth="283.0" minHeight="186.0" minWidth="283.0" styleClass="cardBottom">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <GridPane prefWidth="265.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="106.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="157.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Totale kosten" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="kostenLabel" styleClass="resultLabelNegative" text="3700 €" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Totale baten" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Resultaat" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="batenLabel" styleClass="resultLabelPositive" text="12565 €" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="resultaatLabel" styleClass="resultLabelPositive" text="8865 €" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Label text="Jobcoach" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Gewijzigd" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="jobcoachLabel" text="Pieter-Jan Phillips" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="datumLabel" text="29-01-2017" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <HBox alignment="TOP_CENTER" prefHeight="36.0" prefWidth="263.0" GridPane.columnSpan="2">
+                     <children>
+                        <Label fx:id="onderdeelLabel" text="Departement IT" underline="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</fx:root>

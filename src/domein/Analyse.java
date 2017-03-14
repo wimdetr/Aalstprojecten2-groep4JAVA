@@ -14,6 +14,7 @@ import java.util.Map;
  * @author ~dreeki~
  */
 public class Analyse {
+    
     private int id;
     private Map<Integer, KostOfBaat> kosten;
     private Map<Integer, KostOfBaat> baten;
