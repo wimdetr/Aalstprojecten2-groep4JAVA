@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import domein.Analyse;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,12 +39,17 @@ public class AnalyseCard extends VBox {
     private Label datumLabel;
 
     @FXML
-    private Label onderdeelLabel;
+    private Label bedrijfOnderdeelLabel;
+
+    @FXML
+    private Label bedrijfLabel;
 
     private Schermbeheer schermBeheer;
 
-    public AnalyseCard(Schermbeheer schermBeheer) {
+    private Analyse analyse;
+    public AnalyseCard(Schermbeheer schermBeheer, Analyse a) {
         this.schermBeheer = schermBeheer;
+        analyse = a;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AnalyseCard.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -53,41 +59,14 @@ public class AnalyseCard extends VBox {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        fillInCard();
     }
 
-    @FXML
-    void showDetails(ActionEvent event) {
-
+    private void fillInCard() {
+        /*
+        TODO: Fill out rest of the labels. Will do when DB gets used.
+        */
+        bedrijfLabel.setText(analyse.geefWerkgever().getNaam());
+        bedrijfOnderdeelLabel.setText(analyse.geefWerkgever().getNaamAfdeling());
     }
-
-    @FXML
-    void enterDownloadKnop(KeyEvent event) {
-
-    }
-
-    @FXML
-    void enterVerturenKnop(KeyEvent event) {
-
-    }
-
-    @FXML
-    void enterVerwijderKnop(KeyEvent event) {
-
-    }
-
-    @FXML
-    void klikDownloadKnop(ActionEvent event) {
-
-    }
-
-    @FXML
-    void klikVersturenKnop(ActionEvent event) {
-
-    }
-
-    @FXML
-    void klikVerwijderKnop(ActionEvent event) {
-
-    }
-
 }

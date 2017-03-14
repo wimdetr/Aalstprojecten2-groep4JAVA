@@ -21,7 +21,6 @@ public class Schermbeheer {
     private final Stage mainStage;
     private final Stage popUpStage;
 
-    
     public Schermbeheer(DomeinController dc, Stage stage) {
         this.dc = dc;
         mainStage = stage;

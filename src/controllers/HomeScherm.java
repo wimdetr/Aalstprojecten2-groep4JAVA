@@ -5,7 +5,11 @@
  */
 package controllers;
 
+import domein.Analyse;
+import domein.DomeinController;
+import domein.repository.AnalyseRepository;
 import java.io.IOException;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,8 +39,14 @@ public class HomeScherm extends VBox {
             throw new RuntimeException(ex.getMessage());
         }
 
+        /*
+        Data for testing purposes and DEMO!
+        */
+        DomeinController dc = schermBeheer.getDc();
+        AnalyseRepository repo = dc.getAnalyseRepo();
+        List<Analyse> list = repo.getLijst();
         for (int i = 0; i < 8; i++) {
-            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer));
+            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer,list.get(i)));
         }
     }
 

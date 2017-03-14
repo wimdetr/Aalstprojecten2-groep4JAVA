@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -39,6 +40,8 @@ public class HoofdScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        HomeScherm os = new HomeScherm(schermBeheer);
+        this.setCenter(os);
     }
 
     @FXML
