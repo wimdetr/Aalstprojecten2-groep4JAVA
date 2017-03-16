@@ -68,7 +68,7 @@ public class GebruikerDetailScherm extends BorderPane {
         naamVeld.setText(user.getNaam());
         organisatieVeld.setText(user.getOrganisatie());
         straatVeld.setText(user.getStraat());
-        huisnrVeld.setText(Integer.toString(user.getHuisnummer()));
+        huisnrVeld.setText(user.getHuisnummer());
         postcodeVeld.setText(Integer.toString(user.getPostcode()));
         gemeenteVeld.setText(user.getGemeente());
 
@@ -99,13 +99,14 @@ public class GebruikerDetailScherm extends BorderPane {
     }
 
     private boolean isValid() {
-        return checkTextField("[ a-zA-Z'-]+", naamVeld)
-                && checkTextField("[ a-zA-Z'-]+", voorNaamVeld)
-                && checkTextField(".+", organisatieVeld)
-                && checkTextField("[ a-zA-Z'-]+", straatVeld)
-                && checkTextField("[0-9]+[a-zA-Z]?", huisnrVeld)
-                && checkTextField("^[1-9][0-9]{3}$", postcodeVeld)
-                && checkTextField("[ a-zA-Z'-]+", gemeenteVeld);
+        // & instead of && forces java to check every statement
+        return (checkTextField("[ a-zA-Z'-]+", naamVeld)
+                & checkTextField("[ a-zA-Z'-]+", voorNaamVeld)
+                & checkTextField(".+", organisatieVeld)
+                & checkTextField("[ a-zA-Z'-]+", straatVeld)
+                & checkTextField("[0-9]+[a-zA-Z]?", huisnrVeld)
+                & checkTextField("^[1-9][0-9]{3}$", postcodeVeld)
+                & checkTextField("[ a-zA-Z'-]+", gemeenteVeld));
     }
 
     private boolean checkTextField(String pattern, TextField txf) {
@@ -131,7 +132,7 @@ public class GebruikerDetailScherm extends BorderPane {
         user.setNaam(naamVeld.getText());
         user.setOrganisatie(organisatieVeld.getText());
         user.setStraat(straatVeld.getText());
-        user.setHuisnummer(Integer.parseInt(huisnrVeld.getText()));
+        user.setHuisnummer(huisnrVeld.getText());
         user.setPostcode(Integer.parseInt(postcodeVeld.getText()));
         user.setGemeente(gemeenteVeld.getText());
     }
