@@ -89,7 +89,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonAdminToevoegenScherm(ActionEvent event) {
-        AdminToevoegenScherm scherm = new AdminToevoegenScherm();
+        AdminBeherenScherm scherm = new AdminBeherenScherm();
         this.setCenter(scherm);
         GridPane.setHalignment(scherm, HPos.LEFT);
     }

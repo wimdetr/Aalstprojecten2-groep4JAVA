@@ -22,7 +22,7 @@
       </VBox>
       <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">
          <content>
-            <FlowPane fx:id="flowPaneRecenteAnalyses" hgap="25.0" vgap="25.0" />
+            <FlowPane fx:id="flowPaneRecenteAnalyses" hgap="20.0" vgap="20.0" />
          </content>
          <padding>
             <Insets bottom="5.0" right="5.0" top="5.0" />

@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author wimde
  */
-public class AdminToevoegenScherm extends GridPane {
+public class AdminBeherenScherm extends GridPane {
 
     @FXML
     private TextField emailVeld;
@@ -31,8 +31,8 @@ public class AdminToevoegenScherm extends GridPane {
     @FXML
     private Button adminVoegToeButton;
 
-    public AdminToevoegenScherm() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AdminToevoegenScherm.fxml"));
+    public AdminBeherenScherm() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AdminBeherenScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

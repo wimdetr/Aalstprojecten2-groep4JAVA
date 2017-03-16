@@ -45,8 +45,8 @@ public class HomeScherm extends VBox {
         DomeinController dc = schermBeheer.getDc();
         AnalyseRepository repo = dc.getAnalyseRepo();
         List<Analyse> list = repo.getLijst();
-        for (int i = 0; i < 8; i++) {
-            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer,list.get(i)));
+        for (int i = 0; i < 12; i++) {
+            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer,list.get(i%8)));
         }
     }
 
