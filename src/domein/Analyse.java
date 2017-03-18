@@ -5,9 +5,9 @@
  */
 package domein;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -16,40 +16,48 @@ import java.util.Map;
 public class Analyse {
     
     private int id;
-    private Map<Integer, KostOfBaat> kosten;
-    private Map<Integer, KostOfBaat> baten;
+    private List<KostOfBaat> kosten;
+    private List<KostOfBaat> baten;
     private Werkgever werkgever;
     private Date laatsteAanpasDatum;
 
     public Analyse(int id, Date date) {
         this.id = id;
-        kosten = new HashMap<>();
-        baten = new HashMap<>();
+        kosten = new ArrayList<>();
+        baten = new ArrayList<>();
         laatsteAanpasDatum = date;
     }
     
     public boolean controleerOfKostMetNummerAlIngevuldIs(int nummer){
-        return kosten.keySet().stream().anyMatch(k -> k == nummer);
+        return kosten.stream().anyMatch(k -> k.getId() == nummer);
     }
     
     public KostOfBaat geefKostMetNummer(int nummer){
-        return kosten.get(nummer);
+        return kosten.stream().filter(k -> k.getId() == nummer).findFirst().get();
     }
     
     public boolean controleerOfBaatMetNummerAlIngevuldIs(int nummer){
-        return baten.keySet().stream().anyMatch(k -> k == nummer);
+        return baten.stream().anyMatch(b -> b.getId() == nummer);
     }
     
     public KostOfBaat geefBaatMetNummer(int nummer){
-        return baten.get(nummer);
+        return baten.stream().filter(b -> b.getId() == nummer).findFirst().get();
     }
     
-    public void slaKostMetNummerOp(int nummer, KostOfBaat kost){
-        kosten.put(nummer, kost);
+    public void slaKostMetNummerOp(KostOfBaat kost){
+        if(controleerOfKostMetNummerAlIngevuldIs(kost.getId())){
+            kosten.remove(geefKostMetNummer(kost.getId()));
+        }
+        
+        kosten.add(kost);
     }
     
-    public void slaBaatMetNummerOp(int nummer, KostOfBaat baat){
-        baten.put(nummer, baat);
+    public void slaBaatMetNummerOp(KostOfBaat baat){
+        if(controleerOfBaatMetNummerAlIngevuldIs(baat.getId())){
+            baten.remove(geefBaatMetNummer(baat.getId()));
+        }
+        
+        baten.add(baat);
     }
     
     public Werkgever geefWerkgever(){
@@ -90,11 +98,11 @@ public class Analyse {
         return laatsteAanpasDatum;
     }
 
-    public Map<Integer, KostOfBaat> getBaten() {
+    public List<KostOfBaat> getBaten() {
         return baten;
     }
 
-    public Map<Integer, KostOfBaat> getKosten() {
+    public List<KostOfBaat> getKosten() {
         return kosten;
     }
     

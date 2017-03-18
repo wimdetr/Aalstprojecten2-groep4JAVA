@@ -5,7 +5,8 @@
  */
 package domein;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Map;
 public class KostOfBaat {
     
     private int id;
-    private Map<Integer, KOBRij> rijen;
+    private List<KOBRij> rijen;
     private KOBEnum kostOfBaatEnum;
     private Formule formule;
     private double resultaat;
@@ -23,22 +24,25 @@ public class KostOfBaat {
 
     public KostOfBaat(int id, KOBEnum kobEnum, Formule formule) {
         this.id = id;
-        rijen = new HashMap<>();
+        rijen = new ArrayList<>();
         kostOfBaatEnum = kobEnum;
         this.formule = formule;
         resultaat = 0;
     }
     
-    public void vulKOBRijIn(int nummer, KOBRij rij){
-        rijen.put(rij.getId(), rij);
+    public void vulKOBRijIn(KOBRij rij){
+        if(controleerOfKOBRijMetNummerAlIngevuldIs(rij.getId())){
+            rijen.remove(geefKOBRijMetNummer(rij.getId()));
+        }
+        rijen.add(rij);
     }
     
     public KOBRij geefKOBRijMetNummer(int nummer){
-        return rijen.get(nummer);
+        return rijen.stream().filter(r -> r.getId() == nummer).findFirst().get();
     }
     
     public boolean controleerOfKOBRijMetNummerAlIngevuldIs(int nummer){
-        return rijen.keySet().stream().anyMatch(k -> k == nummer);
+        return rijen.stream().anyMatch(r -> r.getId() == nummer);
     }
 
     public double getResultaat() {
@@ -46,7 +50,7 @@ public class KostOfBaat {
     }
     
     public void berekenResultaat(){
-        resultaat = rijen.values().stream().mapToDouble(v -> v.getResultaat()).reduce(0, (value1, value2) -> value1+value2);
+        resultaat = rijen.stream().mapToDouble(v -> v.getResultaat()).reduce(0, (value1, value2) -> value1+value2);
     }
 
     public Formule getFormule() {
@@ -65,7 +69,7 @@ public class KostOfBaat {
         this.id = id;
     }
 
-    public Map<Integer, KOBRij> getRijen() {
+    public List<KOBRij> getRijen() {
         return rijen;
     }
     

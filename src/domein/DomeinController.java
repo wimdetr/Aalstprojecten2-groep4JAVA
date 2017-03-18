@@ -76,7 +76,7 @@ public class DomeinController {
             }
         }
         if (kostOfBaat != null) {
-            for (KOBRij rij : kostOfBaat.getRijen().values()) {
+            for (KOBRij rij : kostOfBaat.getRijen()) {
                 resultaat.berekenEnSetResultaat(rij);
             }
             kostOfBaat.berekenResultaat();
@@ -93,14 +93,14 @@ public class DomeinController {
             analyse = coach.geefAnalyseMetId(analyseId);
         }
         if (analyse != null) {
-            for (KostOfBaat kob : analyse.getBaten().values()) {
-                kob.getRijen().values().forEach((rij) -> {
+            for (KostOfBaat kob : analyse.getBaten()) {
+                kob.getRijen().forEach((rij) -> {
                     resultaat.berekenEnSetResultaat(rij);
                 });
                 kob.berekenResultaat();
             }
-            for (KostOfBaat kob : analyse.getKosten().values()) {
-                kob.getRijen().values().forEach((rij) -> {
+            for (KostOfBaat kob : analyse.getKosten()) {
+                kob.getRijen().forEach((rij) -> {
                     resultaat.berekenEnSetResultaat(rij);
                 });
                 kob.berekenResultaat();
