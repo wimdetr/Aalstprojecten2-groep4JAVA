@@ -5,8 +5,8 @@
  */
 package domein;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,12 +14,12 @@ import java.util.Map;
  */
 public class KOBRij {
     private int id;
-    private Map<Integer, KOBVak> vakken;
+    private List<KOBVak> vakken;
     private double resultaat;
 
     public KOBRij(int id) {
         this.id = id;
-        vakken = new HashMap<>();
+        vakken = new ArrayList<>();
         resultaat = 0;
     }
 
@@ -27,16 +27,19 @@ public class KOBRij {
         return id;
     }
     
-    public void vulKOBVakIn(int nummer, KOBVak vak){
-        vakken.put(nummer, vak);
+    public void vulKOBVakIn(KOBVak vak){
+        if(controleerOfKOBVakMetNummerAlIngevuldIs(vak.getId())){
+            vakken.remove(geefKOBVakMetNummer(vak.getId()));
+        }
+        vakken.add(vak);
     }
     
     public KOBVak geefKOBVakMetNummer(int nummer){
-        return vakken.get(nummer);
+        return vakken.stream().filter(v -> v.getId() == nummer).findFirst().get();
     }
     
     public boolean controleerOfKOBVakMetNummerAlIngevuldIs(int nummer){
-        return vakken.keySet().stream().anyMatch(k -> k == nummer);
+        return vakken.stream().anyMatch(v -> v.getId() == nummer);
     }
 
     public double getResultaat() {
