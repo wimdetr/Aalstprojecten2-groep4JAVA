@@ -7,13 +7,26 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.Entity;
 
 /**
  *
  * @author ~dreeki~
  */
+@Entity
+@DiscriminatorValue(value = "Admin")
 public class Admin extends Persoon{
+    private final long serialVersionUID = 1L;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<JobCoach> coaches;
+
+    protected Admin() {
+    }
 
     public Admin(String naam, String voornaam, String email) {
         super(naam, voornaam, email);

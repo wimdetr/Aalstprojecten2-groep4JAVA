@@ -11,15 +11,26 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author ~dreeki~
  */
-public class JobCoach extends Persoon {
-
+@Entity
+@DiscriminatorValue(value = "JobCoach")
+public class JobCoach extends Persoon{
+    private final long serialVersionUID = 1L;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Analyse> analyses;
 
+    @Column(name = "NaamBedrijf")
     private final StringProperty organisatie = new SimpleStringProperty();
 
     public String getOrganisatie() {
@@ -33,6 +44,7 @@ public class JobCoach extends Persoon {
     public StringProperty organisatieProperty() {
         return organisatie;
     }
+    @Column(name = "StraatBedrijf")
     private final StringProperty straat = new SimpleStringProperty();
 
     public String getStraat() {
@@ -42,6 +54,7 @@ public class JobCoach extends Persoon {
     public void setStraat(String value) {
         straat.set(value);
     }
+    @Column(name = "NummerBedrijf")
     private final StringProperty huisnummer = new SimpleStringProperty();
 
     public String getHuisnummer() {
@@ -61,6 +74,7 @@ public class JobCoach extends Persoon {
     public StringProperty straatProperty() {
         return straat;
     }
+    @Column(name = "PostcodeBedrijf")
     private final IntegerProperty postcode = new SimpleIntegerProperty();
 
     public int getPostcode() {
@@ -74,6 +88,7 @@ public class JobCoach extends Persoon {
     public IntegerProperty postcodeProperty() {
         return postcode;
     }
+    @Column(name = "GemeenteBedrijf")
     private final StringProperty gemeente = new SimpleStringProperty();
 
     public String getGemeente() {
@@ -87,7 +102,25 @@ public class JobCoach extends Persoon {
     public StringProperty gemeenteProperty() {
         return gemeente;
     }
+    @Column(name = "BusBedrijf")
+    private final StringProperty bus = new SimpleStringProperty();
 
+    public String getBus() {
+        return bus.get();
+    }
+
+    public void setBus(String value) {
+        bus.set(value);
+    }
+
+    public StringProperty busProperty() {
+        return bus;
+    }
+
+    protected JobCoach(){
+        
+    }
+    
     public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
         super(naam, voornaam, email);
         setOrganisatie(naamOrganisatie);
@@ -98,6 +131,11 @@ public class JobCoach extends Persoon {
         analyses = new ArrayList<>();
 
     }
+    
+        public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf, String busBedrijf) {
+            this(naam, voornaam, email, naamOrganisatie, straatBedrijf, nummerBedrijf, postcodeBedrijf, gemeenteBedrijf);
+            setBus(busBedrijf);
+        }
 
     public List<Analyse> getAnalyses() {
         return analyses;

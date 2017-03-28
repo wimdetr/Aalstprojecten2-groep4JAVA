@@ -5,22 +5,41 @@
  */
 package domein;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author ~dreeki~
  */
-public class KostOfBaat {
+@Entity
+@Table(name = "kostofbaat")
+public class KostOfBaat implements Serializable{
+    private final long serialVersionUID = 1L;
     
+    @Id
+    @Column(name = "KostOfBaatId")
     private int id;
-    private List<KOBRij> rijen;
+    @Id
+    @Column(name = "KostOfBaatEnum")
     private KOBEnum kostOfBaatEnum;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<KOBRij> rijen;
+    @Column(name = "Formule")
     private Formule formule;
     private double resultaat;
     //rijen en vakken beginnen bij id == 1, niet 0!!!!
+
+    protected KostOfBaat() {
+    }
 
     public KostOfBaat(int id, KOBEnum kobEnum, Formule formule) {
         this.id = id;
@@ -71,6 +90,14 @@ public class KostOfBaat {
 
     public List<KOBRij> getRijen() {
         return rijen;
+    }
+
+    public KOBEnum getKostOfBaatEnum() {
+        return kostOfBaatEnum;
+    }
+
+    public void setKostOfBaatEnum(KOBEnum kostOfBaatEnum) {
+        this.kostOfBaatEnum = kostOfBaatEnum;
     }
     
     

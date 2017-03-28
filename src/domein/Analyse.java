@@ -5,59 +5,78 @@
  */
 package domein;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author ~dreeki~
  */
-public class Analyse {
+@Entity
+@Table(name = "analyse")
+public class Analyse implements Serializable{
+    private final long serialVersionUID = 1L;
     
+    @Id
+    @Column(name = "AnalyseId")
     private int id;
-    private List<KostOfBaat> kosten;
-    private List<KostOfBaat> baten;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<KostOfBaat> kostenEnBaten;
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Werkgever werkgever;
+    @Column(name = "LaatsteAanpasDatum")
     private Date laatsteAanpasDatum;
+
+    protected Analyse() {
+    }
 
     public Analyse(int id, Date date) {
         this.id = id;
-        kosten = new ArrayList<>();
-        baten = new ArrayList<>();
+        kostenEnBaten = new ArrayList<>();
         laatsteAanpasDatum = date;
     }
     
     public boolean controleerOfKostMetNummerAlIngevuldIs(int nummer){
-        return kosten.stream().anyMatch(k -> k.getId() == nummer);
+        return kostenEnBaten.stream().anyMatch(k -> k.getId() == nummer && k.getKostOfBaatEnum() == KOBEnum.Kost);
     }
     
     public KostOfBaat geefKostMetNummer(int nummer){
-        return kosten.stream().filter(k -> k.getId() == nummer).findFirst().get();
+        return kostenEnBaten.stream().filter(k -> k.getId() == nummer && k.getKostOfBaatEnum() == KOBEnum.Kost).findFirst().get();
     }
     
     public boolean controleerOfBaatMetNummerAlIngevuldIs(int nummer){
-        return baten.stream().anyMatch(b -> b.getId() == nummer);
+        return kostenEnBaten.stream().anyMatch(b -> b.getId() == nummer && b.getKostOfBaatEnum() == KOBEnum.Baat);
     }
     
     public KostOfBaat geefBaatMetNummer(int nummer){
-        return baten.stream().filter(b -> b.getId() == nummer).findFirst().get();
+        return kostenEnBaten.stream().filter(b -> b.getId() == nummer && b.getKostOfBaatEnum() == KOBEnum.Baat).findFirst().get();
     }
     
     public void slaKostMetNummerOp(KostOfBaat kost){
         if(controleerOfKostMetNummerAlIngevuldIs(kost.getId())){
-            kosten.remove(geefKostMetNummer(kost.getId()));
+            kostenEnBaten.remove(geefKostMetNummer(kost.getId()));
         }
         
-        kosten.add(kost);
+        kostenEnBaten.add(kost);
     }
     
     public void slaBaatMetNummerOp(KostOfBaat baat){
         if(controleerOfBaatMetNummerAlIngevuldIs(baat.getId())){
-            baten.remove(geefBaatMetNummer(baat.getId()));
+            kostenEnBaten.remove(geefBaatMetNummer(baat.getId()));
         }
         
-        baten.add(baat);
+        kostenEnBaten.add(baat);
     }
     
     public Werkgever geefWerkgever(){
@@ -99,11 +118,11 @@ public class Analyse {
     }
 
     public List<KostOfBaat> getBaten() {
-        return baten;
+        return kostenEnBaten.stream().filter(b -> b.getKostOfBaatEnum() == KOBEnum.Baat).collect(Collectors.toList());
     }
 
     public List<KostOfBaat> getKosten() {
-        return kosten;
+        return kostenEnBaten.stream().filter(k -> k.getKostOfBaatEnum() == KOBEnum.Kost).collect(Collectors.toList());
     }
     
     

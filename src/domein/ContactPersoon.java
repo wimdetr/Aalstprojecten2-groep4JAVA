@@ -5,11 +5,22 @@
  */
 package domein;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 /**
  *
  * @author ~dreeki~
  */
+@Entity
+@DiscriminatorValue(value = "ContactPersoon")
 public class ContactPersoon extends Persoon{
+    private final long serialVersionUID = 1L;
+
+    protected ContactPersoon() {
+    }
+    
+    
 
     public ContactPersoon(String naam, String voornaam, String email) {
         super(naam, voornaam, email);
