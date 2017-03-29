@@ -57,7 +57,6 @@ public class HoofdScherm extends BorderPane {
 
         ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
         this.setCenter(scherm);
-        GridPane.setHalignment(scherm, HPos.LEFT);
     }
 
     @FXML
@@ -70,14 +69,12 @@ public class HoofdScherm extends BorderPane {
     public void toonJobcoachesScherm(ActionEvent event) {
         GebruikersBeherenScherm scherm = new GebruikersBeherenScherm(schermBeheer);
         this.setCenter(scherm);
-        BorderPane.setAlignment(scherm, Pos.TOP_LEFT);
     }
 
     @FXML
     public void toonAnalyseScherm(ActionEvent event) {
-        Archiefbekijken scherm = new Archiefbekijken();
+        ArchiefScherm scherm = new ArchiefScherm();
         this.setCenter(scherm);
-        GridPane.setHalignment(scherm, HPos.LEFT);
     }
 
     @FXML
