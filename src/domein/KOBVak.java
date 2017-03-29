@@ -5,14 +5,31 @@
  */
 package domein;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author ~dreeki~
  */
-public class KOBVak {
+@Entity
+@Table(name = "kostofbaatvak")
+public class KOBVak implements Serializable{
+    private final long serialVersionUID = 1L;
+    
+    @Id
+    @Column(name = "KOBVakId")
     private int id;
+    @Column(name = "Data")
     private String data;
 
+    protected KOBVak(){
+        
+    }
+    
     public KOBVak(int id) {
         this.id = id;
     }

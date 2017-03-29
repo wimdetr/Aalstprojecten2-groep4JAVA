@@ -5,15 +5,28 @@
  */
 package domein;
 
+import java.io.Serializable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 /**
  *
  * @author ~dreeki~
  */
-public abstract class Persoon {
-
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "persoon")
+@DiscriminatorColumn(name = "Type")
+public abstract class Persoon implements Serializable{
+    private final long serialVersionUID = 1L;
+    @Column(name = "Naam")
     private final StringProperty naam = new SimpleStringProperty();
 
     public String getNaam() {
@@ -27,6 +40,7 @@ public abstract class Persoon {
     public StringProperty naamProperty() {
         return naam;
     }
+    @Column(name = "Voornaam")
     private final StringProperty voornaam = new SimpleStringProperty();
 
     public String getVoornaam() {
@@ -40,6 +54,9 @@ public abstract class Persoon {
     public StringProperty voornaamProperty() {
         return voornaam;
     }
+    
+    @Id
+    @Column(name = "Email")
     private final StringProperty email = new SimpleStringProperty();
 
     public String getEmail() {
@@ -54,6 +71,9 @@ public abstract class Persoon {
         return email;
     }
 
+    protected Persoon(){
+        
+    }
     
     public Persoon(String naam, String voornaam, String email) {
         setNaam(naam);

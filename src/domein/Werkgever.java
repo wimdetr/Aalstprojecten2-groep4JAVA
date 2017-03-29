@@ -5,24 +5,58 @@
  */
 package domein;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author ~dreeki~
  */
-public class Werkgever {
+@Entity
+@Table(name = "werkgever")
+public class Werkgever implements Serializable{
+    private final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "WerkgeverId")
+    private int id;
+    @Column(name = "Naam")
     private String naam;
+    @Column(name = "Straat")
     private String straat;
+    @Column(name = "Nummer")
     private String nummer;
+    @Column(name = "Postcode")
     private int postcode;
+    @Column(name = "Gemeente")
     private String gemeente;
+    @Column(name = "AantalWerkuren")
     private int aantalWerkuren;
+    @Column(name = "PatronaleBijdrage")
     private int patronaleBijdrage;
+    @Column(name = "LinkNaarLogoPrent")
     private String linkNaarLogoPrent;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ContactPersoon contactPersoon;
+    @Column(name = "NaamAfdeling")
     private String naamAfdeling;
+    @Column(name = "Bus")
+    private String bus;
     
     private static final int DEFAULT_PATRONALE_BIJDRAGE = 35;
 
+    protected Werkgever() {
+    }
+    
     public Werkgever(String naam, int postcode, String gemeente) {
         patronaleBijdrage = DEFAULT_PATRONALE_BIJDRAGE;
         this.naam = naam;
@@ -35,6 +69,14 @@ public class Werkgever {
 
     public void setNaamAfdeling(String naamAfdeling) {
         this.naamAfdeling = naamAfdeling;
+    }
+
+    public String getBus() {
+        return bus;
+    }
+
+    public void setBus(String bus) {
+        this.bus = bus;
     }
     
     
@@ -113,6 +155,11 @@ public class Werkgever {
         this.patronaleBijdrage = patronaleBijdrage;
     }
 
-    
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
