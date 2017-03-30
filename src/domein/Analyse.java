@@ -25,9 +25,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "analyse")
-public class Analyse implements Serializable{
+public class Analyse implements Serializable {
+
     private final long serialVersionUID = 1L;
-    
+
     @Id
     @Column(name = "AnalyseId")
     private int id;
@@ -38,6 +39,17 @@ public class Analyse implements Serializable{
     @Column(name = "LaatsteAanpasDatum")
     private Date laatsteAanpasDatum;
 
+    //ManyToOne(bidirectioneel met dep)
+    private Departement departement;
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
     protected Analyse() {
     }
 
@@ -46,44 +58,44 @@ public class Analyse implements Serializable{
         kostenEnBaten = new ArrayList<>();
         laatsteAanpasDatum = date;
     }
-    
-    public boolean controleerOfKostMetNummerAlIngevuldIs(int nummer){
+
+    public boolean controleerOfKostMetNummerAlIngevuldIs(int nummer) {
         return kostenEnBaten.stream().anyMatch(k -> k.getId() == nummer && k.getKostOfBaatEnum() == KOBEnum.Kost);
     }
-    
-    public KostOfBaat geefKostMetNummer(int nummer){
+
+    public KostOfBaat geefKostMetNummer(int nummer) {
         return kostenEnBaten.stream().filter(k -> k.getId() == nummer && k.getKostOfBaatEnum() == KOBEnum.Kost).findFirst().get();
     }
-    
-    public boolean controleerOfBaatMetNummerAlIngevuldIs(int nummer){
+
+    public boolean controleerOfBaatMetNummerAlIngevuldIs(int nummer) {
         return kostenEnBaten.stream().anyMatch(b -> b.getId() == nummer && b.getKostOfBaatEnum() == KOBEnum.Baat);
     }
-    
-    public KostOfBaat geefBaatMetNummer(int nummer){
+
+    public KostOfBaat geefBaatMetNummer(int nummer) {
         return kostenEnBaten.stream().filter(b -> b.getId() == nummer && b.getKostOfBaatEnum() == KOBEnum.Baat).findFirst().get();
     }
-    
-    public void slaKostMetNummerOp(KostOfBaat kost){
-        if(controleerOfKostMetNummerAlIngevuldIs(kost.getId())){
+
+    public void slaKostMetNummerOp(KostOfBaat kost) {
+        if (controleerOfKostMetNummerAlIngevuldIs(kost.getId())) {
             kostenEnBaten.remove(geefKostMetNummer(kost.getId()));
         }
-        
+
         kostenEnBaten.add(kost);
     }
-    
-    public void slaBaatMetNummerOp(KostOfBaat baat){
-        if(controleerOfBaatMetNummerAlIngevuldIs(baat.getId())){
+
+    public void slaBaatMetNummerOp(KostOfBaat baat) {
+        if (controleerOfBaatMetNummerAlIngevuldIs(baat.getId())) {
             kostenEnBaten.remove(geefBaatMetNummer(baat.getId()));
         }
-        
+
         kostenEnBaten.add(baat);
     }
-    
-    public Werkgever geefWerkgever(){
+
+    public Werkgever geefWerkgever() {
         return werkgever;
     }
-    
-    public void slaWerkgeverOp(Werkgever werkgever){
+
+    public void slaWerkgeverOp(Werkgever werkgever) {
         this.werkgever = werkgever;
     }
 
@@ -94,22 +106,22 @@ public class Analyse implements Serializable{
     public int getId() {
         return id;
     }
-    
-    public double geefSubtotaalKosten(){
+
+    public double geefSubtotaalKosten() {
         //return kosten.values().stream().mapToDouble(k -> k.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
-          return 0;      
+        return 0;
     }
-    
-    public double geefSubtotaalBaten(){
+
+    public double geefSubtotaalBaten() {
         //return baten.values().stream().mapToDouble(b -> b.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
         return 0;
     }
-    
-    public double geefResultaat(){
+
+    public double geefResultaat() {
         return geefSubtotaalBaten() - geefSubtotaalKosten();
     }
-    
-    public void vernieuwDatum(){
+
+    public void vernieuwDatum() {
         laatsteAanpasDatum = new Date();
     }
 
@@ -124,6 +136,5 @@ public class Analyse implements Serializable{
     public List<KostOfBaat> getKosten() {
         return kostenEnBaten.stream().filter(k -> k.getKostOfBaatEnum() == KOBEnum.Kost).collect(Collectors.toList());
     }
-    
-    
+
 }

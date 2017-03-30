@@ -1,106 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="609.0" tabClosingPolicy="UNAVAILABLE" type="TabPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
-  <tabs>
-      <Tab text="Baten">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="406.0" prefWidth="601.0">
+<fx:root stylesheets="@../css/analyseoverzichtscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <VBox>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <children>
+            <Label text="Overzichtsscherm analyse" textFill="#85beb8">
+               <font>
+                  <Font name="Likhan" size="32.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="3.0" prefWidth="670.0" spacing="10.0">
                <children>
-                  <TableView fx:id="tvBaten" layoutX="14.0" layoutY="48.0" prefHeight="323.0" prefWidth="575.0">
-                     <columns>
-                        <TableColumn prefWidth="425.0" text="Baten" />
-                        <TableColumn minWidth="0.0" prefWidth="150.0" text="Bedrag" />
-                     </columns>
-                  </TableView>
-                  <Label fx:id="lblSubtotaalBatenVanBaten" layoutX="14.0" layoutY="380.0" text="SUBTOTAAL BATEN" />
-                  <Label fx:id="lblGetalVanBaten" layoutX="561.0" layoutY="380.0" text="Getal" />
-                  <Label layoutX="15.0" layoutY="14.0" prefHeight="27.0" prefWidth="150.0" text="Analyse Colruyt - ">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnVerwijderBaten" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerwijder" onKeyPressed="#keyVerwijder" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnVerzendenBaten" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerstuur" onKeyPressed="#keyVerstuur" prefHeight="25.0" prefWidth="25.0" text="Button" AnchorPane.bottomAnchor="376.0" />
-                  <Button fx:id="btnArchiveerBaten" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikDownload" onKeyPressed="#keyDownload" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Label fx:id="lblTitelAnalyseBaten" layoutX="165.0" layoutY="14.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
+                  <Button mnemonicParsing="false" text="Afprinten" />
+                  <Button mnemonicParsing="false" text="Mailen" />
+                  <Button mnemonicParsing="false" text="Opslaan als pdf" />
                </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="Overzicht">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="609.0">
-               <children>
-                  <TableView fx:id="tvOverzicht" layoutX="14.0" layoutY="48.0" prefHeight="323.0" prefWidth="575.0">
-                     <columns>
-                        <TableColumn prefWidth="212.0" text="Baten" />
-                        <TableColumn prefWidth="75.0" text="Bedrag" />
-                        <TableColumn prefWidth="75.0" text="Bedrag" />
-                        <TableColumn minWidth="0.0" prefWidth="212.0" text="Kosten" />
-                     </columns>
-                  </TableView>
-                  <Label fx:id="lblSubtotaalBatenVanOverzicht" layoutX="14.0" layoutY="380.0" text="SUBTOTAAL BATEN" />
-                  <Label fx:id="lblGetalBatenVanOverzicht" layoutX="252.0" layoutY="380.0" text="Getal" />
-                  <Label fx:id="lblGetalKostenVanOverzicht" layoutX="332.0" layoutY="380.0" text="Getal" />
-                  <Label fx:id="lblSubtotaalKostenVanOverzicht" layoutX="477.0" layoutY="380.0" text="SUBTOTAAL KOSTEN" />
-                  <Label layoutX="15.0" layoutY="14.0" prefHeight="27.0" prefWidth="149.0" text="Analyse Colruyt -">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnVerwijderOverzicht" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerwijder" onKeyPressed="#keyVerwijder" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnArchiveerOverzicht" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikDownload" onKeyPressed="#keyDownload" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnVerzendenOverzicht" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerstuur" onKeyPressed="#keyVerstuur" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Label fx:id="lblTitelAnalyseOverzicht" layoutX="164.0" layoutY="14.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="Kosten">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView fx:id="tvKosten" layoutX="14.0" layoutY="48.0" prefHeight="323.0" prefWidth="575.0">
-                     <columns>
-                        <TableColumn prefWidth="425.0" text="Bedrag" />
-                        <TableColumn minWidth="0.0" prefWidth="150.0" text="Kosten" />
-                     </columns>
-                  </TableView>
-                  <Label fx:id="lblGetalVanKosten" layoutX="561.0" layoutY="380.0" text="Getal" />
-                  <Label fx:id="lblSubtotaalKostenVanKosten" layoutX="14.0" layoutY="380.0" text="SUBTOTAAL KOSTEN" />
-                  <Label layoutX="15.0" layoutY="14.0" prefHeight="27.0" prefWidth="150.0" text="Analyse Colruyt -">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnVerwijderKosten" layoutX="565.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerwijder" onKeyPressed="#keyVerwijder" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnArchiveerKosten" layoutX="535.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikDownload" onKeyPressed="#keyDownload" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Button fx:id="btnVerzendenKosten" layoutX="505.0" layoutY="15.0" mnemonicParsing="false" onAction="#klikVerstuur" onKeyPressed="#keyVerstuur" prefHeight="25.0" prefWidth="25.0" text="Button" />
-                  <Label fx:id="lblTitelVanAnalyseKosten" layoutX="165.0" layoutY="14.0">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-  </tabs>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <center>
+      <TableView fx:id="overzichtTableView" prefHeight="656.0" prefWidth="1116.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn id="baten" fx:id="batenColumn" prefWidth="462.99999237060547" text="Baten" />
+            <TableColumn id="result" fx:id="resultColumn" prefWidth="368.0">
+               <columns>
+                  <TableColumn id="bres" fx:id="batenResColumn" prefWidth="87.0" />
+                  <TableColumn id="kres" fx:id="kostenResColumn" prefWidth="95.0" />
+               </columns>
+            </TableColumn>
+          <TableColumn id="kosten" fx:id="kostenColumn" minWidth="0.0" prefWidth="667.0" text="Kosten" />
+        </columns>
+      </TableView>
+   </center>
 </fx:root>

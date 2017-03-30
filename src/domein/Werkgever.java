@@ -6,6 +6,8 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,9 +24,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "werkgever")
-public class Werkgever implements Serializable{
+public class Werkgever implements Serializable {
+
     private final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "WerkgeverId")
@@ -47,20 +50,30 @@ public class Werkgever implements Serializable{
     private String linkNaarLogoPrent;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ContactPersoon contactPersoon;
+
     @Column(name = "NaamAfdeling")
     private String naamAfdeling;
+
+    // OneToMany met departments (bidirectioneel)
+    private List<Departement> departementen;
+
+    public List<Departement> getDepartementen() {
+        return departementen;
+    }
+
     @Column(name = "Bus")
     private String bus;
-    
+
     private static final int DEFAULT_PATRONALE_BIJDRAGE = 35;
 
     protected Werkgever() {
     }
-    
+
     public Werkgever(String naam, int postcode, String gemeente) {
         patronaleBijdrage = DEFAULT_PATRONALE_BIJDRAGE;
         this.naam = naam;
         this.gemeente = gemeente;
+        departementen = new ArrayList<>();
     }
 
     public String getNaamAfdeling() {
@@ -78,8 +91,6 @@ public class Werkgever implements Serializable{
     public void setBus(String bus) {
         this.bus = bus;
     }
-    
-    
 
     public ContactPersoon getContactPersoon() {
         return contactPersoon;
@@ -88,8 +99,6 @@ public class Werkgever implements Serializable{
     public void setContactPersoon(ContactPersoon contactPersoon) {
         this.contactPersoon = contactPersoon;
     }
-    
-    
 
     public String getLinkNaarLogoPrent() {
         return linkNaarLogoPrent;
@@ -161,5 +170,9 @@ public class Werkgever implements Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void addDepartement(Departement d) {
+        departementen.add(d);
     }
 }

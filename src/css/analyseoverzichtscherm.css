@@ -1,0 +1,47 @@
+/* 
+    Created on : Mar 30, 2017, 8:01:45 AM
+    Author     : wim
+*/
+
+#baten.column-header,
+#baten.column-header .filler,
+#baten.column-header .label,
+#baten.column-header-background .filler{
+    -fx-background-color: rgba(133, 190, 184, 1);
+    -fx-text-fill: white;
+    -fx-alignment: BASELINE_CENTER;
+}
+
+
+#kosten.column-header,
+#kosten.column-header .filler,
+#kosten.column-header .label,
+#kosten.column-header-background .filler{
+    -fx-background-color: rgba(255, 70, 79, 1);
+    -fx-text-fill: white;
+    -fx-alignment: BASELINE_CENTER;
+}
+#result.column-header,
+#result.column-header .filler,
+#result.column-header .label,
+#result.column-header-background .filler
+#result.column-header-background{
+    visibility: hidden; -fx-padding: -1em;
+}
+
+#bres.column-header,
+#bres.column-header .filler,
+#bres.column-header .label,
+#bres.column-header-background .filler
+#bres.column-header-background{
+    visibility: hidden; -fx-padding: -1em;
+    -fx-background-color: transparent;
+}
+
+#kres.column-header,
+#kres.column-header .filler,
+#kres.column-header .label,
+#kres.column-header-background .filler
+#kres.column-header-background{
+    visibility: hidden; -fx-padding: -1em;
+}
