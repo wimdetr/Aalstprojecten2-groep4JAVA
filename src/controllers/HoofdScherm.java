@@ -7,18 +7,14 @@ package controllers;
 
 import domein.DomeinController;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 /**
  *
@@ -73,7 +69,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonAnalyseScherm(ActionEvent event) {
-        ArchiefScherm scherm = new ArchiefScherm();
+        ArchiefScherm scherm = new ArchiefScherm(schermBeheer);
         this.setCenter(scherm);
     }
 

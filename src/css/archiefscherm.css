@@ -1,0 +1,46 @@
+/* 
+    Created on : Mar 30, 2017, 7:09:10 AM
+    Author     : wim
+*/
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header .label,
+.table-view .column-header-background .filler{
+    -fx-background-color: rgba(133, 190, 184, 1);
+    -fx-text-fill: white;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+
+
+.table-view:focused {
+    -fx-background-color:transparent,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    -fx-padding: 1;
+}
+.table-row-cell{
+    -fx-table-cell-border-color: transparent;
+}
+.table-row-cell:selected {
+    -fx-background-color: rgba(133, 190, 184, 0.4);
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+    -fx-table-cell-border-color: transparent;
+
+}
+
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.exportButton{
+    -fx-background-color: rgba(0, 128, 0, 0.8);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}

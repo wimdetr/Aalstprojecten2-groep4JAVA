@@ -99,7 +99,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="109.0" text="Toon details" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#showDetails" prefHeight="26.0" prefWidth="109.0" text="Toon details" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
                </children>
                <padding>
                   <Insets top="5.0" />

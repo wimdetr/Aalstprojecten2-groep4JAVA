@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import domein.Analyse;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,85 +13,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 
 /**
  *
  * @author iSayBoom
  */
-public class OverzichtAnalyseScherm extends TabPane{
-    @FXML
-    private TableView<?> tvBaten;
+public class OverzichtAnalyseScherm extends BorderPane {
 
     @FXML
-    private Label lblSubtotaalBatenVanBaten;
+    private TableView<?> overzichtTableView;
+    @FXML
+    private TableColumn<?, ?> batenColumn;
 
     @FXML
-    private Label lblGetalVanBaten;
+    private TableColumn<?, ?> resultColumn;
 
     @FXML
-    private Button btnVerwijderBaten;
+    private TableColumn<?, ?> batenResColumn;
 
     @FXML
-    private Button btnVerzendenBaten;
+    private TableColumn<?, ?> kostenResColumn;
 
     @FXML
-    private Button btnArchiveerBaten;
+    private TableColumn<?, ?> kostenColumn;
 
-    @FXML
-    private Label lblTitelAnalyseBaten;
-
-    @FXML
-    private TableView<?> tvOverzicht;
-
-    @FXML
-    private Label lblSubtotaalBatenVanOverzicht;
-
-    @FXML
-    private Label lblGetalBatenVanOverzicht;
-
-    @FXML
-    private Label lblGetalKostenVanOverzicht;
-
-    @FXML
-    private Label lblSubtotaalKostenVanOverzicht;
-
-    @FXML
-    private Button btnVerwijderOverzicht;
-
-    @FXML
-    private Button btnArchiveerOverzicht;
-
-    @FXML
-    private Button btnVerzendenOverzicht;
-
-    @FXML
-    private Label lblTitelAnalyseOverzicht;
-
-    @FXML
-    private TableView<?> tvKosten;
-
-    @FXML
-    private Label lblGetalVanKosten;
-
-    @FXML
-    private Label lblSubtotaalKostenVanKosten;
-
-    @FXML
-    private Button btnVerwijderKosten;
-
-    @FXML
-    private Button btnArchiveerKosten;
-
-    @FXML
-    private Button btnVerzendenKosten;
-
-    @FXML
-    private Label lblTitelVanAnalyseKosten;
-    
-    public OverzichtAnalyseScherm() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OverzichtAnalyses.fxml"));
+    public OverzichtAnalyseScherm(Analyse a) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OverzichtAnalyseScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -98,8 +50,14 @@ public class OverzichtAnalyseScherm extends TabPane{
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        kostenColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(1.2)); // w * 1/4
+        batenColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(1.2)); // w * 2/4
+        resultColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(5));
+        kostenResColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(10));
+        batenResColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(10));
+
     }
-    
+
     @FXML
     void keyDownload(KeyEvent event) {
 
