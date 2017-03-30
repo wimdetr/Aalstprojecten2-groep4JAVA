@@ -50,41 +50,7 @@ public class OverzichtAnalyseScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-        kostenColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(1.2)); // w * 1/4
-        batenColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(1.2)); // w * 2/4
-        resultColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(5));
-        kostenResColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(10));
-        batenResColumn.prefWidthProperty().bind(overzichtTableView.widthProperty().divide(10));
 
     }
 
-    @FXML
-    void keyDownload(KeyEvent event) {
-
-    }
-
-    @FXML
-    void keyVerstuur(KeyEvent event) {
-
-    }
-
-    @FXML
-    void keyVerwijder(KeyEvent event) {
-
-    }
-
-    @FXML
-    void klikDownload(ActionEvent event) {
-
-    }
-
-    @FXML
-    void klikVerstuur(ActionEvent event) {
-
-    }
-
-    @FXML
-    void klikVerwijder(ActionEvent event) {
-
-    }
 }

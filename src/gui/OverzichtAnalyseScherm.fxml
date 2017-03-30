@@ -43,14 +43,14 @@
    <center>
       <TableView fx:id="overzichtTableView" prefHeight="656.0" prefWidth="1116.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn id="baten" fx:id="batenColumn" prefWidth="462.99999237060547" text="Baten" />
-            <TableColumn id="result" fx:id="resultColumn" prefWidth="368.0">
+          <TableColumn id="baten" fx:id="batenColumn" prefWidth="500.0" text="Baten" />
+            <TableColumn id="result" fx:id="resultColumn" prefWidth="300.0">
                <columns>
                   <TableColumn id="bres" fx:id="batenResColumn" prefWidth="87.0" />
                   <TableColumn id="kres" fx:id="kostenResColumn" prefWidth="95.0" />
                </columns>
             </TableColumn>
-          <TableColumn id="kosten" fx:id="kostenColumn" minWidth="0.0" prefWidth="667.0" text="Kosten" />
+          <TableColumn id="kosten" fx:id="kostenColumn" minWidth="0.0" prefWidth="500.0" text="Kosten" />
         </columns>
       </TableView>
    </center>
