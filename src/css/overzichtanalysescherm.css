@@ -1,0 +1,53 @@
+/* 
+    Created on : Mar 30, 2017, 8:01:45 AM
+    Author     : wim
+*/
+
+
+
+#grid{
+    -fx-border-width: 5px;
+
+}
+
+.baatBoxOdd{
+    -fx-background-color: rgba(0, 139, 139, 0.05);
+    -fx-border-color:lightgrey;
+    -fx-border-width: 0 1 1 0;
+    -fx-padding: 0 0 0 5;
+}
+
+.baatBoxEven{
+    -fx-background-color: rgba(0, 139, 139, 0.15);
+    -fx-border-color:lightgrey;
+    -fx-border-width: 0 0 1 1;
+    -fx-padding: 0 0 0 5;
+}
+
+.kostBoxOdd{
+    -fx-background-color: rgba(165, 42, 42, 0.05);
+    -fx-border-color:lightgrey;
+    -fx-border-width: 0 0 1 1;
+    -fx-padding: 0 0 0 5;
+
+}
+
+.kostBoxEven{
+    -fx-background-color: rgba(165, 42, 42, 0.15);
+    -fx-border-color:lightgrey;
+    -fx-border-width: 1 0 1 1;
+    -fx-padding: 0 0 0 5;
+
+}
+
+.resultBoxAccent{
+    -fx-background-color: rgba(128, 128, 128, 0.05);
+    -fx-border-color:lightgrey;
+    -fx-border-width: 1 0 1 0;
+}
+
+.totalBox{
+    -fx-border-color:lightgrey;
+    -fx-border-width: 1 1 0 1;
+    -fx-background-color: derive(green,50%);
+}

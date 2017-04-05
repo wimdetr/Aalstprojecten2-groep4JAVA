@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 /**
  *
@@ -74,8 +75,8 @@ public class AnalyseCard extends VBox {
 
     @FXML
     void showDetails(ActionEvent event) {
-        // spaghetti code alert, how do i fix this? Add parent to constructor?
+        // shitty code alert, how do i fix this? Add parent to constructor?
         BorderPane parent = (BorderPane) this.getParent().getParent().getParent().getParent().getParent().getParent();
-        parent.setCenter(new OverzichtAnalyseScherm(analyse));
+        parent.setCenter(new OverzichtAnalyseScherm(analyse,(Stage) getScene().getWindow(),schermBeheer));
     }
 }
