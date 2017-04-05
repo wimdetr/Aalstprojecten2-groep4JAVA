@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class Schermbeheer {
 
     private final DomeinController dc;
-    private final Stage mainStage;
+    private Stage mainStage;
     private final Stage popUpStage;
 
     public Schermbeheer(DomeinController dc, Stage stage) {
@@ -48,6 +48,10 @@ public class Schermbeheer {
         mainStage.show();
     }
 
+    public void returnToPreviousScreen(Stage stage){
+        mainStage = stage;
+        mainStage.show();
+    }
     public void plaatsPopUpScherm(Parent popUpScreen, String schermTitel) {
         // todo: niet altijd nieuwe scene maken
         setDisableMainStage(true);

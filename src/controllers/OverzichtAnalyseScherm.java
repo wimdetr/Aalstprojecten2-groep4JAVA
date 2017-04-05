@@ -10,38 +10,35 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  *
- * @author iSayBoom
+ * @author wimdetr
  */
 public class OverzichtAnalyseScherm extends BorderPane {
 
     @FXML
-    private TableView<?> overzichtTableView;
-    @FXML
-    private TableColumn<?, ?> batenColumn;
+    private Label baat1, baat2, baat3, baat4, baat5, baat6, baat7, baat8, baat9, baat10, baat11;
 
     @FXML
-    private TableColumn<?, ?> resultColumn;
+    private Label subtotaalBaat, subtotaalKost;
 
     @FXML
-    private TableColumn<?, ?> batenResColumn;
+    private Label kost1, kost2, kost3, kost4, kost5, kost6, kost7, kost8;
 
     @FXML
-    private TableColumn<?, ?> kostenResColumn;
+    private Label resultaat;
 
-    @FXML
-    private TableColumn<?, ?> kostenColumn;
+    private Analyse analyse;
 
-    public OverzichtAnalyseScherm(Analyse a) {
+    private Stage prevStage;
+    private Schermbeheer schermbeheer;
+
+    public OverzichtAnalyseScherm(Analyse a, Stage prevStage, Schermbeheer beheer) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OverzichtAnalyseScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -50,7 +47,21 @@ public class OverzichtAnalyseScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        analyse = a;
+        fillData();
+        this.prevStage = prevStage;
+        this.schermbeheer = beheer;
+    }
 
+    private void fillData() {
+        /*
+        TODO: fill up the textfields with data from the DB.
+         */
+    }
+
+    @FXML
+    void goBack(ActionEvent event) {
+        schermbeheer.returnToPreviousScreen(prevStage);
     }
 
 }
