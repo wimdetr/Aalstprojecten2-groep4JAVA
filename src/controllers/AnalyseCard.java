@@ -26,12 +26,6 @@ import javafx.stage.Stage;
 public class AnalyseCard extends VBox {
 
     @FXML
-    private Label kostenLabel;
-
-    @FXML
-    private Label batenLabel;
-
-    @FXML
     private Label resultaatLabel;
 
     @FXML
@@ -45,6 +39,12 @@ public class AnalyseCard extends VBox {
 
     @FXML
     private Label bedrijfLabel;
+
+    @FXML
+    private HBox kostbaatbox, kostbaatboxkost, kostbaatboxbaat;
+
+    @FXML
+    private Label kostenLabel, batenLabel;
 
     private Schermbeheer schermBeheer;
 
@@ -69,6 +69,7 @@ public class AnalyseCard extends VBox {
         /*
         TODO: Fill out rest of the labels. Will do when DB gets used.
          */
+
         bedrijfLabel.setText(analyse.geefWerkgever().getNaam());
         bedrijfOnderdeelLabel.setText(analyse.geefWerkgever().getNaamAfdeling());
     }
@@ -77,6 +78,6 @@ public class AnalyseCard extends VBox {
     void showDetails(ActionEvent event) {
         // shitty code alert, how do i fix this? Add parent to constructor?
         BorderPane parent = (BorderPane) this.getParent().getParent().getParent().getParent().getParent().getParent();
-        parent.setCenter(new OverzichtAnalyseScherm(analyse,(Stage) getScene().getWindow(),schermBeheer));
+        parent.setCenter(new OverzichtAnalyseScherm(analyse, (Stage) getScene().getWindow(), schermBeheer));
     }
 }
