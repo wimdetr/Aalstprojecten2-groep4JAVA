@@ -35,10 +35,9 @@ public class OverzichtAnalyseScherm extends BorderPane {
 
     private Analyse analyse;
 
-    private Stage prevStage;
     private Schermbeheer schermbeheer;
 
-    public OverzichtAnalyseScherm(Analyse a, Stage prevStage, Schermbeheer beheer) {
+    public OverzichtAnalyseScherm(Analyse a, Schermbeheer beheer) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OverzichtAnalyseScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -49,7 +48,6 @@ public class OverzichtAnalyseScherm extends BorderPane {
         }
         analyse = a;
         fillData();
-        this.prevStage = prevStage;
         this.schermbeheer = beheer;
     }
 
@@ -61,7 +59,9 @@ public class OverzichtAnalyseScherm extends BorderPane {
 
     @FXML
     void goBack(ActionEvent event) {
-        schermbeheer.returnToPreviousScreen(prevStage);
+        /*
+        TODO: Go back to previous screen.
+        */
     }
 
 }

@@ -77,14 +77,12 @@ public class HoofdScherm extends BorderPane {
     void klikToonProfiel(MouseEvent event) {
         ProfielBekijkenScherm ab = new ProfielBekijkenScherm();
         this.setCenter(ab);
-        BorderPane.setAlignment(ab, Pos.TOP_LEFT);
     }
 
     @FXML
     public void toonAdminToevoegenScherm(ActionEvent event) {
-        AdminBeherenScherm scherm = new AdminBeherenScherm();
+        AdminBeherenScherm scherm = new AdminBeherenScherm(schermBeheer);
         this.setCenter(scherm);
-        GridPane.setHalignment(scherm, HPos.LEFT);
     }
 
 }

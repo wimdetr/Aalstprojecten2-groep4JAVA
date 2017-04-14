@@ -91,7 +91,7 @@ public class GebruikerDetailScherm extends BorderPane {
             if (result.get() == ButtonType.OK) {
                 updateUser();
                 schermBeheer.sluitPopUpScherm();
-                // todo, wegschrijven naar databank
+                // todo, wegschrijven naar databank!!!
             }
         } else {
             errorLabel.setVisible(true);

@@ -63,31 +63,31 @@ public class JobCoachRepository {
 
     public List<JobCoach> zoekVoornaam(String query) {
         return lijst.stream()
-                .filter(p -> p.getVoornaam().contains(query))
+                .filter(p -> p.getVoornaam().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<JobCoach> zoekNaam(String query) {
         return lijst.stream()
-                .filter(p -> p.getNaam().contains(query))
+                .filter(p -> p.getNaam().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<JobCoach> zoekStraat(String query) {
         return lijst.stream()
-                .filter(p -> p.getStraat().contains(query))
+                .filter(p -> p.getStraat().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<JobCoach> zoekOrganisatie(String query) {
         return lijst.stream()
-                .filter(p -> p.getOrganisatie().contains(query))
+                .filter(p -> p.getOrganisatie().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<JobCoach> zoekEmail(String query) {
         return lijst.stream()
-                .filter(p -> p.getEmail().contains(query))
+                .filter(p -> p.getEmail().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -99,7 +99,7 @@ public class JobCoachRepository {
 
     public List<JobCoach> zoekGemeente(String query) {
         return lijst.stream()
-                .filter(p -> p.getGemeente().contains(query))
+                .filter(p -> p.getGemeente().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 }
