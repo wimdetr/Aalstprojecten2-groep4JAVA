@@ -18,6 +18,7 @@ public class DomeinController {
 
     private Admin admin;
     private final AdminRepository adminRepo;
+
     private final JobCoachRepository jobCoachRepo;
     private final AnalyseRepository analyseRepo;
 
@@ -42,6 +43,10 @@ public class DomeinController {
 
     public AnalyseRepository getAnalyseRepo() {
         return analyseRepo;
+    }
+
+    public AdminRepository getAdminRepo() {
+        return adminRepo;
     }
 
     public boolean controleerOfAdminKanInloggen(String username, String wachtwoord) {

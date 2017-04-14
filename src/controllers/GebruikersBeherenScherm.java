@@ -113,7 +113,7 @@ public class GebruikersBeherenScherm extends BorderPane {
         });
 
         gebruikersTableView.setItems(data);
-        JobCoachRepository jcr = new JobCoachRepository();
+        JobCoachRepository jcr = dc.getJobCoachRepo();
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekVoornaam, "Voornaam"));
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekNaam, "Naam"));
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekOrganisatie, "Organisatie"));

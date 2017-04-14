@@ -78,6 +78,6 @@ public class AnalyseCard extends VBox {
     void showDetails(ActionEvent event) {
         // shitty code alert, how do i fix this? Add parent to constructor?
         BorderPane parent = (BorderPane) this.getParent().getParent().getParent().getParent().getParent().getParent();
-        parent.setCenter(new OverzichtAnalyseScherm(analyse, (Stage) getScene().getWindow(), schermBeheer));
+        parent.setCenter(new OverzichtAnalyseScherm(analyse, schermBeheer));
     }
 }
