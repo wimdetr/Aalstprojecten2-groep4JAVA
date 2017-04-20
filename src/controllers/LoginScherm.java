@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
@@ -22,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -116,10 +114,10 @@ public class LoginScherm extends GridPane {
     private void klikKnop(ActionEvent event) {
         logIn();
     }
-    
+
     @FXML
-    private void klikWachtwoordVergeten(ActionEvent event){
-        
+    private void klikWachtwoordVergeten(ActionEvent event) {
+
     }
 
     private void veranderFocus(Node node) {
@@ -129,16 +127,11 @@ public class LoginScherm extends GridPane {
     private void logIn() {
         if (dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())) {
             dc.logAdminIn(tfGebruikersnaam.getText().trim());
-            
             HoofdScherm hoofd = new HoofdScherm(schermBeheer);
             schermBeheer.plaatsScherm(hoofd, "Kairos - Administratie");
-
             schermBeheer.setMainStageResizable(true);
         } else {
-
             lblErrorBericht.setVisible(true);
         }
     }
-
-
 }

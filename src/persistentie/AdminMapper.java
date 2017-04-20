@@ -6,6 +6,12 @@
 package persistentie;
 
 import domein.Admin;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import util.JPAUtil;
 
 /**
  *
@@ -14,14 +20,23 @@ import domein.Admin;
 public class AdminMapper {
 
     public AdminMapper() {
+
     }
-    
-    public boolean controleerOfAdminKanInloggen(String username, String wachtwoord){
+
+    public boolean controleerOfAdminKanInloggen(String username, String wachtwoord) {
+        Map<String, String> properties = new HashMap<>();
+        properties.put("javax.persistence.jdbc.user", username);
+        properties.put("javax.persistence.jdbc.password", wachtwoord);
+        try {
+            JPAUtil.prepareEmf(properties);
+        } catch (Exception e) { // if user is not in DB
+            e.printStackTrace();
+            return false;
+        }
         return true;
-        //return username.equals("admin@gmail.com") && wachtwoord.equals("test");
     }
-    
-    public Admin geefAdmin(String username){
+
+    public Admin geefAdmin(String username) {
         return new Admin("De Witte", "Andreas", "dreeki");
     }
 

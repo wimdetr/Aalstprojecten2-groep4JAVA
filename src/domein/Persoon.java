@@ -21,14 +21,20 @@ import javax.persistence.Table;
  * @author ~dreeki~
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "persoon")
 @DiscriminatorColumn(name = "Type")
-public abstract class Persoon implements Serializable{
+public abstract class Persoon implements Serializable {
+
     private final long serialVersionUID = 1L;
-    @Column(name = "Naam")
+
     private final StringProperty naam = new SimpleStringProperty();
 
+    protected Persoon() {
+
+    }
+
+    @Column(name = "Naam")
     public String getNaam() {
         return naam.get();
     }
@@ -40,9 +46,9 @@ public abstract class Persoon implements Serializable{
     public StringProperty naamProperty() {
         return naam;
     }
-    @Column(name = "Voornaam")
     private final StringProperty voornaam = new SimpleStringProperty();
 
+    @Column(name = "Voornaam")
     public String getVoornaam() {
         return voornaam.get();
     }
@@ -54,11 +60,11 @@ public abstract class Persoon implements Serializable{
     public StringProperty voornaamProperty() {
         return voornaam;
     }
-    
-    @Id
-    @Column(name = "Email")
+
     private final StringProperty email = new SimpleStringProperty();
 
+    @Id
+    @Column(name = "Email")
     public String getEmail() {
         return email.get();
     }
@@ -71,15 +77,10 @@ public abstract class Persoon implements Serializable{
         return email;
     }
 
-    protected Persoon(){
-        
-    }
-    
     public Persoon(String naam, String voornaam, String email) {
         setNaam(naam);
         setVoornaam(voornaam);
         setEmail(email);
     }
 
-    
 }
