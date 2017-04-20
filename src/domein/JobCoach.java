@@ -16,6 +16,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -24,15 +26,13 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @DiscriminatorValue(value = "JobCoach")
-public class JobCoach extends Persoon{
-    private final long serialVersionUID = 1L;
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Analyse> analyses;
+public class JobCoach extends Persoon {
 
-    @Column(name = "NaamBedrijf")
+    private final long serialVersionUID = 1L;
+
     private final StringProperty organisatie = new SimpleStringProperty();
 
+    @Column(name = "NaamBedrijf")
     public String getOrganisatie() {
         return organisatie.get();
     }
@@ -44,9 +44,9 @@ public class JobCoach extends Persoon{
     public StringProperty organisatieProperty() {
         return organisatie;
     }
-    @Column(name = "StraatBedrijf")
     private final StringProperty straat = new SimpleStringProperty();
 
+    @Column(name = "StraatBedrijf")
     public String getStraat() {
         return straat.get();
     }
@@ -54,9 +54,9 @@ public class JobCoach extends Persoon{
     public void setStraat(String value) {
         straat.set(value);
     }
-    @Column(name = "NummerBedrijf")
     private final StringProperty huisnummer = new SimpleStringProperty();
 
+    @Column(name = "NummerBedrijf")
     public String getHuisnummer() {
         return huisnummer.get();
     }
@@ -68,15 +68,13 @@ public class JobCoach extends Persoon{
     public StringProperty huisnummerProperty() {
         return huisnummer;
     }
-    
-    
-    
+
     public StringProperty straatProperty() {
         return straat;
     }
-    @Column(name = "PostcodeBedrijf")
     private final IntegerProperty postcode = new SimpleIntegerProperty();
 
+    @Column(name = "PostcodeBedrijf")
     public int getPostcode() {
         return postcode.get();
     }
@@ -88,9 +86,9 @@ public class JobCoach extends Persoon{
     public IntegerProperty postcodeProperty() {
         return postcode;
     }
-    @Column(name = "GemeenteBedrijf")
     private final StringProperty gemeente = new SimpleStringProperty();
 
+    @Column(name = "GemeenteBedrijf")
     public String getGemeente() {
         return gemeente.get();
     }
@@ -102,9 +100,9 @@ public class JobCoach extends Persoon{
     public StringProperty gemeenteProperty() {
         return gemeente;
     }
-    @Column(name = "BusBedrijf")
     private final StringProperty bus = new SimpleStringProperty();
 
+    @Column(name = "BusBedrijf")
     public String getBus() {
         return bus.get();
     }
@@ -117,26 +115,30 @@ public class JobCoach extends Persoon{
         return bus;
     }
 
-    protected JobCoach(){
-        
+    protected JobCoach() {
+
     }
-    
-    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf) {
+
+    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf, String busBedrijf) {
         super(naam, voornaam, email);
         setOrganisatie(naamOrganisatie);
         setStraat(straatBedrijf);
         setHuisnummer(nummerBedrijf);
         setPostcode(postcodeBedrijf);
         setGemeente(gemeenteBedrijf);
+        setBus(busBedrijf);
         analyses = new ArrayList<>();
 
     }
-    
-        public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf, String busBedrijf) {
-            this(naam, voornaam, email, naamOrganisatie, straatBedrijf, nummerBedrijf, postcodeBedrijf, gemeenteBedrijf);
-            setBus(busBedrijf);
-        }
 
+    private List<Analyse> analyses;
+
+    public void setAnalyses(List<Analyse> analyses) {
+        this.analyses = analyses;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "JobCoachEmail", referencedColumnName = "Email")
     public List<Analyse> getAnalyses() {
         return analyses;
     }

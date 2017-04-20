@@ -7,6 +7,9 @@ package persistentie;
 
 import domein.JobCoach;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import util.JPAUtil;
 
 /**
  *
@@ -16,8 +19,11 @@ public class JobCoachMapper {
 
     public JobCoachMapper() {
     }
-    
-    public List<JobCoach> geefCoaches(String naam){
+
+    public List<JobCoach> getAll(){
+     return null;
+    }
+    public List<JobCoach> geefCoaches(String naam) {
         // connectie met DB
         return null;
     }

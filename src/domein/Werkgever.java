@@ -48,9 +48,6 @@ public class Werkgever implements Serializable {
     private int patronaleBijdrage;
     @Column(name = "LinkNaarLogoPrent")
     private String linkNaarLogoPrent;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private ContactPersoon contactPersoon;
-
     @Column(name = "NaamAfdeling")
     private String naamAfdeling;
 
@@ -90,14 +87,6 @@ public class Werkgever implements Serializable {
 
     public void setBus(String bus) {
         this.bus = bus;
-    }
-
-    public ContactPersoon getContactPersoon() {
-        return contactPersoon;
-    }
-
-    public void setContactPersoon(ContactPersoon contactPersoon) {
-        this.contactPersoon = contactPersoon;
     }
 
     public String getLinkNaarLogoPrent() {
