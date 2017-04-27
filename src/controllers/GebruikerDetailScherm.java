@@ -1,5 +1,6 @@
 package controllers;
 
+import domein.DomeinController;
 import domein.JobCoach;
 import java.io.IOException;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import persistentie.JobCoachMapper;
 
 /**
  *
@@ -46,10 +48,10 @@ public class GebruikerDetailScherm extends BorderPane {
 
     private Schermbeheer schermBeheer;
 
-    private JobCoach user;
+    private JobCoach jobcoach;
 
     public GebruikerDetailScherm(Schermbeheer schermbeheer, JobCoach j) {
-        user = j;
+        jobcoach = j;
         this.schermBeheer = schermbeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikerDetailScherm.fxml"));
         loader.setRoot(this);
@@ -64,13 +66,13 @@ public class GebruikerDetailScherm extends BorderPane {
     }
 
     private void fillInData() {
-        voorNaamVeld.setText(user.getVoornaam());
-        naamVeld.setText(user.getNaam());
-        organisatieVeld.setText(user.getNaamBedrijf());
-        straatVeld.setText(user.getStraatBedrijf());
-        huisnrVeld.setText(Integer.toString(user.getNummerBedrijf()));
-        postcodeVeld.setText(Integer.toString(user.getPostcodeBedrijf()));
-        gemeenteVeld.setText(user.getGemeenteBedrijf());
+        voorNaamVeld.setText(jobcoach.getVoornaam());
+        naamVeld.setText(jobcoach.getNaam());
+        organisatieVeld.setText(jobcoach.getNaamBedrijf());
+        straatVeld.setText(jobcoach.getStraatBedrijf());
+        huisnrVeld.setText(Integer.toString(jobcoach.getNummerBedrijf()));
+        postcodeVeld.setText(Integer.toString(jobcoach.getPostcodeBedrijf()));
+        gemeenteVeld.setText(jobcoach.getGemeenteBedrijf());
 
     }
 
@@ -91,7 +93,9 @@ public class GebruikerDetailScherm extends BorderPane {
             if (result.get() == ButtonType.OK) {
                 updateUser();
                 schermBeheer.sluitPopUpScherm();
-                // todo, wegschrijven naar databank!!!
+                JobCoachMapper m = schermBeheer.getDc().getJobCoachRepo().getJobCoachMapper();
+                m.modify(jobcoach);
+                
             }
         } else {
             errorLabel.setVisible(true);
@@ -128,12 +132,12 @@ public class GebruikerDetailScherm extends BorderPane {
     }
 
     private void updateUser() {
-        user.setVoornaam(voorNaamVeld.getText());
-        user.setNaam(naamVeld.getText());
-        user.setNaamBedrijf(organisatieVeld.getText());
-        user.setStraatBedrijf(straatVeld.getText());
-        user.setNummerBedrijf(Integer.parseInt(huisnrVeld.getText()));
-        user.setPostcodeBedrijf(Integer.parseInt(postcodeVeld.getText()));
-        user.setGemeenteBedrijf(gemeenteVeld.getText());
+        jobcoach.setVoornaam(voorNaamVeld.getText());
+        jobcoach.setNaam(naamVeld.getText());
+        jobcoach.setNaamBedrijf(organisatieVeld.getText());
+        jobcoach.setStraatBedrijf(straatVeld.getText());
+        jobcoach.setNummerBedrijf(Integer.parseInt(huisnrVeld.getText()));
+        jobcoach.setPostcodeBedrijf(Integer.parseInt(postcodeVeld.getText()));
+        jobcoach.setGemeenteBedrijf(gemeenteVeld.getText());
     }
 }

@@ -8,10 +8,13 @@ package domein;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -47,10 +50,8 @@ public class JobCoach implements Serializable {
 
     @Transient
     private final StringProperty email = new SimpleStringProperty();
-    
-   
 
-    @OneToMany(mappedBy = "jobcoach",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "jobcoach", fetch = FetchType.EAGER)
     @Access(AccessType.FIELD)
     private List<Analyse> analyses;
 
@@ -61,6 +62,7 @@ public class JobCoach implements Serializable {
     public void setAnalyses(List<Analyse> analyses) {
         this.analyses = analyses;
     }
+
     @Id
     @Column(name = "Email")
     @Access(AccessType.PROPERTY)
@@ -234,6 +236,19 @@ public class JobCoach implements Serializable {
         }
         return true;
     }
+
+    @Transient
+    private BooleanProperty checked = new SimpleBooleanProperty(false);
+
+    public ObservableBooleanValue isChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked.set(checked);
+    }
+    
+ 
 
     @Override
     public String toString() {

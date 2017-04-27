@@ -11,26 +11,34 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
+import persistentie.JobCoachMapper;
 
 /**
  *
@@ -40,6 +48,9 @@ public class GebruikersBeherenScherm extends BorderPane {
 
     @FXML
     private TableView<JobCoach> gebruikersTableView;
+
+    @FXML
+    private TableColumn<JobCoach, Boolean> checkboxCol;
 
     @FXML
     private TableColumn<JobCoach, String> voorNaamCol;
@@ -87,25 +98,32 @@ public class GebruikersBeherenScherm extends BorderPane {
             throw new RuntimeException(ex.getMessage());
         }
         this.dc = schermbeheer.getDc();
-        data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
+        data = FXCollections.observableList(dc.getJobCoachRepo().getLijst());
+
+        checkboxCol.setCellValueFactory(
+                param -> param.getValue().isChecked()
+        );
+
+        checkboxCol.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxCol));
 
         gebruikersTableView.setPlaceholder(new Label("Geen gebruikers gevonden."));
 
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
-        organisatieCol.setCellValueFactory(new PropertyValueFactory<>("organisatie"));
+        organisatieCol.setCellValueFactory(new PropertyValueFactory<>("naamBedrijf"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         straatCol.setCellValueFactory(cellData -> Bindings.concat(cellData.getValue().straatBedrijfProperty(),
                 " ", cellData.getValue().nummerBedrijfProperty())); // 2 properties bijeen binden voor UX
-        postcodeCol.setCellValueFactory(new PropertyValueFactory<>("postcode"));
-        gemeenteCol.setCellValueFactory(new PropertyValueFactory<>("gemeente"));
+        postcodeCol.setCellValueFactory(new PropertyValueFactory<>("postcodeBedrijf"));
+        gemeenteCol.setCellValueFactory(new PropertyValueFactory<>("gemeenteBedrijf"));
 
         gebruikersTableView.setRowFactory((p) -> {
             TableRow<JobCoach> rij = new TableRow<>();
             rij.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !rij.isEmpty()) {
                     JobCoach j = rij.getItem();
-                    schermBeheer.plaatsPopUpScherm(new GebruikerDetailScherm(schermbeheer, j), "Gebruiker ");
+                    schermBeheer.plaatsPopUpScherm(new GebruikerDetailScherm(schermbeheer, j),
+                            "Gebruiker: " + j.getVoornaam() + " " + j.getNaam());
 
                 }
             });
@@ -123,9 +141,22 @@ public class GebruikersBeherenScherm extends BorderPane {
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekGemeente, "Gemeente"));
         zoekChoiceBox.setValue(zoekChoiceBox.getItems().get(0));
 
-        gebruikersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        exporteerBtn.disableProperty().bind(Bindings.isEmpty(gebruikersTableView.getSelectionModel().getSelectedItems()));
-        verwijderBtn.disableProperty().bind(Bindings.isEmpty(gebruikersTableView.getSelectionModel().getSelectedItems()));
+        gebruikersTableView.setSelectionModel(null);
+        //gebruikersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)
+
+        BooleanBinding checkBinding = new BooleanBinding() {
+            {
+                data.stream().map(c -> c.isChecked()).forEach(super::bind);
+            }
+
+            @Override
+            protected boolean computeValue() {
+                return data.stream().noneMatch(c -> c.isChecked().get());
+            }
+        };
+        verwijderBtn.disableProperty().bind(checkBinding);
+        exporteerBtn.disableProperty().bind(checkBinding);
+
     }
 
     private Function<String, List<JobCoach>> createSearchOption(Function<String, List<JobCoach>> func, String a) {
@@ -146,16 +177,17 @@ public class GebruikersBeherenScherm extends BorderPane {
     private void doZoek(ActionEvent event) {
         String query = zoekTextField.getText();
         if (query.isEmpty()) {
-            data = FXCollections.observableArrayList(dc.getJobCoachRepo().getLijst());
+            data = FXCollections.observableList(dc.getJobCoachRepo().getLijst());
         } else {
-            data = FXCollections.observableArrayList(zoekChoiceBox.getValue().apply(query));
+            data = FXCollections.observableList(zoekChoiceBox.getValue().apply(query));
         }
         gebruikersTableView.setItems(data);
     }
 
     @FXML
     private void doDelete(ActionEvent event) {
-        ObservableList<JobCoach> coaches = gebruikersTableView.getSelectionModel().getSelectedItems();
+        ObservableList<JobCoach> coaches = gebruikersTableView.getItems().filtered(p -> p.isChecked().get() == true);
+        System.out.println(coaches.get(0));
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Verwijderconfirmatie");
         alert.setHeaderText("Verwijderen gebruiker(s)");
@@ -171,16 +203,21 @@ public class GebruikersBeherenScherm extends BorderPane {
             i++;
         }
 
-        alert.setContentText("Wilt u de volgende gebruikers echt verwijderen? \n \n" + sb.toString());
+        alert.setContentText("Wilt u de volgende gebruiker(s) echt verwijderen? \n \n" + sb.toString());
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+            JobCoachMapper m = schermBeheer.getDc().getJobCoachRepo().getJobCoachMapper();
+            for (JobCoach j : coaches) {
+                m.delete(j);
+                j.setChecked(Boolean.FALSE);
+            }
             data.removeAll(coaches);
         }
     }
 
     @FXML
     private void doExporteer(ActionEvent event) {
-        ObservableList<JobCoach> coaches = gebruikersTableView.getSelectionModel().getSelectedItems();
+        ObservableList<JobCoach> coaches = gebruikersTableView.getItems().filtered(p -> p.isChecked().get() == true);
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Exporteer gebruiker(s)");
         dialog.setHeaderText("Bestandsnaam invoeren");
@@ -232,7 +269,6 @@ public class GebruikersBeherenScherm extends BorderPane {
                     alert.setTitle("Error");
                     alert.setHeaderText("Exporteren mislukt!");
                     alert.setContentText("Er is iets foutgelopen, probeer het nog eens.");
-
                 }
             }
         }
@@ -240,7 +276,11 @@ public class GebruikersBeherenScherm extends BorderPane {
 
     @FXML
     private void doSelectAll(ActionEvent event) {
-        gebruikersTableView.getSelectionModel().selectAll();
+        if (data.stream().allMatch(a -> a.isChecked().get() == true)) {
+            data.forEach(a -> a.setChecked(Boolean.FALSE));
+        } else {
+            data.forEach(a -> a.setChecked(Boolean.TRUE));
+        }
     }
 
 }

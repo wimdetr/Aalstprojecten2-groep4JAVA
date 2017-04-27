@@ -6,11 +6,8 @@
 package persistentie;
 
 import domein.Admin;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import util.JPAUtil;
 
 /**
