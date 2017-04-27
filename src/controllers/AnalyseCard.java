@@ -70,8 +70,8 @@ public class AnalyseCard extends VBox {
         TODO: Fill out rest of the labels. Will do when DB gets used.
          */
 
-        bedrijfLabel.setText(analyse.geefWerkgever().getNaam());
-        bedrijfOnderdeelLabel.setText(analyse.geefWerkgever().getNaamAfdeling());
+        bedrijfLabel.setText(analyse.getWerkgever().getNaam());
+        bedrijfOnderdeelLabel.setText(analyse.getWerkgever().getNaamAfdeling());
     }
 
     @FXML

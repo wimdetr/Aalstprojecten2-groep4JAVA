@@ -5,135 +5,40 @@
  */
 package domein;
 
+import domein.Analyse;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  *
- * @author ~dreeki~
+ * @author wimde
  */
 @Entity
-@Table(name = "werkgever")
 public class Werkgever implements Serializable {
 
-    private final long serialVersionUID = 1L;
+    protected Werkgever() {
 
+    }
+
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "WerkgeverId")
     private int id;
-    @Column(name = "Naam")
-    private String naam;
-    @Column(name = "Straat")
-    private String straat;
-    @Column(name = "Nummer")
-    private String nummer;
-    @Column(name = "Postcode")
-    private int postcode;
-    @Column(name = "Gemeente")
-    private String gemeente;
+
     @Column(name = "AantalWerkuren")
     private int aantalWerkuren;
-    @Column(name = "PatronaleBijdrage")
-    private int patronaleBijdrage;
-    @Column(name = "LinkNaarLogoPrent")
-    private String linkNaarLogoPrent;
-    @Column(name = "NaamAfdeling")
-    private String naamAfdeling;
 
-    // OneToMany met departments (bidirectioneel)
-    private List<Departement> departementen;
-
-    public List<Departement> getDepartementen() {
-        return departementen;
-    }
-
-    @Column(name = "Bus")
-    private String bus;
-
-    private static final int DEFAULT_PATRONALE_BIJDRAGE = 35;
-
-    protected Werkgever() {
-    }
-
-    public Werkgever(String naam, int postcode, String gemeente) {
-        patronaleBijdrage = DEFAULT_PATRONALE_BIJDRAGE;
-        this.naam = naam;
-        this.gemeente = gemeente;
-        departementen = new ArrayList<>();
-    }
-
-    public String getNaamAfdeling() {
-        return naamAfdeling;
-    }
-
-    public void setNaamAfdeling(String naamAfdeling) {
-        this.naamAfdeling = naamAfdeling;
-    }
-
-    public String getBus() {
-        return bus;
-    }
-
-    public void setBus(String bus) {
-        this.bus = bus;
-    }
-
-    public String getLinkNaarLogoPrent() {
-        return linkNaarLogoPrent;
-    }
-
-    public void setLinkNaarLogoPrent(String linkNaarLogoPrent) {
-        this.linkNaarLogoPrent = linkNaarLogoPrent;
-    }
-
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-
-    public String getStraat() {
-        return straat;
-    }
-
-    public void setStraat(String straat) {
-        this.straat = straat;
-    }
-
-    public String getNummer() {
-        return nummer;
-    }
-
-    public void setNummer(String nummer) {
-        this.nummer = nummer;
-    }
-
-    public int getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(int postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getGemeente() {
-        return gemeente;
-    }
-
-    public void setGemeente(String gemeente) {
+    public Werkgever(String bedrijf, int i, String gemeente) {
+        naam = bedrijf;
+        id = i;
         this.gemeente = gemeente;
     }
 
@@ -145,12 +50,148 @@ public class Werkgever implements Serializable {
         this.aantalWerkuren = aantalWerkuren;
     }
 
+    @Column(name = "Gemeente")
+    private String gemeente;
+
+    public String getGemeente() {
+        return gemeente;
+    }
+
+    public void setGemeente(String gemeente) {
+        this.gemeente = gemeente;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "AnalyseId")
+    private Analyse analyse;
+
+    public Analyse getAnalyse() {
+        return analyse;
+    }
+
+    public void setAnalyse(Analyse analyse) {
+        this.analyse = analyse;
+    }
+
+    @Column(name = "ContactPersoonNaam")
+    private String contactPersoonNaam;
+
+    public String getContactPersoonNaam() {
+        return contactPersoonNaam;
+    }
+
+    public void setContactPersoonNaam(String contactPersoonNaam) {
+        this.contactPersoonNaam = contactPersoonNaam;
+    }
+
+    @Column(name = "ContactPersoonVoornaam")
+    private String contactPersoonVoornaam;
+
+    public String getContactPersoonVoornaam() {
+        return contactPersoonVoornaam;
+    }
+
+    @Column(name = "linkNaarLogoPrent")
+    private String linkNaarLogoPrent;
+
+    public String getLinkNaarLogoPrent() {
+        return linkNaarLogoPrent;
+    }
+
+    public void setLinkNaarLogoPrent(String linkNaarLogoPrent) {
+        this.linkNaarLogoPrent = linkNaarLogoPrent;
+    }
+
+    public void setContactPersoonVoornaam(String contactPersoonVoornaam) {
+        this.contactPersoonVoornaam = contactPersoonVoornaam;
+    }
+
+    @Column(name = "ContactPersoonEmail")
+    private String contactPersoonEmail;
+
+    public String getContactPersoonEmail() {
+        return contactPersoonEmail;
+    }
+
+    public void setContactPersoonEmail(String contactPersoonEmail) {
+        this.contactPersoonEmail = contactPersoonEmail;
+    }
+
+    @Column(name = "Naam")
+    private String naam;
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    @Column(name = "NaamAfdeling")
+    private String naamAfdeling;
+
+    public String getNaamAfdeling() {
+        return naamAfdeling;
+    }
+
+    public void setNaamAfdeling(String naamAfdeling) {
+        this.naamAfdeling = naamAfdeling;
+    }
+
+    @Column(name = "Nummer")
+    private int nummer;
+
+    public int getNummer() {
+        return nummer;
+    }
+
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
+    }
+
+    @Column(name = "PatronaleBijdrage")
+    private int patronaleBijdrage;
+
     public int getPatronaleBijdrage() {
         return patronaleBijdrage;
     }
 
     public void setPatronaleBijdrage(int patronaleBijdrage) {
         this.patronaleBijdrage = patronaleBijdrage;
+    }
+
+    @Column(name = "Postcode")
+    private int postcode;
+
+    public int getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(int postcode) {
+        this.postcode = postcode;
+    }
+
+    @Column(name = "Straat")
+    private String straat;
+
+    public String getStraat() {
+        return straat;
+    }
+
+    public void setStraat(String straat) {
+        this.straat = straat;
+    }
+
+    @Column(name = "bus")
+    private String bus;
+
+    public String getBus() {
+        return bus;
+    }
+
+    public void setBus(String bus) {
+        this.bus = bus;
     }
 
     public int getId() {
@@ -161,7 +202,29 @@ public class Werkgever implements Serializable {
         this.id = id;
     }
 
-    public void addDepartement(Departement d) {
-        departementen.add(d);
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (int) id;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Werkgever)) {
+            return false;
+        }
+        Werkgever other = (Werkgever) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "persistence.Werkgever[ id=" + id + " ]";
+    }
+
 }

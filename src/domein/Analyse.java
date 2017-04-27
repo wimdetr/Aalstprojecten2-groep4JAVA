@@ -1,101 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domein;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author ~dreeki~
+ * @author wimde
  */
 @Entity
 @Table(name = "analyse")
 public class Analyse implements Serializable {
 
-    private final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "AnalyseId")
-    private int id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<KostOfBaat> kostenEnBaten;
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private Werkgever werkgever;
-    @Column(name = "LaatsteAanpasDatum")
-    private Date laatsteAanpasDatum;
-
-    //ManyToOne(bidirectioneel met dep)
-    private Departement departement;
-
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
-    }
-
-    public Departement getDepartement() {
-        return departement;
-    }
-
     protected Analyse() {
+
     }
+    
 
-    public Analyse(int id, Date date) {
-        this.id = id;
-        kostenEnBaten = new ArrayList<>();
-        laatsteAanpasDatum = date;
-    }
+    private static final long serialVersionUID = 1L;
 
-    public boolean controleerOfKostMetNummerAlIngevuldIs(int nummer) {
-        return kostenEnBaten.stream().anyMatch(k -> k.getId() == nummer && k.getKostOfBaatEnum() == KOBEnum.Kost);
-    }
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="JobCoachEmail")
+    private JobCoach jobcoach;
+    
+    @OneToOne(mappedBy = "analyse")
+    private Werkgever werkgever;
 
-    public KostOfBaat geefKostMetNummer(int nummer) {
-        return kostenEnBaten.stream().filter(k -> k.getId() == nummer && k.getKostOfBaatEnum() == KOBEnum.Kost).findFirst().get();
-    }
-
-    public boolean controleerOfBaatMetNummerAlIngevuldIs(int nummer) {
-        return kostenEnBaten.stream().anyMatch(b -> b.getId() == nummer && b.getKostOfBaatEnum() == KOBEnum.Baat);
-    }
-
-    public KostOfBaat geefBaatMetNummer(int nummer) {
-        return kostenEnBaten.stream().filter(b -> b.getId() == nummer && b.getKostOfBaatEnum() == KOBEnum.Baat).findFirst().get();
-    }
-
-    public void slaKostMetNummerOp(KostOfBaat kost) {
-        if (controleerOfKostMetNummerAlIngevuldIs(kost.getId())) {
-            kostenEnBaten.remove(geefKostMetNummer(kost.getId()));
-        }
-
-        kostenEnBaten.add(kost);
-    }
-
-    public void slaBaatMetNummerOp(KostOfBaat baat) {
-        if (controleerOfBaatMetNummerAlIngevuldIs(baat.getId())) {
-            kostenEnBaten.remove(geefBaatMetNummer(baat.getId()));
-        }
-
-        kostenEnBaten.add(baat);
-    }
-
-    public Werkgever geefWerkgever() {
-        return werkgever;
-    }
-
-    public void slaWerkgeverOp(Werkgever werkgever) {
+    public void setWerkgever(Werkgever werkgever) {
         this.werkgever = werkgever;
     }
 
@@ -103,38 +47,98 @@ public class Analyse implements Serializable {
         return werkgever;
     }
 
-    public int getId() {
-        return id;
-    }
+    @Id
+    @Column(name = "AnalyseId")
+    private int id;
 
-    public double geefSubtotaalKosten() {
-        //return kosten.values().stream().mapToDouble(k -> k.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
-        return 0;
-    }
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "AnalyseId", referencedColumnName = "AnalyseId")
+    private List<KostOfBaat> kostenEnBaten;
 
-    public double geefSubtotaalBaten() {
-        //return baten.values().stream().mapToDouble(b -> b.geefResultaat()).reduce(0, (value1, value2) -> value1 + value2);
-        return 0;
-    }
+    @Column(name = "LaatsteAanpasDatum")
+    @Temporal(TemporalType.DATE)
+    private Date laatsteAanpasDatum;
 
-    public double geefResultaat() {
-        return geefSubtotaalBaten() - geefSubtotaalKosten();
-    }
-
-    public void vernieuwDatum() {
-        laatsteAanpasDatum = new Date();
+    public Analyse(int i, Date date) {
+        id = i;
+        laatsteAanpasDatum = date;
     }
 
     public Date getLaatsteAanpasDatum() {
         return laatsteAanpasDatum;
     }
 
-    public List<KostOfBaat> getBaten() {
-        return kostenEnBaten.stream().filter(b -> b.getKostOfBaatEnum() == KOBEnum.Baat).collect(Collectors.toList());
+    public void setLaatsteAanpasDatum(Date laatsteAanpasDatum) {
+        this.laatsteAanpasDatum = laatsteAanpasDatum;
     }
 
-    public List<KostOfBaat> getKosten() {
-        return kostenEnBaten.stream().filter(k -> k.getKostOfBaatEnum() == KOBEnum.Kost).collect(Collectors.toList());
+    public List<KostOfBaat> getKostenEnBaten() {
+        return kostenEnBaten;
+    }
+
+    public void setKostenEnBaten(List<KostOfBaat> kostenEnBaten) {
+        this.kostenEnBaten = kostenEnBaten;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (int) id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Analyse)) {
+            return false;
+        }
+        Analyse other = (Analyse) object;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "persistence.Analyse[ id=" + id + " ]";
+    }
+
+    public void slaWerkgeverOp(Werkgever werk2) {
+        setWerkgever(werk2);
+    }
+
+    boolean controleerOfKostMetNummerAlIngevuldIs(int kostId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    KostOfBaat geefKostMetNummer(int kostId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    boolean controleerOfBaatMetNummerAlIngevuldIs(int kostOfBaatId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    KostOfBaat geefBaatMetNummer(int kostOfBaatId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Iterable<KostOfBaat> getBaten() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Iterable<KostOfBaat> getKosten() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

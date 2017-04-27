@@ -95,8 +95,8 @@ public class GebruikersBeherenScherm extends BorderPane {
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
         organisatieCol.setCellValueFactory(new PropertyValueFactory<>("organisatie"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        straatCol.setCellValueFactory(cellData -> Bindings.concat(cellData.getValue().getStraat(),
-                " ", cellData.getValue().getHuisnummer())); // 2 properties bijeen binden voor UX
+        straatCol.setCellValueFactory(cellData -> Bindings.concat(cellData.getValue().straatBedrijfProperty(),
+                " ", cellData.getValue().nummerBedrijfProperty())); // 2 properties bijeen binden voor UX
         postcodeCol.setCellValueFactory(new PropertyValueFactory<>("postcode"));
         gemeenteCol.setCellValueFactory(new PropertyValueFactory<>("gemeente"));
 
@@ -206,13 +206,13 @@ public class GebruikersBeherenScherm extends BorderPane {
                             .append(";")
                             .append(coach.getNaam())
                             .append(";")
-                            .append(coach.getOrganisatie())
+                            .append(coach.getNaamBedrijf())
                             .append(";")
-                            .append(coach.getGemeente())
+                            .append(coach.getGemeenteBedrijf())
                             .append(";")
-                            .append(coach.getPostcode())
+                            .append(coach.getPostcodeBedrijf())
                             .append(";")
-                            .append(coach.getGemeente())
+                            .append(coach.getStraatBedrijf())
                             .append(";")
                             .append(coach.getEmail())
                             .append("\n");

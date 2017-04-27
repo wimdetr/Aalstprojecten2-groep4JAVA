@@ -5,6 +5,7 @@
  */
 package controllers;
 
+
 import domein.Analyse;
 import java.io.IOException;
 import javafx.event.ActionEvent;

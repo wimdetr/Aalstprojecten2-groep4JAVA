@@ -20,8 +20,7 @@ import javax.persistence.Transient;
  *
  * @author ~dreeki~
  */
-@Entity
-@DiscriminatorValue(value = "Admin")
+
 public class Admin extends Persoon {
 
     private final long serialVersionUID = 1L;
@@ -29,8 +28,6 @@ public class Admin extends Persoon {
     @Transient
     private BooleanProperty checked = new SimpleBooleanProperty(false);
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<JobCoach> coaches;
 
     private boolean superAdmin;
 
@@ -47,26 +44,19 @@ public class Admin extends Persoon {
 
     public Admin(String naam, String voornaam, String email) {
         super(naam, voornaam, email);
-        coaches = new ArrayList<>();
     }
 
     public boolean isSuperAdmin() {
         return superAdmin;
     }
 
-    public List<JobCoach> getCoaches() {
-        return coaches;
+    boolean controleerOfCoachMetEmailBestaat(String jobCoachMail) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setCoaches(List<JobCoach> lijst) {
-        coaches = lijst;
+    JobCoach geefCoachMetEmail(String jobCoachMail) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean controleerOfCoachMetEmailBestaat(String email) {
-        return coaches.stream().anyMatch(c -> c.getEmail().equals(email));
-    }
 
-    public JobCoach geefCoachMetEmail(String email) {
-        return coaches.stream().filter(c -> c.getEmail().equals(email)).findFirst().get();
-    }
 }
