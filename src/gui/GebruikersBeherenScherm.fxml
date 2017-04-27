@@ -10,32 +10,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <fx:root stylesheets="@../css/gebruikersbeherenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <HBox alignment="TOP_RIGHT" prefHeight="38.0" prefWidth="590.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#doSelectAll" styleClass="selectAllButton" text="Selecteer Alle" />
-            <Button fx:id="exporteerBtn" mnemonicParsing="false" onAction="#doExporteer" styleClass="exportButton" text="Exporteer" />
-            <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#doDelete" styleClass="deleteButton" text="Verwijder" />
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" />
-         </BorderPane.margin>
-      </HBox>
-   </bottom>
    <center>
-      <TableView fx:id="gebruikersTableView" prefHeight="734.0" prefWidth="580.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="gebruikersTableView" editable="true" prefHeight="734.0" prefWidth="580.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="voorNaamCol" prefWidth="128.0" text="Voornaam" />
-          <TableColumn fx:id="naamCol" prefWidth="186.0" text="Naam" />
-            <TableColumn fx:id="organisatieCol" prefWidth="109.0" text="Organisatie" />
-            <TableColumn fx:id="straatCol" prefWidth="59.0" text="Straat" />
-            <TableColumn fx:id="gemeenteCol" prefWidth="75.0" text="Gemeente" />
-            <TableColumn fx:id="emailCol" prefWidth="133.0" text="Email" />
-            <TableColumn fx:id="postcodeCol" prefWidth="35.0" text="Postcode" />
+            <TableColumn fx:id="checkboxCol" prefWidth="30.0" resizable="false" sortable="false" />
+          <TableColumn fx:id="voorNaamCol" editable="false" prefWidth="113.0" text="Voornaam" />
+          <TableColumn fx:id="naamCol" editable="false" prefWidth="186.0" text="Naam" />
+            <TableColumn fx:id="organisatieCol" editable="false" prefWidth="109.0" text="Organisatie" />
+            <TableColumn fx:id="straatCol" editable="false" prefWidth="59.0" text="Straat" />
+            <TableColumn fx:id="gemeenteCol" editable="false" prefWidth="75.0" text="Gemeente" />
+            <TableColumn fx:id="emailCol" editable="false" prefWidth="133.0" text="Email" />
+            <TableColumn fx:id="postcodeCol" editable="false" prefWidth="35.0" text="Postcode" />
         </columns>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" />
@@ -46,7 +36,7 @@
       </TableView>
    </center>
    <top>
-      <VBox>
+      <VBox alignment="BOTTOM_LEFT">
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
@@ -60,11 +50,23 @@
                </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="590.0" spacing="10.0">
+            <HBox>
                <children>
-                  <TextField fx:id="zoekTextField" prefHeight="26.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />
-                  <ChoiceBox fx:id="zoekChoiceBox" prefWidth="150.0" />
-                  <Button mnemonicParsing="false" onAction="#doZoek" prefHeight="26.0" prefWidth="113.0" text="Zoek" />
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="590.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="zoekTextField" prefHeight="26.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />
+                        <ChoiceBox fx:id="zoekChoiceBox" prefWidth="150.0" />
+                        <Button mnemonicParsing="false" onAction="#doZoek" prefHeight="26.0" prefWidth="113.0" text="Zoek" />
+                     </children>
+                  </HBox>
+                  <Region prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="38.0" prefWidth="590.0" spacing="5.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#doSelectAll" styleClass="selectAllButton" text="Selecteer Alle" />
+                        <Button fx:id="exporteerBtn" mnemonicParsing="false" onAction="#doExporteer" styleClass="exportButton" text="Exporteer" />
+                        <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#doDelete" styleClass="deleteButton" text="Verwijder" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>

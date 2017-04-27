@@ -20,11 +20,27 @@ public class JobCoachMapper {
     public JobCoachMapper() {
     }
 
-    public List<JobCoach> getAll(){
-     return null;
+    public List<JobCoach> getAll() {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        Query q = em.createNamedQuery("JobCoach.findAll", JobCoach.class);
+        List<JobCoach> results = q.getResultList();
+        return results;
     }
-    public List<JobCoach> geefCoaches(String naam) {
-        // connectie met DB
-        return null;
+
+    public void modify(JobCoach j) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        em.merge(j);
+        em.getTransaction().commit();
+        em.close();
     }
+
+    public void delete(JobCoach j) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.contains(j) ? j : em.merge(j));
+        em.getTransaction().commit();
+        em.close();
+    }
+
 }

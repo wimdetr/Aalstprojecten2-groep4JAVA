@@ -21,11 +21,14 @@ public class JobCoachRepository {
 
     private JobCoachMapper jobCoachMapper;
 
+    public JobCoachMapper getJobCoachMapper() {
+        return jobCoachMapper;
+    }
+
     public JobCoachRepository() {
         lijst = new ArrayList<>();
         jobCoachMapper = new JobCoachMapper();
-        fillUpWithDummyData();
-        jobCoachMapper.getAll();
+        lijst = jobCoachMapper.getAll();
     }
 
     public void fillUpWithDummyData() {

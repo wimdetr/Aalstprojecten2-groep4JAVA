@@ -17,20 +17,16 @@ import domein.repository.JobCoachRepository;
 public class DomeinController {
 
     private Admin admin;
-    private final AdminRepository adminRepo;
+    private AdminRepository adminRepo;
 
-    private final JobCoachRepository jobCoachRepo;
-    private final AnalyseRepository analyseRepo;
+    private JobCoachRepository jobCoachRepo;
+    private AnalyseRepository analyseRepo;
 
-    private final WerkgeverRepository bedrijfRepo;
-    private final Resultaat resultaat;
+    private WerkgeverRepository bedrijfRepo;
+    private Resultaat resultaat;
 
     public DomeinController() {
         adminRepo = new AdminRepository();
-        jobCoachRepo = new JobCoachRepository();
-        analyseRepo = new AnalyseRepository();
-        bedrijfRepo = new WerkgeverRepository();
-        resultaat = new Resultaat();
     }
 
     public Admin getAdmin() {
@@ -55,6 +51,10 @@ public class DomeinController {
 
     public void logAdminIn(String username) {
         admin = adminRepo.geefAdmin(username);
+        jobCoachRepo = new JobCoachRepository();
+        analyseRepo = new AnalyseRepository();
+        bedrijfRepo = new WerkgeverRepository();
+        resultaat = new Resultaat();
     }
 
     public void logAdminUit() {
