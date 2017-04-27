@@ -5,6 +5,7 @@
  */
 package domein;
 
+
 /**
  *
  * @author ~dreeki~
@@ -35,7 +36,7 @@ public class Resultaat {
                 }else{
                     berekenEnSetResultaat(kostRij);
                     double tussenWaarde;
-                    String dataVak4 = kostRij.geefKOBVakMetNummer(4).geefData();
+                    String dataVak4 = kostRij.geefKOBVakMetNummer(4).getDataVak();
                     double dataVak3 = kostRij.geefKOBVakMetNummer(3).geefDataAlsDouble();
                     double dataVak2 = kostRij.geefKOBVakMetNummer(2).geefDataAlsDouble();
                     
@@ -74,7 +75,7 @@ public class Resultaat {
                 mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble());
                 break;
             case FORMULE_BAAT_3_EN_4:
-                if(mijnRij.geefKOBVakMetNummer(1).geefData().trim().equals("")){
+                if(mijnRij.geefKOBVakMetNummer(1).getDataVak().trim().equals("")){
                     mijnRij.setResultaat(0);
                 }else{
                     mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble()/aantalWerkuren*mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble()*(1+(analyse.getWerkgever().getPatronaleBijdrage()/100)) * 13.92);

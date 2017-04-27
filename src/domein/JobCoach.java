@@ -5,153 +5,259 @@
  */
 package domein;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
- * @author ~dreeki~
+ * @author wimde
  */
 @Entity
-@DiscriminatorValue(value = "JobCoach")
-public class JobCoach extends Persoon {
+@Table(name = "persoon")
+@NamedQueries({
+    @NamedQuery(name = "JobCoach.findAll", query = "SELECT p FROM JobCoach p")
+}
+)
+@NamedNativeQuery(name = "findAnalyses",
+        query = "SELECT * FROM analyse a WHERE a.JobCoachEmail =?1", resultClass = Analyse.class)
+@Access(AccessType.FIELD)
+public class JobCoach implements Serializable {
 
-    private final long serialVersionUID = 1L;
+    // AFBLIJVEN!! Het werkt eindelijk met properties maar ik weet zelf ook niet hoe
+    private static final long serialVersionUID = 1L;
 
-    private final StringProperty organisatie = new SimpleStringProperty();
+    @Transient
+    private final StringProperty email = new SimpleStringProperty();
+    
+   
 
-    @Column(name = "NaamBedrijf")
-    public String getOrganisatie() {
-        return organisatie.get();
-    }
-
-    public void setOrganisatie(String value) {
-        organisatie.set(value);
-    }
-
-    public StringProperty organisatieProperty() {
-        return organisatie;
-    }
-    private final StringProperty straat = new SimpleStringProperty();
-
-    @Column(name = "StraatBedrijf")
-    public String getStraat() {
-        return straat.get();
-    }
-
-    public void setStraat(String value) {
-        straat.set(value);
-    }
-    private final StringProperty huisnummer = new SimpleStringProperty();
-
-    @Column(name = "NummerBedrijf")
-    public String getHuisnummer() {
-        return huisnummer.get();
-    }
-
-    public void setHuisnummer(String value) {
-        huisnummer.set(value);
-    }
-
-    public StringProperty huisnummerProperty() {
-        return huisnummer;
-    }
-
-    public StringProperty straatProperty() {
-        return straat;
-    }
-    private final IntegerProperty postcode = new SimpleIntegerProperty();
-
-    @Column(name = "PostcodeBedrijf")
-    public int getPostcode() {
-        return postcode.get();
-    }
-
-    public void setPostcode(int value) {
-        postcode.set(value);
-    }
-
-    public IntegerProperty postcodeProperty() {
-        return postcode;
-    }
-    private final StringProperty gemeente = new SimpleStringProperty();
-
-    @Column(name = "GemeenteBedrijf")
-    public String getGemeente() {
-        return gemeente.get();
-    }
-
-    public void setGemeente(String value) {
-        gemeente.set(value);
-    }
-
-    public StringProperty gemeenteProperty() {
-        return gemeente;
-    }
-    private final StringProperty bus = new SimpleStringProperty();
-
-    @Column(name = "BusBedrijf")
-    public String getBus() {
-        return bus.get();
-    }
-
-    public void setBus(String value) {
-        bus.set(value);
-    }
-
-    public StringProperty busProperty() {
-        return bus;
-    }
-
-    protected JobCoach() {
-
-    }
-
-    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, String nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf, String busBedrijf) {
-        super(naam, voornaam, email);
-        setOrganisatie(naamOrganisatie);
-        setStraat(straatBedrijf);
-        setHuisnummer(nummerBedrijf);
-        setPostcode(postcodeBedrijf);
-        setGemeente(gemeenteBedrijf);
-        setBus(busBedrijf);
-        analyses = new ArrayList<>();
-
-    }
-
+    @OneToMany(mappedBy = "jobcoach",fetch = FetchType.EAGER)
+    @Access(AccessType.FIELD)
     private List<Analyse> analyses;
 
-    public void setAnalyses(List<Analyse> analyses) {
-        this.analyses = analyses;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "JobCoachEmail", referencedColumnName = "Email")
     public List<Analyse> getAnalyses() {
         return analyses;
     }
 
-    public void voegAnalyseToe(Analyse a) {
-        analyses.add(a);
+    public void setAnalyses(List<Analyse> analyses) {
+        this.analyses = analyses;
+    }
+    @Id
+    @Column(name = "Email")
+    @Access(AccessType.PROPERTY)
+    public String getEmail() {
+        return email.get();
     }
 
-    public boolean controleerOfAnalyseAanwezigIs(int id) {
-        return analyses.stream().anyMatch(a -> a.getId() == id);
+    public void setEmail(String value) {
+        email.set(value);
     }
 
-    public Analyse geefAnalyseMetId(int id) {
-        return analyses.stream().filter(a -> a.getId() == id).findFirst().get();
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    @Transient
+    private final StringProperty naam = new SimpleStringProperty();
+
+    @Column(name = "Naam")
+    @Access(AccessType.PROPERTY)
+    public String getNaam() {
+        return naam.get();
+    }
+
+    public void setNaam(String value) {
+        naam.set(value);
+    }
+
+    public StringProperty naamProperty() {
+        return naam;
+    }
+
+    @Transient
+    private final StringProperty voornaam = new SimpleStringProperty();
+
+    @Column(name = "Voornaam")
+    @Access(AccessType.PROPERTY)
+    public String getVoornaam() {
+        return voornaam.get();
+    }
+
+    public void setVoornaam(String value) {
+        voornaam.set(value);
+    }
+
+    public StringProperty voornaamProperty() {
+        return voornaam;
+    }
+
+    @Transient
+    private final StringProperty busBedrijf = new SimpleStringProperty();
+
+    @Column(name = "BusBedrijf")
+    @Access(AccessType.PROPERTY)
+    public String getBusBedrijf() {
+        return busBedrijf.get();
+    }
+
+    public void setBusBedrijf(String value) {
+        busBedrijf.set(value);
+    }
+
+    public StringProperty busBedrijfProperty() {
+        return busBedrijf;
+    }
+
+    @Transient
+    private final StringProperty gemeenteBedrijf = new SimpleStringProperty();
+
+    @Column(name = "GemeenteBedrijf")
+    @Access(AccessType.PROPERTY)
+    public String getGemeenteBedrijf() {
+        return gemeenteBedrijf.get();
+    }
+
+    public void setGemeenteBedrijf(String value) {
+        gemeenteBedrijf.set(value);
+    }
+
+    public StringProperty gemeenteBedrijfProperty() {
+        return gemeenteBedrijf;
+    }
+
+    @Transient
+    private final StringProperty naamBedrijf = new SimpleStringProperty();
+
+    @Column(name = "NaamBedrijf")
+    @Access(AccessType.PROPERTY)
+    public String getNaamBedrijf() {
+        return naamBedrijf.get();
+    }
+
+    public void setNaamBedrijf(String value) {
+        naamBedrijf.set(value);
+    }
+
+    public StringProperty naamBedrijfProperty() {
+        return naamBedrijf;
+    }
+
+    @Transient
+    private final IntegerProperty postcodeBedrijf = new SimpleIntegerProperty();
+
+    @Column(name = "PostcodeBedrijf")
+    @Access(AccessType.PROPERTY)
+    public int getPostcodeBedrijf() {
+        return postcodeBedrijf.get();
+    }
+
+    public void setPostcodeBedrijf(int value) {
+        postcodeBedrijf.set(value);
+    }
+
+    public IntegerProperty postcodeBedrijfProperty() {
+        return postcodeBedrijf;
+    }
+
+    @Transient
+    private final StringProperty straatBedrijf = new SimpleStringProperty();
+
+    @Column(name = "StraatBedrijf")
+    @Access(AccessType.PROPERTY)
+    public String getStraatBedrijf() {
+        return straatBedrijf.get();
+    }
+
+    public void setStraatBedrijf(String value) {
+        straatBedrijf.set(value);
+    }
+
+    public StringProperty straatBedrijfProperty() {
+        return straatBedrijf;
+    }
+
+    @Transient
+    private final IntegerProperty nummerBedrijf = new SimpleIntegerProperty();
+
+    @Column(name = "NummerBedrijf")
+    @Access(AccessType.PROPERTY)
+    public int getNummerBedrijf() {
+        return nummerBedrijf.get();
+    }
+
+    public void setNummerBedrijf(int value) {
+        nummerBedrijf.set(value);
+    }
+
+    public IntegerProperty nummerBedrijfProperty() {
+        return nummerBedrijf;
+    }
+
+    public JobCoach() {
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (email != null ? email.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof JobCoach)) {
+            return false;
+        }
+        JobCoach other = (JobCoach) object;
+        if ((this.email == null && other.email != null) || (this.email != null && !this.email.equals(other.email))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "persistence.Persoon[ email=" + email + " ]";
+    }
+
+    boolean controleerOfAnalyseAanwezigIs(int analyseId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Analyse geefAnalyseMetId(int analyseId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, int nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf, String busBedrijf) {
+        setNaam(naam);
+        setVoornaam(voornaam);
+        setEmail(email);
+        setNaamBedrijf(naamOrganisatie);
+        setStraatBedrijf(straatBedrijf);
+        setNummerBedrijf(nummerBedrijf);
+        setPostcodeBedrijf(postcodeBedrijf);
+        setGemeenteBedrijf(gemeenteBedrijf);
+        setBusBedrijf(busBedrijf);
+
     }
 }

@@ -5,8 +5,9 @@
  */
 package controllers;
 
+
+
 import domein.Analyse;
-import domein.Departement;
 import domein.Werkgever;
 import java.io.File;
 import java.io.IOException;
@@ -77,7 +78,6 @@ public class ArchiefScherm extends BorderPane {
         }
         this.beheer = beheer;
         data = FXCollections.observableArrayList(beheer.getDc().getAnalyseRepo().getLijst());
-        fillUp();
 
         // -> table moet van Jobcoach zijn niet van analyse!
         // hoe probleem met lijst dep. oplossen??
@@ -101,59 +101,11 @@ public class ArchiefScherm extends BorderPane {
         return bd.doubleValue();
     }
 
-    private void fillUp() {
-        TreeItem<String> root = new TreeItem<>();
-
-        Werkgever werk1 = new Werkgever("Colruyt", 9300, "Aalst");
-        Werkgever werk2 = new Werkgever("Delhaize", 9300, "Aalst");
-
-        Departement dep1 = new Departement("IT");
-        Analyse ana1 = new Analyse(1, new Date());
-        Analyse ana2 = new Analyse(7, new Date());
-
-        ana1.setDepartement(dep1);
-        ana2.setDepartement(dep1);
-
-        dep1.addAnalyse(ana1);
-        dep1.addAnalyse(ana2);
-
-        werk1.addDepartement(dep1);
-
-        Departement dep2 = new Departement("logistics");
-        Analyse ana3 = new Analyse(4, new Date());
-        Analyse ana4 = new Analyse(9, new Date());
-        Analyse ana5 = new Analyse(16, new Date());
-
-        ana3.setDepartement(dep2);
-        ana4.setDepartement(dep2);
-        ana5.setDepartement(dep2);
-
-        dep2.addAnalyse(ana3);
-        dep2.addAnalyse(ana4);
-        dep2.addAnalyse(ana5);
-        werk1.addDepartement(dep2);
-
-        Departement dep3 = new Departement("logistics");
-        Analyse ana6 = new Analyse(21, new Date());
-        Analyse ana7 = new Analyse(22, new Date());
-        Analyse ana8 = new Analyse(37, new Date());
-
-        ana6.setDepartement(dep3);
-        ana7.setDepartement(dep3);
-        ana8.setDepartement(dep3);
-
-        dep3.addAnalyse(ana6);
-        dep3.addAnalyse(ana7);
-        dep3.addAnalyse(ana8);
-        werk2.addDepartement(dep3);
-
-    }
-
     @FXML
     void doExport(ActionEvent event) {
         Set<Werkgever> werkgevers = new HashSet<>();
         for (Analyse ana : beheer.getDc().getAnalyseRepo().getLijst()) {
-            werkgevers.add(ana.geefWerkgever());
+            werkgevers.add(ana.getWerkgever());
         }
 
         TextInputDialog dialog = new TextInputDialog();

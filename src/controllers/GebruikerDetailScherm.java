@@ -66,11 +66,11 @@ public class GebruikerDetailScherm extends BorderPane {
     private void fillInData() {
         voorNaamVeld.setText(user.getVoornaam());
         naamVeld.setText(user.getNaam());
-        organisatieVeld.setText(user.getOrganisatie());
-        straatVeld.setText(user.getStraat());
-        huisnrVeld.setText(user.getHuisnummer());
-        postcodeVeld.setText(Integer.toString(user.getPostcode()));
-        gemeenteVeld.setText(user.getGemeente());
+        organisatieVeld.setText(user.getNaamBedrijf());
+        straatVeld.setText(user.getStraatBedrijf());
+        huisnrVeld.setText(Integer.toString(user.getNummerBedrijf()));
+        postcodeVeld.setText(Integer.toString(user.getPostcodeBedrijf()));
+        gemeenteVeld.setText(user.getGemeenteBedrijf());
 
     }
 
@@ -130,10 +130,10 @@ public class GebruikerDetailScherm extends BorderPane {
     private void updateUser() {
         user.setVoornaam(voorNaamVeld.getText());
         user.setNaam(naamVeld.getText());
-        user.setOrganisatie(organisatieVeld.getText());
-        user.setStraat(straatVeld.getText());
-        user.setHuisnummer(huisnrVeld.getText());
-        user.setPostcode(Integer.parseInt(postcodeVeld.getText()));
-        user.setGemeente(gemeenteVeld.getText());
+        user.setNaamBedrijf(organisatieVeld.getText());
+        user.setStraatBedrijf(straatVeld.getText());
+        user.setNummerBedrijf(Integer.parseInt(huisnrVeld.getText()));
+        user.setPostcodeBedrijf(Integer.parseInt(postcodeVeld.getText()));
+        user.setGemeenteBedrijf(gemeenteVeld.getText());
     }
 }
