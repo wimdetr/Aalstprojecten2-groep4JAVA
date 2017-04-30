@@ -34,6 +34,10 @@ public class JPAUtil {
         return emf;
     }
 
+    public static void destroyConnection(){
+        emf.close();
+        emf = null;
+    }
     private JPAUtil() {
     }
 }

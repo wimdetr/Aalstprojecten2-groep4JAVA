@@ -2,6 +2,7 @@ package controllers;
 
 import domein.DomeinController;
 import domein.JobCoach;
+import domein.repository.JobCoachRepository;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -92,10 +93,9 @@ public class GebruikerDetailScherm extends BorderPane {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 updateUser();
+                JobCoachRepository m = schermBeheer.getDc().getJobCoachRepo();
+                m.modifyJobCoach(jobcoach);
                 schermBeheer.sluitPopUpScherm();
-                JobCoachMapper m = schermBeheer.getDc().getJobCoachRepo().getJobCoachMapper();
-                m.modify(jobcoach);
-                
             }
         } else {
             errorLabel.setVisible(true);
@@ -104,8 +104,8 @@ public class GebruikerDetailScherm extends BorderPane {
 
     private boolean isValid() {
         // & instead of && forces java to check every statement
-        return (checkTextField("[ a-zA-Z'-]+", naamVeld)
-                & checkTextField("[ a-zA-Z'-]+", voorNaamVeld)
+        return (!naamVeld.getText().isEmpty()
+                & !voorNaamVeld.getText().isEmpty()
                 & checkTextField(".+", organisatieVeld)
                 & checkTextField("[ a-zA-Z'-]+", straatVeld)
                 & checkTextField("[0-9]+[a-zA-Z]?", huisnrVeld)

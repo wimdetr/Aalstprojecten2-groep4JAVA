@@ -48,20 +48,22 @@ public class Schermbeheer {
         mainStage.show();
     }
 
-    public void returnToPreviousScreen(Stage stage){
+    public void returnToPreviousScreen(Stage stage) {
         mainStage = stage;
         mainStage.show();
     }
+
     public void plaatsPopUpScherm(Parent popUpScreen, String schermTitel) {
         // todo: niet altijd nieuwe scene maken
         setDisableMainStage(true);
         Scene scene = new Scene(popUpScreen);
         popUpStage.setScene(scene);
         popUpStage.setTitle(schermTitel);
-        popUpStage.show();
         popUpStage.setOnCloseRequest(e -> {
             sluitPopUpScherm();
         });
+        popUpStage.showAndWait();
+
     }
 
     public void sluitPopUpScherm() {

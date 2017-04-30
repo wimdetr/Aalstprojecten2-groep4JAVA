@@ -7,12 +7,20 @@ package controllers;
 
 import domein.Admin;
 import domein.DomeinController;
+import domein.JobCoach;
+import domein.repository.AdminRepository;
 import java.io.IOException;
+import java.util.Optional;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -20,6 +28,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import org.fxmisc.easybind.EasyBind;
+import persistentie.JobCoachMapper;
 
 /**
  *
@@ -52,7 +63,10 @@ public class AdminBeherenScherm extends BorderPane {
 
     private Schermbeheer beheer;
 
+    private ObservableList<Admin> data;
+
     public AdminBeherenScherm(Schermbeheer beheer) {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/AdminBeherenScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -61,8 +75,10 @@ public class AdminBeherenScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+
         dc = beheer.getDc();
         this.beheer = beheer;
+        data = FXCollections.observableList(dc.getAdminRepo().getLijst());
         checkboxColumn.setCellValueFactory(
                 param -> param.getValue().isChecked()
         );
@@ -71,8 +87,8 @@ public class AdminBeherenScherm extends BorderPane {
         voornaamColumn.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamColumn.setCellValueFactory(new PropertyValueFactory<>("naam"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        verwijderAdminBtn.setDisable(!dc.getAdmin().isSuperAdmin());
-        checkboxColumn.setVisible(!dc.getAdmin().isSuperAdmin());
+        verwijderAdminBtn.setVisible(dc.getAdmin().isSuperAdmin());
+        checkboxColumn.setVisible(dc.getAdmin().isSuperAdmin());
 
         adminTableView.setRowFactory(tv -> {
             TableRow<Admin> row = new TableRow<>();
@@ -82,24 +98,59 @@ public class AdminBeherenScherm extends BorderPane {
                     rowData.setChecked(rowData.isChecked().get() ? Boolean.FALSE : Boolean.TRUE);
                 }
             });
+            row.disableProperty().bind(EasyBind.select(row.itemProperty())
+                    .selectObject(Admin::emailProperty)
+                    .map(a -> a.equals(beheer.getDc().getAdmin().getEmail())));
             return row;
         });
+        adminTableView.setItems(data);
+        BooleanBinding checkBinding = new BooleanBinding() {
+            {
+                data.stream().map(c -> c.isChecked()).forEach(super::bind);
+            }
 
-        adminTableView.setSelectionModel(null);
-        adminTableView.setPlaceholder(new Label("Er zijn geen andere admins"));
-        adminTableView.setItems(FXCollections.observableArrayList(dc.getAdminRepo().getLijst()));
+            @Override
+            protected boolean computeValue() {
+                return data.stream().noneMatch(c -> c.isChecked().get());
+            }
+        };
+        verwijderAdminBtn.disableProperty().bind(checkBinding);
     }
 
     @FXML
     void verwijderAdmin(ActionEvent event) {
-        /*
-            TODO
-         */
+        ObservableList<Admin> admins = data.filtered(p -> p.isChecked().get() == true);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Verwijderconfirmatie");
+        alert.setHeaderText("Verwijderen Administrator(s)");
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Admin a : admins) {
+            sb.append(i)
+                    .append(". ")
+                    .append(a.getVoornaam())
+                    .append(" ")
+                    .append(a.getNaam())
+                    .append("\n");
+            i++;
+        }
+
+        alert.setContentText("Bent u zeker dat u volgende admin(s) echt wil verwijderen? \n \n" + sb.toString());
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            AdminRepository repo = dc.getAdminRepo();
+            for (Admin a : admins) {
+                repo.deleteAdmin(a);
+                a.setChecked(Boolean.FALSE);
+            }
+            data.removeAll(admins);
+        }
 
     }
 
     @FXML
     void voegAdminToe(ActionEvent event) {
         beheer.plaatsPopUpScherm(new AdminToevoegenScherm(beheer), "Admin Toevoegen");
+        adminTableView.refresh(); // this method will get executed after popupstage gets closed, something something spaghetti
     }
 }

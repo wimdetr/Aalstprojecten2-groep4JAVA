@@ -27,7 +27,7 @@ public class JobCoachMapper {
         return results;
     }
 
-    public void modify(JobCoach j) {
+    public void modifyJobCoach(JobCoach j) {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
         em.merge(j);

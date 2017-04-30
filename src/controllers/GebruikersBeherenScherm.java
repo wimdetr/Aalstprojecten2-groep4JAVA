@@ -17,17 +17,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -35,7 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import persistentie.JobCoachMapper;
@@ -100,14 +94,13 @@ public class GebruikersBeherenScherm extends BorderPane {
         this.dc = schermbeheer.getDc();
         data = FXCollections.observableList(dc.getJobCoachRepo().getLijst());
 
-        checkboxCol.setCellValueFactory(
-                param -> param.getValue().isChecked()
-        );
-
-        checkboxCol.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxCol));
-
         gebruikersTableView.setPlaceholder(new Label("Geen gebruikers gevonden."));
 
+        /*
+        Cell factories
+         */
+        checkboxCol.setCellValueFactory(param -> param.getValue().isChecked());
+        checkboxCol.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxCol));
         voorNaamCol.setCellValueFactory(new PropertyValueFactory<>("voornaam"));
         naamCol.setCellValueFactory(new PropertyValueFactory<>("naam"));
         organisatieCol.setCellValueFactory(new PropertyValueFactory<>("naamBedrijf"));
@@ -117,6 +110,9 @@ public class GebruikersBeherenScherm extends BorderPane {
         postcodeCol.setCellValueFactory(new PropertyValueFactory<>("postcodeBedrijf"));
         gemeenteCol.setCellValueFactory(new PropertyValueFactory<>("gemeenteBedrijf"));
 
+        /*
+        Doubleclick on cell opens modify pop-up.
+         */
         gebruikersTableView.setRowFactory((p) -> {
             TableRow<JobCoach> rij = new TableRow<>();
             rij.setOnMouseClicked(event -> {
@@ -130,6 +126,7 @@ public class GebruikersBeherenScherm extends BorderPane {
             return rij;
         });
 
+        
         gebruikersTableView.setItems(data);
         JobCoachRepository jcr = dc.getJobCoachRepo();
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekVoornaam, "Voornaam"));
@@ -141,9 +138,6 @@ public class GebruikersBeherenScherm extends BorderPane {
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekGemeente, "Gemeente"));
         zoekChoiceBox.setValue(zoekChoiceBox.getItems().get(0));
 
-        gebruikersTableView.setSelectionModel(null);
-        //gebruikersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)
-
         BooleanBinding checkBinding = new BooleanBinding() {
             {
                 data.stream().map(c -> c.isChecked()).forEach(super::bind);
@@ -154,6 +148,7 @@ public class GebruikersBeherenScherm extends BorderPane {
                 return data.stream().noneMatch(c -> c.isChecked().get());
             }
         };
+        
         verwijderBtn.disableProperty().bind(checkBinding);
         exporteerBtn.disableProperty().bind(checkBinding);
 
@@ -187,7 +182,6 @@ public class GebruikersBeherenScherm extends BorderPane {
     @FXML
     private void doDelete(ActionEvent event) {
         ObservableList<JobCoach> coaches = gebruikersTableView.getItems().filtered(p -> p.isChecked().get() == true);
-        System.out.println(coaches.get(0));
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Verwijderconfirmatie");
         alert.setHeaderText("Verwijderen gebruiker(s)");

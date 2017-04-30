@@ -51,6 +51,7 @@ public class DomeinController {
 
     public void logAdminIn(String username) {
         admin = adminRepo.geefAdmin(username);
+        adminRepo.setLijst(adminRepo.getAdminMapper().getAdmins());
         jobCoachRepo = new JobCoachRepository();
         analyseRepo = new AnalyseRepository();
         bedrijfRepo = new WerkgeverRepository();

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -18,34 +19,38 @@
    <top>
       <VBox prefHeight="102.0" prefWidth="591.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Administratorpaneel" textFill="#85beb8">
+            <Label text="Administrators" textFill="#85beb8">
                <font>
                   <Font name="Likhan" size="32.0" />
                </font>
             </Label>
             <Separator prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="46.0" prefWidth="591.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="verwijderAdminBtn" mnemonicParsing="false" onAction="#verwijderAdmin" styleClass="deleteButton" text="Verwijder" />
+                        <Button fx:id="voegToeBtn" mnemonicParsing="false" onAction="#voegAdminToe" styleClass="addButton" text="Voeg Toe" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" right="1.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </top>
    <center>
-      <TableView fx:id="adminTableView" BorderPane.alignment="CENTER">
+      <TableView fx:id="adminTableView" editable="true" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn fx:id="checkboxColumn" prefWidth="100.0" />
-          <TableColumn fx:id="voornaamColumn" prefWidth="125.0" text="Voornaam" />
-          <TableColumn fx:id="naamColumn" minWidth="0.0" prefWidth="237.0" text="Naam" />
-            <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="202.0" text="Email" />
+            <TableColumn fx:id="checkboxColumn" prefWidth="29.0" sortable="false" />
+            <TableColumn fx:id="emailColumn" editable="false" minWidth="0.0" prefWidth="202.0" text="Email" />
+          <TableColumn fx:id="voornaamColumn" editable="false" prefWidth="196.0" text="Voornaam" />
+          <TableColumn fx:id="naamColumn" editable="false" minWidth="0.0" prefWidth="237.0" text="Naam" />
         </columns>
       </TableView>
    </center>
-   <bottom>
-      <HBox alignment="TOP_RIGHT" prefHeight="46.0" prefWidth="591.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="verwijderAdminBtn" mnemonicParsing="false" onAction="#verwijderAdmin" styleClass="deleteButton" text="Verwijder" />
-            <Button fx:id="voegToeBtn" mnemonicParsing="false" onAction="#voegAdminToe" styleClass="addButton" text="Voeg Toe" />
-         </children>
-         <BorderPane.margin>
-            <Insets top="5.0" />
-         </BorderPane.margin>
-      </HBox>
-   </bottom>
 </fx:root>

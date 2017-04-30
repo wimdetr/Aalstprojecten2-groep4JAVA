@@ -12,9 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import util.JPAUtil;
 
 /**
  *
@@ -24,6 +26,9 @@ public class HoofdScherm extends BorderPane {
 
     private Schermbeheer schermBeheer;
     private DomeinController dc;
+
+    @FXML
+    private Label naamLabel;
 
     public HoofdScherm(Schermbeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
@@ -36,6 +41,7 @@ public class HoofdScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        naamLabel.setText(schermBeheer.getDc().getAdmin().getVoornaam() +" "+schermBeheer.getDc().getAdmin().getNaam());
         HomeScherm os = new HomeScherm(schermBeheer);
         this.setCenter(os);
     }
@@ -43,6 +49,7 @@ public class HoofdScherm extends BorderPane {
     @FXML
     void doLogOut(ActionEvent event) {
         dc.logAdminUit();
+        JPAUtil.destroyConnection();
         LoginScherm ls = new LoginScherm(schermBeheer);
         schermBeheer.plaatsScherm(ls, "Login");
         schermBeheer.setMainStageResizable(false);

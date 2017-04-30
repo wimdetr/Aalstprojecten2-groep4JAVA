@@ -80,6 +80,6 @@
       </ImageView>
    </left>
    <bottom>
-      <Label fx:id="errorLabel" text="Gelieve alle velden correct in te vullen!" textFill="RED" visible="false" BorderPane.alignment="CENTER" />
+      <Label fx:id="errorLabel" text="Gelieve alle velden correct in te vullen! (De e-mail mag ook nog niet in gebruik zijn)" textFill="RED" visible="false" BorderPane.alignment="CENTER" />
    </bottom>
 </fx:root>

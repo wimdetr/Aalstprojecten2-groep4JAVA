@@ -19,35 +19,51 @@ import javax.mail.internet.MimeMessage;
  * @author ~dreeki~
  */
 public class MailVerzender {
-    private final Properties PROPS;
-    //private static final String USERNAME = "colorettorecovery@gmail.com";
-    //private static final String WACHTWOORD = "colorettohogent2016";
-    private final String USERNAME;
-    private final String WACHTWOORD;
+
+    /*
+    for security purposes the DB should hold the username and password,imo
+    will keep it this way just for fastness
     
-    public MailVerzender(String username, String wachtwoord){
-        USERNAME = username;
-        WACHTWOORD = wachtwoord;
-        this.PROPS = new Properties();
+    een link met de JAR in bijlage zou handig zijn.
+     */
+    private static final Properties PROPS = new Properties();
+    private static final String USERNAME = "ITSolutions.Kairos@gmail.com";
+    private static final String WACHTWOORD = "ITSolutions123";
+
+    public MailVerzender() {
+
+    }
+
+    private static void prepareProperties() {
         PROPS.put("mail.smtp.auth", "true");
         PROPS.put("mail.smtp.starttls.enable", "true");
         PROPS.put("mail.smtp.host", "smtp.gmail.com");
         PROPS.put("mail.smtp.port", "587");
     }
-    
-    public void sendMail(String wachtwoord, String mailAdres) throws MessagingException{
+
+    public static void sendMail(String recipient, String subject, String content) {
+        if (PROPS.isEmpty()) {
+            prepareProperties();
+        }
+
         Session session = Session.getInstance(PROPS, new javax.mail.Authenticator() {
             @Override
-            protected PasswordAuthentication getPasswordAuthentication(){
+            protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(USERNAME, WACHTWOORD);
             }
         });
-        Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(USERNAME));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailAdres));
-        message.setSubject("Wachtwoord Recovery");
-        message.setText("Geachte,\n\nU meldde dat u uw wachtwoord vergeten bent, u kan opnieuw een eerste maal inloggen met het wachtwoord " + wachtwoord + ".\nU zal na het inloggen uw nieuw zelfgekozen wachtwoord moeten ingeven.\n\nMet vriendelijke groeten,\nKairos");
-        
-        Transport.send(message);
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(USERNAME));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+            message.setSubject(subject);
+            message.setText(content);
+            Transport.send(message);
+        }
+        catch(MessagingException e){
+            e.printStackTrace();
+        }
     }
+
+  
 }

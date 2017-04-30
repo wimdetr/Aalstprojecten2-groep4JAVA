@@ -39,7 +39,7 @@
             </ImageView>
             <HBox alignment="BOTTOM_LEFT" prefHeight="84.0" prefWidth="322.0" spacing="10.0" GridPane.columnIndex="2">
                <children>
-                  <Label alignment="CENTER" prefHeight="53.0" prefWidth="352.0" text="Bart Moens" textFill="WHITE" wrapText="true">
+                  <Label fx:id="naamLabel" alignment="CENTER" prefHeight="53.0" prefWidth="352.0" text="Bart Moens" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Likhan" size="26.0" />
                      </font>

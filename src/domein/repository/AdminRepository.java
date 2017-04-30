@@ -23,10 +23,13 @@ public class AdminRepository {
     }
     private final AdminMapper adminMapper;
 
+    public AdminMapper getAdminMapper() {
+        return adminMapper;
+    }
+
     public AdminRepository() {
         lijst = new ArrayList<>();
         adminMapper = new AdminMapper();
-        fillUpWithDummyData();
     }
 
     public boolean controleerOfAdminKanInloggen(String username, String wachtwoord) {
@@ -37,7 +40,23 @@ public class AdminRepository {
         return adminMapper.geefAdmin(username);
     }
 
+    public void setLijst(List<Admin> a) {
+        lijst = a;
+    }
+    
+    public void addAdmin(Admin a){
+        adminMapper.addAdmin(a);
+        lijst.add(a);
+    }
+    
+    public void deleteAdmin(Admin a){
+        adminMapper.deleteAdmin(a);
+    }
+
     private void fillUpWithDummyData() {
+        /*
+        Werd gebruikt voor dummydata zonder DB connectie.
+        */
         lijst.add(new Admin("De Troyer", "Wim", "wimdetroyer@gmail.com"));
         lijst.add(new Admin("De Witte", "Andreas", "andreasdewitte@gmail.com"));
         lijst.add(new Admin("De Bruyne", "Niels", "nielsdebruyne@gmail.com"));

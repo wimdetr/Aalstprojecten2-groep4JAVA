@@ -6,7 +6,6 @@
 package domein;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -17,12 +16,10 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
