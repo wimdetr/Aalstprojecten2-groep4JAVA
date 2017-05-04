@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -30,6 +31,9 @@ public class HoofdScherm extends BorderPane {
     @FXML
     private Label naamLabel;
 
+    @FXML
+    private MenuButton menuButton;
+
     public HoofdScherm(Schermbeheer schermBeheer) {
         this.schermBeheer = schermBeheer;
         this.dc = schermBeheer.getDc();
@@ -41,13 +45,13 @@ public class HoofdScherm extends BorderPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
-        naamLabel.setText(schermBeheer.getDc().getAdmin().getVoornaam() +" "+schermBeheer.getDc().getAdmin().getNaam());
+        menuButton.setText(dc.getAdmin().getVoornaam() + " " + dc.getAdmin().getNaam());
         HomeScherm os = new HomeScherm(schermBeheer);
         this.setCenter(os);
     }
 
     @FXML
-    void doLogOut(ActionEvent event) {
+    private void doLogOut(ActionEvent event) {
         dc.logAdminUit();
         JPAUtil.destroyConnection();
         LoginScherm ls = new LoginScherm(schermBeheer);
@@ -56,10 +60,8 @@ public class HoofdScherm extends BorderPane {
     }
 
     @FXML
-    public void toonProfielScherm(ActionEvent event) {
-
-        ProfielBekijkenScherm scherm = new ProfielBekijkenScherm();
-        this.setCenter(scherm);
+    private void wachtwoordVeranderen(ActionEvent event) {
+        schermBeheer.plaatsPopUpScherm(new WachtwoordWijzigenScherm(schermBeheer), "Wachtwoord wijzigen");
     }
 
     @FXML
@@ -75,21 +77,32 @@ public class HoofdScherm extends BorderPane {
     }
 
     @FXML
+    public void toonDoelgroepScherm(ActionEvent event) {
+        DoelgroepBeherenScherm scherm = new DoelgroepBeherenScherm(schermBeheer);
+        this.setCenter(scherm);
+    }
+
+    @FXML
     public void toonAnalyseScherm(ActionEvent event) {
         ArchiefScherm scherm = new ArchiefScherm(schermBeheer);
         this.setCenter(scherm);
     }
 
     @FXML
-    void klikToonProfiel(MouseEvent event) {
-        ProfielBekijkenScherm ab = new ProfielBekijkenScherm();
-        this.setCenter(ab);
-    }
-
-    @FXML
     public void toonAdminToevoegenScherm(ActionEvent event) {
         AdminBeherenScherm scherm = new AdminBeherenScherm(schermBeheer);
         this.setCenter(scherm);
+    }
+
+    @FXML
+    void toonWerkgeverScherm(ActionEvent event) {
+        WerkgeverBeherenScherm scherm = new WerkgeverBeherenScherm(schermBeheer);
+        this.setCenter(scherm);
+    }
+
+    @FXML
+    void toonEmailScherm(ActionEvent event) {
+
     }
 
 }

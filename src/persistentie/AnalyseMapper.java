@@ -5,10 +5,29 @@
  */
 package persistentie;
 
+import domein.Analyse;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import util.JPAUtil;
+
 /**
  *
  * @author ~dreeki~
  */
 public class AnalyseMapper {
-    
+
+    public AnalyseMapper() {
+    }
+
+    public List<Analyse> getAll() {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Analyse> q = em.createNamedQuery("Analyse.findAll", Analyse.class);
+        List<Analyse> results = q.getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return results;
+    }
+
 }

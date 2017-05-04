@@ -26,10 +26,6 @@ public class JPAUtil {
         }
     }
 
-    public static boolean checkLogin(String username, String wachtwoord){
-        return true;
-    }
-    
     public static EntityManagerFactory getEmf() {
         return emf;
     }

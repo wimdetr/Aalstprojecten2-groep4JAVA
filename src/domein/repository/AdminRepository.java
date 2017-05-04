@@ -53,6 +53,9 @@ public class AdminRepository {
         adminMapper.deleteAdmin(a);
     }
 
+    public void changePasswordForCurrentUser(String password){
+        adminMapper.changePasswordForCurrentUser(password);
+    }
     private void fillUpWithDummyData() {
         /*
         Werd gebruikt voor dummydata zonder DB connectie.

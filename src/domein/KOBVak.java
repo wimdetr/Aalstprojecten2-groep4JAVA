@@ -82,7 +82,7 @@ public class KOBVak implements Serializable {
     }
 
     public double geefDataAlsDouble(){
-        return Double.parseDouble(dataVak);
+        return Double.parseDouble(dataVak.replace(",", "."));
     }
 }
 

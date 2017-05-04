@@ -1,12 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import domein.DomeinController;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.util.Properties;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,14 +27,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 /**
- * FXML Controller class
  *
  * @author ~dreeki~
  */
-public class LoginScherm extends GridPane {
+public class LoginScherm extends BorderPane {
 
     @FXML
     private TextField tfGebruikersnaam;
@@ -36,24 +43,17 @@ public class LoginScherm extends GridPane {
     private PasswordField pfWachtwoord;
 
     @FXML
-    private Hyperlink hlWachtwoordVergeten;
-
-    @FXML
-    private Button btnInloggen;
-
-    @FXML
-    private CheckBox checkBoxOnthoudWachtwoord;
-
-    @FXML
     private Label lblErrorBericht;
 
-    private DomeinController dc;
-    private Schermbeheer schermBeheer;
+    @FXML
+    private CheckBox checkbox;
 
-    public LoginScherm(Schermbeheer schermBeheer) {
-        this.dc = schermBeheer.getDc();
-        this.schermBeheer = schermBeheer;
+    private Schermbeheer beheer;
 
+    private Preferences prefs;
+    public LoginScherm(Schermbeheer beheer) {
+        prefs = Preferences.userRoot().node(this.getClass().getName());
+        this.beheer = beheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginScherm.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -62,74 +62,35 @@ public class LoginScherm extends GridPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
+        loadSavedData();
+    }
 
-        lblErrorBericht.setVisible(false);
+    private void loadSavedData() {
+        tfGebruikersnaam.setText(prefs.get("email", ""));
+        pfWachtwoord.setText(prefs.get("wachtwoord", ""));
+        if(!tfGebruikersnaam.getText().isEmpty()){
+            checkbox.setSelected(true);
+        }
+    }
+
+    private void saveData(String email, String wachtwoord) {
+        prefs.put("email", email);
+        prefs.put("wachtwoord", wachtwoord);
     }
 
     @FXML
-    private void keyPressedCheckBox(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.TAB)) {
-            veranderFocus(hlWachtwoordVergeten);
-        }
-    }
-
-    @FXML
-    private void keyPressedGebruikersnaamVeld(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            veranderFocus(pfWachtwoord);
-        }
-        if (event.getCode().equals(KeyCode.TAB)) {
-            veranderFocus(pfWachtwoord);
-        }
-    }
-
-    @FXML
-    private void keyPressedLoginKnop(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            logIn();
-        }
-        if (event.getCode().equals(KeyCode.TAB)) {
-            veranderFocus(tfGebruikersnaam);
-        }
-    }
-
-    @FXML
-    private void keyPressedWachtwoordVergeten(KeyEvent event) {
-        if (event.getCode() == KeyCode.TAB) {
-            veranderFocus(btnInloggen);
-        }
-    }
-
-    @FXML
-    private void keyPressedWachtwoordVeld(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            logIn();
-        }
-        if (event.getCode().equals(KeyCode.TAB)) {
-            veranderFocus(checkBoxOnthoudWachtwoord);
-        }
-    }
-
-    @FXML
-    private void klikKnop(ActionEvent event) {
-        logIn();
-    }
-
-    @FXML
-    private void klikWachtwoordVergeten(ActionEvent event) {
-
-    }
-
-    private void veranderFocus(Node node) {
-        Platform.runLater(() -> node.requestFocus());
-    }
-
-    private void logIn() {
-        if (dc.controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())) {
-            dc.logAdminIn(tfGebruikersnaam.getText().trim());
-            HoofdScherm hoofd = new HoofdScherm(schermBeheer);
-            schermBeheer.plaatsScherm(hoofd, "Kairos - Administratie");
-            schermBeheer.setMainStageResizable(true);
+    void logIn(ActionEvent event) {
+        if (beheer.getDc().controleerOfAdminKanInloggen(tfGebruikersnaam.getText().trim(), pfWachtwoord.getText().trim())) {
+            beheer.getDc().logAdminIn(tfGebruikersnaam.getText().trim());
+            HoofdScherm hoofd = new HoofdScherm(beheer);
+            beheer.plaatsScherm(hoofd, "Kairos - Administratie");
+            beheer.registerHoofdScherm(hoofd);
+            beheer.setMainStageResizable(true);
+            if (checkbox.isSelected()) {
+                saveData(tfGebruikersnaam.getText(), pfWachtwoord.getText());
+            } else {
+                saveData("", "");
+            }
         } else {
             lblErrorBericht.setVisible(true);
         }

@@ -30,10 +30,6 @@ public class MailVerzender {
     private static final String USERNAME = "ITSolutions.Kairos@gmail.com";
     private static final String WACHTWOORD = "ITSolutions123";
 
-    public MailVerzender() {
-
-    }
-
     private static void prepareProperties() {
         PROPS.put("mail.smtp.auth", "true");
         PROPS.put("mail.smtp.starttls.enable", "true");
@@ -59,11 +55,9 @@ public class MailVerzender {
             message.setSubject(subject);
             message.setText(content);
             Transport.send(message);
-        }
-        catch(MessagingException e){
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
-  
 }

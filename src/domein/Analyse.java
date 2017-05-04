@@ -3,6 +3,7 @@ package domein;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -22,20 +26,28 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "analyse")
-public class Analyse implements Serializable {
+@NamedQueries({
+    @NamedQuery(name = "Analyse.findAll", query = "SELECT a FROM Analyse a")})
+public class Analyse implements Serializable,Comparable<Analyse> {
 
     protected Analyse() {
 
     }
-    
 
     private static final long serialVersionUID = 1L;
 
-    
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="JobCoachEmail")
+    @JoinColumn(name = "JobCoachEmail")
     private JobCoach jobcoach;
-    
+
+    public JobCoach getJobcoach() {
+        return jobcoach;
+    }
+
+    public void setJobcoach(JobCoach jobcoach) {
+        this.jobcoach = jobcoach;
+    }
+
     @OneToOne(mappedBy = "analyse")
     private Werkgever werkgever;
 
@@ -54,6 +66,15 @@ public class Analyse implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "AnalyseId", referencedColumnName = "AnalyseId")
     private List<KostOfBaat> kostenEnBaten;
+
+    @Transient
+    private double resultaat;
+
+    @Transient
+    private double resultaatBaten;
+
+    @Transient
+    private double resultaatKosten;
 
     @Column(name = "LaatsteAanpasDatum")
     @Temporal(TemporalType.DATE)
@@ -88,6 +109,14 @@ public class Analyse implements Serializable {
         this.id = id;
     }
 
+    public double getResultaat() {
+        return resultaat;
+    }
+
+    public void setResultaat(double resultaat) {
+        this.resultaat = resultaat;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,28 +146,55 @@ public class Analyse implements Serializable {
         setWerkgever(werk2);
     }
 
-    boolean controleerOfKostMetNummerAlIngevuldIs(int kostId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean controleerOfVraagNummerAlIngevuldIs(KOBEnum e, int vraagnummer) {
+        for (KostOfBaat kob : kostenEnBaten) {
+            if (kob.getVraagId() == vraagnummer && kob.getKobEnum() == e) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    KostOfBaat geefKostMetNummer(int kostId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public KostOfBaat geefKostOfBaatMetNummer(KOBEnum e, int vraagnummer) {
+        for (KostOfBaat kob : kostenEnBaten) {
+            if (kob.getVraagId() == vraagnummer && kob.getKobEnum() == e) {
+                return kob;
+            }
+        }
+        return null;
     }
 
-    boolean controleerOfBaatMetNummerAlIngevuldIs(int kostOfBaatId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getResultaatBaten() {
+        return resultaatBaten;
     }
 
-    KostOfBaat geefBaatMetNummer(int kostOfBaatId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getResultaatKosten() {
+        return resultaatKosten;
     }
 
-    Iterable<KostOfBaat> getBaten() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private double berekenSubTotaal(KOBEnum e) {
+        double sum = 0;
+        for (KostOfBaat kob : kostenEnBaten) {
+            if (kob.getKobEnum() == e) {
+                sum += kob.getResultaat();
+            }
+        }
+        return sum;
     }
 
-    Iterable<KostOfBaat> getKosten() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void berekenVolledigResultaat() {
+        resultaatBaten = round(berekenSubTotaal(KOBEnum.Baat));
+        resultaatKosten = round(berekenSubTotaal(KOBEnum.Kost));
+        resultaat = round(resultaatBaten - resultaatKosten);
+    }
+
+    private double round(double a) {
+        return Math.round(a * 100.00) / 100.00;
+    }
+    
+    @Override
+    public int compareTo(Analyse a){
+        return getLaatsteAanpasDatum().compareTo(a.getLaatsteAanpasDatum());
     }
 
 }

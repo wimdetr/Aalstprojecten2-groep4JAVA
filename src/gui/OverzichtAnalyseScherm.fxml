@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,30 +18,57 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
          <children>
-            <Label text="Resultaat analyse" textFill="#85beb8">
+            <Label fx:id="overzichtAnalyseTitel" prefHeight="47.0" prefWidth="1053.0" textFill="#85beb8">
                <font>
                   <Font name="Likhan" size="32.0" />
                </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1052.0" spacing="10.0">
+            <HBox prefHeight="15.0" prefWidth="1053.0" spacing="20.0">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
                <children>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="62.0" prefWidth="114.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#goBack" prefHeight="26.0" prefWidth="117.0" text="Ga terug" />
-                     </children>
-                  </HBox>
-                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="Afprinten" />
-                        <Button mnemonicParsing="false" text="Mailen" />
-                        <Button mnemonicParsing="false" text="Opslaan als pdf" />
-                     </children>
-                  </HBox>
+                  <Label text="Gemeente:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gemeenteLabel" text="zfafazpmoppppppp">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Straat:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="straatLabel" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Postcode:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="postcodeLabel" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Contactpersoon bedrijf:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="emailLabel" text="email">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
          </children>
@@ -280,7 +305,7 @@
             </HBox>
             <HBox alignment="CENTER" styleClass="resultBoxAccent" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="kost" alignment="CENTER" text="€ 0,00" />
+                  <Label fx:id="kost1" alignment="CENTER" text="€ 0,00" />
                </children>
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">

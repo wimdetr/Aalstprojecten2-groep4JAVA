@@ -128,21 +128,32 @@ public class KostOfBaat implements Serializable {
     }
 
     public boolean controleerOfKOBRijMetNummerAlIngevuldIs(int rijId) {
-        try{
-            rijen.get(rijId);
+        for (KOBRij k : rijen) {
+            if (k.getkOBRijId() == rijId) {
+                return true;
+            }
         }
-        catch(Exception ex){
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public KOBRij geefKOBRijMetNummer(int rijId) {
-        return rijen.get(rijId);
+        for (KOBRij k : rijen) {
+            if (k.getkOBRijId() == rijId) {
+                return k;
+            }
+        }
+        return null;
     }
 
-    void berekenResultaat() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void berekenResultaat() {
+        double sum = 0;
+        for (KOBRij rij : getRijen()) {
+            sum += rij.getResultaat();
+        }
+        if (formule == Formule.FORMULE_KOST1) {
+            sum *= 12;
+        }
+        resultaat = sum;
     }
 
 }

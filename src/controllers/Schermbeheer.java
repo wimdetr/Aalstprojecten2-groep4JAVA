@@ -9,6 +9,7 @@ import domein.DomeinController;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +21,8 @@ public class Schermbeheer {
     private final DomeinController dc;
     private Stage mainStage;
     private final Stage popUpStage;
+    private static Schermbeheer instance;
+    private HoofdScherm hoofdScherm;
 
     public Schermbeheer(DomeinController dc, Stage stage) {
         this.dc = dc;
@@ -30,6 +33,14 @@ public class Schermbeheer {
         mainStage.setOnCloseRequest(e -> {
             sluitPopUpScherm();
         });
+    }
+
+    public void registerHoofdScherm(HoofdScherm s) {
+        this.hoofdScherm = s;
+    }
+
+    public void setMiddenScherm(Parent p) {
+        hoofdScherm.setCenter(p);
     }
 
     public void setMainStageResizable(boolean resizable) {
@@ -45,11 +56,6 @@ public class Schermbeheer {
         mainStage.setScene(scene);
         mainStage.setTitle(schermTitel);
         mainStage.centerOnScreen();
-        mainStage.show();
-    }
-
-    public void returnToPreviousScreen(Stage stage) {
-        mainStage = stage;
         mainStage.show();
     }
 

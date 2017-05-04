@@ -5,10 +5,26 @@
  */
 package persistentie;
 
+import domein.Werkgever;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import util.JPAUtil;
+
 /**
  *
- * @author ~dreeki~
+ * @author wim
  */
 public class WerkgeverMapper {
-    
+
+    public List<Werkgever> getAll() {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<Werkgever> q = em.createNamedQuery("Werkgever.findAll", Werkgever.class);
+        List<Werkgever> results = q.getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return results;
+    }
+
 }

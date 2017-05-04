@@ -3,56 +3,84 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="250.0" minWidth="350.0" type="GridPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-      <RowConstraints vgrow="NEVER" />
-      <RowConstraints vgrow="NEVER" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-    <RowConstraints vgrow="NEVER" />
-      <RowConstraints vgrow="NEVER" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-      <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
-  </rowConstraints>
-   <children>
-      <Label text="Gebruikersnaam" GridPane.rowIndex="1" />
-      <Label text="Wachtwoord" GridPane.rowIndex="4" />
-      <TextField fx:id="tfGebruikersnaam" onKeyPressed="#keyPressedGebruikersnaamVeld" GridPane.rowIndex="2" />
-      <Hyperlink fx:id="hlWachtwoordVergeten" onAction="#klikWachtwoordVergeten" onKeyPressed="#keyPressedWachtwoordVergeten" text="Wachtwoord vergeten?" GridPane.rowIndex="9" />
-      <GridPane GridPane.rowIndex="8">
-        <columnConstraints>
-          <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="RIGHT" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+<fx:root prefHeight="257.0" prefWidth="377.0" stylesheets="@../css/loginscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="CENTER" prefHeight="76.0" prefWidth="413.0" styleClass="topbar" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnInloggen" mnemonicParsing="false" onAction="#klikKnop" onKeyPressed="#keyPressedLoginKnop" text="Inloggen" GridPane.columnIndex="1" />
-            <CheckBox fx:id="checkBoxOnthoudWachtwoord" mnemonicParsing="false" onKeyPressed="#keyPressedCheckBox" text="Wachtwoord onthouden" />
+            <ImageView fitHeight="64.0" fitWidth="233.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/kairos_wordmark_normal.png" />
+               </image>
+            </ImageView>
          </children>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </GridPane>
-      <Label fx:id="lblErrorBericht" text="-Gebruikersnaam of Wachtwoord incorrect!" textFill="#f50505" GridPane.halignment="LEFT" />
-      <PasswordField fx:id="pfWachtwoord" onKeyPressed="#keyPressedWachtwoordVeld" GridPane.rowIndex="5" />
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="127.0" prefWidth="377.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" />
+            <GridPane hgap="5.0" prefHeight="150.0" prefWidth="377.0" vgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="108.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="252.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="56.0" minHeight="23.0" prefHeight="25.0" />
+                  <RowConstraints maxHeight="56.0" minHeight="23.0" prefHeight="30.0" />
+                  <RowConstraints maxHeight="22.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="16.0" minHeight="9.0" prefHeight="9.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="E-mailadres: " GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="17.0" prefWidth="96.0" text="Wachtwoord: " GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="pfWachtwoord" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <CheckBox fx:id="checkbox" mnemonicParsing="false" text="Gegevens onthouden" />
+                        <Button mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="87.0" styleClass="loginBtn" text="Log in" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="379.0" text="Administratieapplicatie" underline="true" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="tfGebruikersnaam" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblErrorBericht" text="Email/wachtwoord incorrect!" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
 </fx:root>

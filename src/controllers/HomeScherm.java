@@ -39,14 +39,14 @@ public class HomeScherm extends VBox {
             throw new RuntimeException(ex.getMessage());
         }
 
-        /*
-        Data for testing purposes and DEMO!
-        */
         DomeinController dc = schermBeheer.getDc();
         AnalyseRepository repo = dc.getAnalyseRepo();
-        List<Analyse> list = repo.getLijst();
-        for (int i = 0; i < 12; i++) {
-            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer,list.get(i%8)));
+        /*
+        Momenteel ingesteld op 10
+         */
+        List<Analyse> list = repo.getNthMostRecent(10);
+        for (Analyse a : list) {
+            flowPaneRecenteAnalyses.getChildren().add(new AnalyseCard(this.schermBeheer, a));
         }
     }
 

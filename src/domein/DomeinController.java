@@ -7,6 +7,7 @@ package domein;
 
 import domein.repository.AdminRepository;
 import domein.repository.AnalyseRepository;
+import domein.repository.DoelgroepRepository;
 import domein.repository.WerkgeverRepository;
 import domein.repository.JobCoachRepository;
 
@@ -23,7 +24,20 @@ public class DomeinController {
     private AnalyseRepository analyseRepo;
 
     private WerkgeverRepository bedrijfRepo;
+    private DoelgroepRepository doelgroepRepo;
     private Resultaat resultaat;
+
+    public WerkgeverRepository getBedrijfRepo() {
+        return bedrijfRepo;
+    }
+
+    public DoelgroepRepository getDoelgroepRepo() {
+        return doelgroepRepo;
+    }
+
+    public Resultaat getResultaat() {
+        return resultaat;
+    }
 
     public DomeinController() {
         adminRepo = new AdminRepository();
@@ -55,62 +69,19 @@ public class DomeinController {
         jobCoachRepo = new JobCoachRepository();
         analyseRepo = new AnalyseRepository();
         bedrijfRepo = new WerkgeverRepository();
-        resultaat = new Resultaat();
+        doelgroepRepo = new DoelgroepRepository();
+        resultaat = new Resultaat(doelgroepRepo.getLijst());
+        berekenResultaten();
     }
 
     public void logAdminUit() {
         admin = null;
     }
 
-    public void berekenResultaatVanKostOfBaatMetId(String jobCoachMail, int analyseId, int kostOfBaatId, KOBEnum kob) {
-        JobCoach coach = null;
-        if (admin.controleerOfCoachMetEmailBestaat(jobCoachMail)) {
-            coach = admin.geefCoachMetEmail(jobCoachMail);
-        }
-        Analyse analyse = null;
-        if (coach != null && coach.controleerOfAnalyseAanwezigIs(analyseId)) {
-            analyse = coach.geefAnalyseMetId(analyseId);
-        }
-        KostOfBaat kostOfBaat = null;
-        if (analyse != null && kob == KOBEnum.Baat) {
-            if (analyse.controleerOfBaatMetNummerAlIngevuldIs(kostOfBaatId)) {
-                kostOfBaat = analyse.geefBaatMetNummer(kostOfBaatId);
-            }
-        } else if (analyse != null && kob == KOBEnum.Kost) {
-            if (analyse.controleerOfKostMetNummerAlIngevuldIs(kostOfBaatId)) {
-                kostOfBaat = analyse.geefKostMetNummer(kostOfBaatId);
-            }
-        }
-        if (kostOfBaat != null) {
-            for (KOBRij rij : kostOfBaat.getRijen()) {
-                resultaat.berekenEnSetResultaat(rij);
-            }
-            kostOfBaat.berekenResultaat();
-        }
-    }
-
-    public void berekenAlleResultatenVanAnalyse(String jobCoachMail, int analyseId) {
-        JobCoach coach = null;
-        if (admin.controleerOfCoachMetEmailBestaat(jobCoachMail)) {
-            coach = admin.geefCoachMetEmail(jobCoachMail);
-        }
-        Analyse analyse = null;
-        if (coach != null && coach.controleerOfAnalyseAanwezigIs(analyseId)) {
-            analyse = coach.geefAnalyseMetId(analyseId);
-        }
-        if (analyse != null) {
-            for (KostOfBaat kob : analyse.getBaten()) {
-                kob.getRijen().forEach((rij) -> {
-                    resultaat.berekenEnSetResultaat(rij);
-                });
-                kob.berekenResultaat();
-            }
-            for (KostOfBaat kob : analyse.getKosten()) {
-                kob.getRijen().forEach((rij) -> {
-                    resultaat.berekenEnSetResultaat(rij);
-                });
-                kob.berekenResultaat();
-            }
-        }
+    public void berekenResultaten() {
+        // todo; mss ipv allemaal uit te rekenen per 10 of 20? (performance wise)
+        analyseRepo.getLijst().forEach((a) -> {
+            resultaat.berekenAnalyse(a);
+        });
     }
 }

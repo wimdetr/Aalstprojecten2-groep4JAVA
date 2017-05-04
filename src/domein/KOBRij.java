@@ -8,6 +8,7 @@ package domein;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,18 +27,34 @@ import javax.persistence.Transient;
 @Table(name = "kostofbaatrij")
 public class KOBRij implements Serializable {
 
+    protected KOBRij() {
+
+    }
     private static final long serialVersionUID = 1L;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "KOBRijid", referencedColumnName = "id")
     private List<KOBVak> vakken;
-    
+
     @Transient
     public double resultaat;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(name = "KOBRijId")
+    // geen idee hoe da komt ma ik moe da misspellen of het mapt ni
+    // <3 jpa 
+    private int kOBRijId;
+
+    public int getkOBRijId() {
+        return kOBRijId;
+    }
+
+    public void setkOBRijId(int kOBRijId) {
+        this.kOBRijId = kOBRijId;
+    }
 
     public int getId() {
         return id;
@@ -89,6 +106,11 @@ public class KOBRij implements Serializable {
     }
 
     public KOBVak geefKOBVakMetNummer(int i) {
-        return vakken.get(i);
+        for (KOBVak vak : vakken) {
+            if (vak.getKobVakId() == i) {
+                return vak;
+            }
+        }
+        return null;
     }
 }
