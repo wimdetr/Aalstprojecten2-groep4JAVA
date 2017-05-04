@@ -7,6 +7,9 @@ package domein;
 
 import domein.Analyse;
 import java.io.Serializable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,13 +17,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
  * @author wimde
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Werkgever.findAll", query = "SELECT w FROM Werkgever w")})
 public class Werkgever implements Serializable {
 
     protected Werkgever() {
@@ -209,6 +217,17 @@ public class Werkgever implements Serializable {
         return hash;
     }
 
+       @Transient
+    private BooleanProperty checked = new SimpleBooleanProperty(false);
+
+    public ObservableBooleanValue isChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked.set(checked);
+    }
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

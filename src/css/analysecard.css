@@ -10,7 +10,7 @@
 }
 
 .cardTop{
-    -fx-background-color: #85BEB8;
+    -fx-background-color: #337AB7;
     -fx-background-radius: 5 5 0 0;
     -fx-border-color: black;
     -fx-border-width: 0 0 1 0;
@@ -18,7 +18,7 @@
 
 
 .detailbutton{
-    -fx-background-color: #85BEB8;
+    -fx-background-color: #337AB7;
 }
 
 .kostbaatbox{
@@ -26,13 +26,12 @@
 }
 
 .kostbaatboxkost{
-    -fx-background-color: derive(red,80%);
+    -fx-background-color: #FF6666;
+
 }
 
 .kostbaatboxbaat{
-    -fx-background-color: derive(green,100%);
-    -fx-border-color: black;
-    -fx-border-width: 0 1 0 0;
+    -fx-background-color: #9FDF9F;
 }
 
 .cardBottom{
@@ -40,16 +39,15 @@
     -fx-background-radius: 0 0 5 5;
 }
 
-.resultLabelPositive{
-    -fx-text-fill:derive(green,20%);
-}
-
-.resultLabelNegative{
-    -fx-text-fill:derive(red,20%);
-}
-
 .resultBox{
     -fx-border-color: black;
     -fx-border-width: 1 0 0 0;
-    -fx-background-color: derive(green,100%);
+}
+
+.resultBoxNegative{
+    -fx-background-color: #337AB7;
+}
+
+.resultBoxPositive{
+    -fx-background-color: #9FDF9F;
 }

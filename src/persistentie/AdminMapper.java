@@ -44,19 +44,23 @@ public class AdminMapper {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         TypedQuery<Admin> q = em.createNamedQuery("Admin.findAdmin", Admin.class);
         q.setParameter("name", username);
-        return q.getSingleResult();
+        Admin results = q.getSingleResult();
+        em.close();
+        return results;
     }
 
     public List<Admin> getAdmins() {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
-        Query q = em.createNamedQuery("Admin.findAll", Admin.class);
-        return q.getResultList();
+        TypedQuery<Admin> q = em.createNamedQuery("Admin.findAll", Admin.class);
+        List<Admin> results = q.getResultList();
+        em.close();
+        return results;
     }
 
     /*
     TODO: Make this multithreaded!
     Currently the code does NOT run completely off the javaFX thread so the gui blocks sometimes.
-    */
+     */
     public void addAdmin(Admin a) {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
@@ -94,7 +98,6 @@ public class AdminMapper {
         globalgrant.executeUpdate();
         grant.executeUpdate();
         em.persist(a);
-
         em.getTransaction().commit();
         em.close();
     }
@@ -106,6 +109,16 @@ public class AdminMapper {
         em.remove(em.contains(a) ? a : em.merge(a));
         Query drop = em.createNativeQuery("DROP USER " + "'" + a.getEmail() + "'" + "@'%'");
         drop.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void changePasswordForCurrentUser(String password) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        Query changePw = em.createNativeQuery("SET PASSWORD = "+"?1");
+        changePw.setParameter(1, password);
+        changePw.executeUpdate();
         em.getTransaction().commit();
         em.close();
     }

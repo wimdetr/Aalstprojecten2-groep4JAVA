@@ -5,43 +5,42 @@
  */
 package persistentie;
 
-import domein.JobCoach;
+import domein.Doelgroep;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import util.JPAUtil;
 
 /**
  *
- * @author ~dreeki~
+ * @author wimde
  */
-public class JobCoachMapper {
+public class DoelgroepMapper {
 
-    public JobCoachMapper() {
-    }
-
-    public List<JobCoach> getAll() {
-        EntityManager em = JPAUtil.getEmf().createEntityManager();
-        Query q = em.createNamedQuery("JobCoach.findAll", JobCoach.class);
-        List<JobCoach> results = q.getResultList();
-        em.close();
-        return results;
-    }
-
-    public void modifyJobCoach(JobCoach j) {
+    public List<Doelgroep> getAll() {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
-        em.merge(j);
+        TypedQuery<Doelgroep> q = em.createNamedQuery("Doelgroep.findAll", Doelgroep.class);
         em.getTransaction().commit();
-        em.close();
+        return q.getResultList();
     }
 
-    public void delete(JobCoach j) {
+    public void addDoelgroep(Doelgroep d) {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.contains(j) ? j : em.merge(j));
+        em.persist(d);
         em.getTransaction().commit();
         em.close();
+
+    }
+
+    public void modifyDoelgroep(Doelgroep d) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        em.merge(d);
+        em.getTransaction().commit();
+        em.close();
+
     }
 
 }

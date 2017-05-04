@@ -59,7 +59,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="498.0" styleClass="resultBox" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <HBox fx:id="resultBox" alignment="CENTER" prefHeight="46.0" prefWidth="498.0" styleClass="resultBox" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <children>
                         <Label fx:id="resultaatLabel" alignment="CENTER" text="€ 10.818,00">
                            <font>
@@ -85,25 +85,36 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox fx:id="kostbaatbox" prefHeight="29.0" prefWidth="478.0" styleClass="kostbaatbox">
+                        <GridPane fx:id="kostbaatbox" maxHeight="12.0" maxWidth="478.0" minHeight="12.0" minWidth="408.0" prefHeight="12.0" prefWidth="408.0" styleClass="kostbaatbox" VBox.vgrow="NEVER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <HBox fx:id="kostbaatboxkost" prefHeight="12.0" prefWidth="242.0" styleClass="kostbaatboxkost">
-                                 <children>
-                                    <Label fx:id="kostenLabel" text="€ 12.456,00" />
-                                 </children>
+                              <HBox fx:id="kostbaatboxkost" prefHeight="12.0" prefWidth="242.0" styleClass="kostbaatboxkost" GridPane.hgrow="ALWAYS">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>
                               </HBox>
-                              <HBox fx:id="kostbaatboxbaat" alignment="TOP_RIGHT" prefHeight="12.0" prefWidth="279.0" styleClass="kostbaatboxbaat">
-                                 <children>
-                                    <Label fx:id="batenLabel" text="€23.274,00">
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </Label>
-                                 </children>
-                              </HBox>
+                              <HBox fx:id="kostbaatboxbaat" alignment="TOP_RIGHT" maxHeight="478.0" prefHeight="12.0" prefWidth="279.0" styleClass="kostbaatboxbaat" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
+                           </children>
+                        </GridPane>
+                        <HBox prefHeight="19.0" prefWidth="478.0">
+                           <children>
+                              <Label fx:id="kostenLabel" text="€ 12.456,00">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <Label fx:id="batenLabel" text="€23.274,00">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </HBox>
                      </children>
@@ -113,7 +124,7 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                      <children>
-                        <VBox prefHeight="52.0" prefWidth="209.0" spacing="10.0">
+                        <VBox prefHeight="52.0" prefWidth="135.0" spacing="5.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="19.0" prefWidth="196.0" text="Jobcoach" underline="true">
                                  <font>
@@ -123,7 +134,7 @@
                               <Label fx:id="jobcoachLabel" alignment="CENTER" prefHeight="16.0" prefWidth="207.0" text="Niels De Bruyne" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="52.0" prefWidth="182.0" spacing="10.0">
+                        <VBox prefHeight="52.0" prefWidth="182.0" spacing="5.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="198.0" text="Locatie" underline="true">
                                  <font>
@@ -133,7 +144,7 @@
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="236.0" text="Aalst" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="52.0" prefWidth="149.0" spacing="10.0">
+                        <VBox prefHeight="52.0" prefWidth="149.0" spacing="5.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="166.0" text="Gewijzigd op" underline="true">
                                  <font>

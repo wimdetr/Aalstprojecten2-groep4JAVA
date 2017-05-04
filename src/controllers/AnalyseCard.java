@@ -10,14 +10,18 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import util.NumberUtil;
 
 /**
  *
@@ -41,7 +45,9 @@ public class AnalyseCard extends VBox {
     private Label bedrijfLabel;
 
     @FXML
-    private HBox kostbaatbox, kostbaatboxkost, kostbaatboxbaat;
+    private GridPane kostbaatbox;
+    @FXML
+    private HBox kostbaatboxkost, kostbaatboxbaat, resultBox;
 
     @FXML
     private Label kostenLabel, batenLabel;
@@ -70,14 +76,32 @@ public class AnalyseCard extends VBox {
         TODO: Fill out rest of the labels. Will do when DB gets used.
          */
 
+        double kosten = analyse.getResultaatKosten();
+        double baten = analyse.getResultaatBaten();
+        double resultaat = analyse.getResultaat();
         bedrijfLabel.setText(analyse.getWerkgever().getNaam());
         bedrijfOnderdeelLabel.setText(analyse.getWerkgever().getNaamAfdeling());
+        kostenLabel.setText(NumberUtil.formatDouble(kosten));
+        batenLabel.setText(NumberUtil.formatDouble(baten));
+        resultaatLabel.setText(NumberUtil.formatDouble(resultaat));
+        
+        
+        if (resultaat >= 0) {
+            resultBox.getStyleClass().add("resultBoxPositive");
+        } else {
+            resultBox.getStyleClass().add("resultBoxNegative");
+        }
+        if (kosten + baten != 0) {
+            double kostShare = kosten / (kosten + baten);
+            double baatShare = baten / (kosten + baten);
+            kostbaatbox.getColumnConstraints().get(0).setPercentWidth(NumberUtil.getAsPercent(kostShare));
+            kostbaatbox.getColumnConstraints().get(1).setPercentWidth(NumberUtil.getAsPercent(baatShare));
+
+        }
     }
 
     @FXML
     void showDetails(ActionEvent event) {
-        // shitty code alert, how do i fix this? Add parent to constructor?
-        BorderPane parent = (BorderPane) this.getParent().getParent().getParent().getParent().getParent().getParent();
-        parent.setCenter(new OverzichtAnalyseScherm(analyse, schermBeheer));
+        schermBeheer.setMiddenScherm(new OverzichtAnalyseScherm(analyse, schermBeheer));
     }
 }

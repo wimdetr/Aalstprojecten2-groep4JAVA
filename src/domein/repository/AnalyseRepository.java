@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import persistentie.AnalyseMapper;
 
 /**
@@ -30,9 +31,20 @@ public class AnalyseRepository {
     public AnalyseRepository() {
         lijst = new ArrayList<>();
         analyseMapper = new AnalyseMapper();
-        fillUpWithDummyData();
+        getAll();
     }
 
+    
+    public void getAll(){
+        lijst = analyseMapper.getAll();
+    }
+    
+    public List<Analyse> getNthMostRecent(int n){
+        if(n >= lijst.size()){
+            n = lijst.size();
+        }
+        return lijst.stream().sorted().limit(n).collect(Collectors.toList());
+    }
     private void fillUpWithDummyData() {
 
         Analyse ana1 = new Analyse(1, new Date());

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,7 +14,7 @@
    <top>
       <VBox prefHeight="106.0" prefWidth="929.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Archief " textFill="#85beb8">
+            <Label text="Archief Analyses" textFill="#85beb8">
                <font>
                   <Font name="Likhan" size="32.0" />
                </font>
@@ -28,17 +25,6 @@
    </top>
    <bottom>
       <HBox alignment="TOP_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#doExport" prefHeight="31.0" prefWidth="189.0" styleClass="exportButton" text="Exporteer werkgevers">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/icons/export.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding></HBox>
@@ -49,12 +35,13 @@
    <center>
       <TableView fx:id="archiefTableView" prefHeight="470.0" prefWidth="929.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="idColumn" prefWidth="47.0" text="ID" />
-          <TableColumn fx:id="voornaamColumn" prefWidth="161.0" text="Voornaam" />
-            <TableColumn fx:id="naamColumn" prefWidth="204.0" text="Naam" />
-            <TableColumn fx:id="bedrijfColumn" minWidth="7.0" prefWidth="210.0" text="Bedrijf" />
-            <TableColumn fx:id="departementColumn" prefWidth="180.0" text="Departement" />
-            <TableColumn fx:id="resultaatColumn" minWidth="0.0" prefWidth="126.0" style="-fx-text-fill: green;" text="Resultaat" />
+            <TableColumn fx:id="idColumn" prefWidth="62.0" text="AnalyseID" />
+          <TableColumn fx:id="voornaamColumn" prefWidth="174.0" text="Voornaam" />
+            <TableColumn fx:id="naamColumn" prefWidth="204.0" text="Naam " />
+            <TableColumn fx:id="bedrijfColumn" minWidth="7.0" prefWidth="183.0" text="Bedrijf" />
+            <TableColumn fx:id="departementColumn" prefWidth="154.0" text="Afdeling" />
+            <TableColumn fx:id="datumColumn" prefWidth="158.0" text="Laatst gewijzigd" />
+            <TableColumn fx:id="resultaatColumn" minWidth="0.0" prefWidth="96.0" style="-fx-text-fill: green;" text="Resultaat" />
         </columns>
       </TableView>
    </center>
