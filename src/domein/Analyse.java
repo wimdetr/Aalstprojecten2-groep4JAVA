@@ -28,7 +28,7 @@ import javax.persistence.Transient;
 @Table(name = "analyse")
 @NamedQueries({
     @NamedQuery(name = "Analyse.findAll", query = "SELECT a FROM Analyse a")})
-public class Analyse implements Serializable,Comparable<Analyse> {
+public class Analyse implements Serializable, Comparable<Analyse> {
 
     protected Analyse() {
 
@@ -40,23 +40,23 @@ public class Analyse implements Serializable,Comparable<Analyse> {
     @JoinColumn(name = "JobCoachEmail")
     private JobCoach jobcoach;
 
+    @OneToOne(mappedBy = "analyse")
+    private Departement departement;
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
     public JobCoach getJobcoach() {
         return jobcoach;
     }
 
     public void setJobcoach(JobCoach jobcoach) {
         this.jobcoach = jobcoach;
-    }
-
-    @OneToOne(mappedBy = "analyse")
-    private Werkgever werkgever;
-
-    public void setWerkgever(Werkgever werkgever) {
-        this.werkgever = werkgever;
-    }
-
-    public Werkgever getWerkgever() {
-        return werkgever;
     }
 
     @Id
@@ -142,10 +142,6 @@ public class Analyse implements Serializable,Comparable<Analyse> {
         return "persistence.Analyse[ id=" + id + " ]";
     }
 
-    public void slaWerkgeverOp(Werkgever werk2) {
-        setWerkgever(werk2);
-    }
-
     public boolean controleerOfVraagNummerAlIngevuldIs(KOBEnum e, int vraagnummer) {
         for (KostOfBaat kob : kostenEnBaten) {
             if (kob.getVraagId() == vraagnummer && kob.getKobEnum() == e) {
@@ -191,9 +187,9 @@ public class Analyse implements Serializable,Comparable<Analyse> {
     private double round(double a) {
         return Math.round(a * 100.00) / 100.00;
     }
-    
+
     @Override
-    public int compareTo(Analyse a){
+    public int compareTo(Analyse a) {
         return getLaatsteAanpasDatum().compareTo(a.getLaatsteAanpasDatum());
     }
 

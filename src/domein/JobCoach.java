@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package domein;
 
 import java.io.Serializable;
@@ -244,20 +240,10 @@ public class JobCoach implements Serializable {
     public void setChecked(Boolean checked) {
         this.checked.set(checked);
     }
-    
- 
 
     @Override
     public String toString() {
         return "persistence.Persoon[ email=" + email + " ]";
-    }
-
-    boolean controleerOfAnalyseAanwezigIs(int analyseId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    Analyse geefAnalyseMetId(int analyseId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public JobCoach(String naam, String voornaam, String email, String naamOrganisatie, String straatBedrijf, int nummerBedrijf, int postcodeBedrijf, String gemeenteBedrijf, String busBedrijf) {

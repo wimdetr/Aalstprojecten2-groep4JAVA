@@ -121,14 +121,6 @@ public class Admin implements Serializable {
         this.checked.set(checked);
     }
 
-    boolean controleerOfCoachMetEmailBestaat(String jobCoachMail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    JobCoach geefCoachMetEmail(String jobCoachMail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public String toString() {
         return "persistence.Persoon[ email=" + email + " ]";

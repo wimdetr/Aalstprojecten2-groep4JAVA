@@ -44,3 +44,11 @@
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
+
+.resultaatPositive{
+    -fx-text-fill: green;
+}
+
+.resultaatNegative{
+    -fx-text-fill: red;
+}

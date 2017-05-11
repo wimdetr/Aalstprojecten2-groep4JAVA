@@ -11,6 +11,7 @@
     <class>domein.Werkgever</class>
     <class>domein.Admin</class>
     <class>domein.Doelgroep</class>
+    <class>domein.Departement</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

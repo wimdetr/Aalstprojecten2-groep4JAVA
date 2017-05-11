@@ -41,7 +41,7 @@
             <TableColumn fx:id="bedrijfColumn" minWidth="7.0" prefWidth="183.0" text="Bedrijf" />
             <TableColumn fx:id="departementColumn" prefWidth="154.0" text="Afdeling" />
             <TableColumn fx:id="datumColumn" prefWidth="158.0" text="Laatst gewijzigd" />
-            <TableColumn fx:id="resultaatColumn" minWidth="0.0" prefWidth="96.0" style="-fx-text-fill: green;" text="Resultaat" />
+            <TableColumn fx:id="resultaatColumn" minWidth="0.0" prefWidth="96.0" text="Resultaat" />
         </columns>
       </TableView>
    </center>

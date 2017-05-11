@@ -94,13 +94,13 @@ public class WerkgeverBeherenScherm extends BorderPane {
         checkboxCol.setCellValueFactory(param -> param.getValue().isChecked());
         checkboxCol.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxCol));
         bedrijfCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getNaam()));
-        afdelingCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getNaamAfdeling()));
-        contactpersoonCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonVoornaam()
-                + " " + e.getValue().getContactPersoonNaam()));
-        emailCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonEmail()));
-        gemeenteCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getGemeente()));
-        straatCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getStraat() + e.getValue().getNummer()));
-        postcodeCol.setCellValueFactory(e -> new SimpleStringProperty(Integer.toString(e.getValue().getPostcode())));
+//        afdelingCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getNaamAfdeling()));
+//        contactpersoonCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonVoornaam()
+//                + " " + e.getValue().getContactPersoonNaam()));
+//        emailCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonEmail()));
+//        gemeenteCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getGemeente()));
+//        straatCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getStraat() + e.getValue().getNummer()));
+//        postcodeCol.setCellValueFactory(e -> new SimpleStringProperty(Integer.toString(e.getValue().getPostcode())));
         data = FXCollections.observableList(beheer.getDc().getBedrijfRepo().getLijst());
         werkgeversTableView.setItems(data);
         BooleanBinding checkBinding = new BooleanBinding() {
@@ -165,20 +165,20 @@ public class WerkgeverBeherenScherm extends BorderPane {
                         .append("Postcode;")
                         .append("\n");
                 werkgevers.forEach((werkgever) -> {
-                    csvBuilder.append(werkgever.getNaam())
-                            .append(";")
-                            .append(werkgever.getNaamAfdeling())
-                            .append(";")
-                            .append(werkgever.getGemeente())
-                            .append(";")
-                            .append(werkgever.getStraat())
-                            .append(";")
-                            .append(werkgever.getNummer())
-                            .append(werkgever.getBus() == null ? "" : werkgever.getBus())
-                            .append(";")
-                            .append(werkgever.getPostcode())
-                            .append(";")
-                            .append("\n");
+//                    csvBuilder.append(werkgever.getNaam())
+//                            .append(";")
+//                            .append(werkgever.getNaamAfdeling())
+//                            .append(";")
+//                            .append(werkgever.getGemeente())
+//                            .append(";")
+//                            .append(werkgever.getStraat())
+//                            .append(";")
+//                            .append(werkgever.getNummer())
+//                            .append(werkgever.getBus() == null ? "" : werkgever.getBus())
+//                            .append(";")
+//                            .append(werkgever.getPostcode())
+//                            .append(";")
+//                            .append("\n");
                 });
                 String csvString = csvBuilder.toString();
                 String location = chosenDir.toString() + "/" + naamBestand;
