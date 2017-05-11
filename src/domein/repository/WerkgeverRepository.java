@@ -38,13 +38,13 @@ public class WerkgeverRepository {
 
     public List<Werkgever> zoekAfdeling(String query) {
         return lijst.stream()
-                .filter(p -> p.getNaamAfdeling().toLowerCase().startsWith(query.toLowerCase()))
+ //               .filter(p -> p.getNaamAfdeling().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<Werkgever> zoekGemeente(String query) {
         return lijst.stream()
-                .filter(p -> p.getGemeente().toLowerCase().startsWith(query.toLowerCase()))
+       //         .filter(p -> p.getGemeente().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 }

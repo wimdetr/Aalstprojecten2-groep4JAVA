@@ -23,12 +23,18 @@ import java.util.Set;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.CssMetaData;
+import javafx.css.SimpleStyleableStringProperty;
+import javafx.css.Styleable;
+import javafx.css.StyleableStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -87,9 +93,34 @@ public class ArchiefScherm extends BorderPane {
         idColumn.setCellValueFactory(e -> new SimpleIntegerProperty(e.getValue().getId()));
         voornaamColumn.setCellValueFactory(e -> e.getValue().getJobcoach().voornaamProperty());
         naamColumn.setCellValueFactory(e -> e.getValue().getJobcoach().naamProperty());
-        bedrijfColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getWerkgever().getNaam()));
-        departementColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getWerkgever().getNaamAfdeling()));
-        resultaatColumn.setCellValueFactory(e -> new SimpleStringProperty(NumberUtil.formatDouble(e.getValue().getResultaat())));
+        bedrijfColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getDepartement().getWerkgever().getNaam()));
+        departementColumn.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getDepartement().getNaam()));
+        resultaatColumn.setCellFactory(e -> {
+            TableCell<Analyse, String> cell = new TableCell<Analyse, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item);
+                        if (NumberUtil.convertToDouble(item) >= 0) {
+                            setStyle("-fx-text-fill: green");
+                        } else {
+                            setStyle("-fx-text-fill: red");
+                        }
+                    }
+                }
+            };
+            return cell;
+        }
+        );
+        resultaatColumn.setCellValueFactory(e -> {
+            double res = e.getValue().getResultaat();
+            return new SimpleStringProperty(NumberUtil.formatDouble(res));
+        });
+
         datumColumn.setCellValueFactory(e
                 -> {
             SimpleStringProperty property = new SimpleStringProperty();

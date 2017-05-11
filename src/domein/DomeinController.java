@@ -18,6 +18,7 @@ import domein.repository.JobCoachRepository;
 public class DomeinController {
 
     private Admin admin;
+
     private AdminRepository adminRepo;
 
     private JobCoachRepository jobCoachRepo;

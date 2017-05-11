@@ -79,13 +79,12 @@ public class AnalyseCard extends VBox {
         double kosten = analyse.getResultaatKosten();
         double baten = analyse.getResultaatBaten();
         double resultaat = analyse.getResultaat();
-        bedrijfLabel.setText(analyse.getWerkgever().getNaam());
-        bedrijfOnderdeelLabel.setText(analyse.getWerkgever().getNaamAfdeling());
+        bedrijfLabel.setText(analyse.getDepartement().getWerkgever().getNaam());
+        bedrijfOnderdeelLabel.setText(analyse.getDepartement().getNaam());
         kostenLabel.setText(NumberUtil.formatDouble(kosten));
         batenLabel.setText(NumberUtil.formatDouble(baten));
         resultaatLabel.setText(NumberUtil.formatDouble(resultaat));
-        
-        
+
         if (resultaat >= 0) {
             resultBox.getStyleClass().add("resultBoxPositive");
         } else {

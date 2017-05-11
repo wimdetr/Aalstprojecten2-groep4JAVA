@@ -65,16 +65,16 @@ public class OverzichtAnalyseScherm extends BorderPane {
         /*
         TODO: mss in een lijst zetten want dit is wel heel lelijk ma bon
          */
-        overzichtAnalyseTitel.setText(analyse.getWerkgever().getNaam() + " - " + analyse.getWerkgever().getNaamAfdeling()
+        overzichtAnalyseTitel.setText(analyse.getDepartement().getWerkgever().getNaam() + " - " + analyse.getDepartement().getNaam()
                 + " (" + analyse.getJobcoach().getVoornaam() + " " + analyse.getJobcoach().getNaam() + ")");
 
-        String bus = analyse.getWerkgever().getBus() == null ? "" : analyse.getWerkgever().getBus();
-        gemeenteLabel.setText(analyse.getWerkgever().getGemeente());
-        straatLabel.setText(analyse.getWerkgever().getStraat() + " "
-                + analyse.getWerkgever().getNummer()
+        String bus = analyse.getDepartement().getBus() == null ? "" : analyse.getDepartement().getBus();
+        gemeenteLabel.setText(analyse.getDepartement().getGemeente());
+        straatLabel.setText(analyse.getDepartement().getStraat() + " "
+                + analyse.getDepartement().getNummer()
                 + bus);
-        postcodeLabel.setText(Integer.toString(analyse.getWerkgever().getPostcode()));
-        emailLabel.setText(analyse.getWerkgever().getContactPersoonEmail());
+        postcodeLabel.setText(Integer.toString(analyse.getDepartement().getPostcode()));
+        emailLabel.setText(analyse.getDepartement().getContactPersoonEmail());
         List<Label> baten = Arrays.asList(baat1, baat2, baat3, baat4, baat5, baat6, baat7, baat8, baat9, baat10, baat11);
         List<Label> kosten = Arrays.asList(kost1, kost2, kost3, kost4, kost5, kost6, kost7, kost8);
         //baten

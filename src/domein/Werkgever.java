@@ -5,11 +5,12 @@
  */
 package domein;
 
-import domein.Analyse;
 import java.io.Serializable;
+import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +18,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -35,94 +38,34 @@ public class Werkgever implements Serializable {
 
     }
 
+    @OneToMany(mappedBy = "werkgever",fetch = FetchType.EAGER)
+    private List<Departement> departementen;
+
+    public List<Departement> getDepartementen() {
+        return departementen;
+    }
+
+    public void setDepartementen(List<Departement> departementen) {
+        this.departementen = departementen;
+    }
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "WerkgeverId")
     private int id;
 
-    @Column(name = "AantalWerkuren")
-    private int aantalWerkuren;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Werkgever(String bedrijf, int i, String gemeente) {
         naam = bedrijf;
         id = i;
-        this.gemeente = gemeente;
-    }
-
-    public int getAantalWerkuren() {
-        return aantalWerkuren;
-    }
-
-    public void setAantalWerkuren(int aantalWerkuren) {
-        this.aantalWerkuren = aantalWerkuren;
-    }
-
-    @Column(name = "Gemeente")
-    private String gemeente;
-
-    public String getGemeente() {
-        return gemeente;
-    }
-
-    public void setGemeente(String gemeente) {
-        this.gemeente = gemeente;
-    }
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "AnalyseId")
-    private Analyse analyse;
-
-    public Analyse getAnalyse() {
-        return analyse;
-    }
-
-    public void setAnalyse(Analyse analyse) {
-        this.analyse = analyse;
-    }
-
-    @Column(name = "ContactPersoonNaam")
-    private String contactPersoonNaam;
-
-    public String getContactPersoonNaam() {
-        return contactPersoonNaam;
-    }
-
-    public void setContactPersoonNaam(String contactPersoonNaam) {
-        this.contactPersoonNaam = contactPersoonNaam;
-    }
-
-    @Column(name = "ContactPersoonVoornaam")
-    private String contactPersoonVoornaam;
-
-    public String getContactPersoonVoornaam() {
-        return contactPersoonVoornaam;
-    }
-
-    @Column(name = "linkNaarLogoPrent")
-    private String linkNaarLogoPrent;
-
-    public String getLinkNaarLogoPrent() {
-        return linkNaarLogoPrent;
-    }
-
-    public void setLinkNaarLogoPrent(String linkNaarLogoPrent) {
-        this.linkNaarLogoPrent = linkNaarLogoPrent;
-    }
-
-    public void setContactPersoonVoornaam(String contactPersoonVoornaam) {
-        this.contactPersoonVoornaam = contactPersoonVoornaam;
-    }
-
-    @Column(name = "ContactPersoonEmail")
-    private String contactPersoonEmail;
-
-    public String getContactPersoonEmail() {
-        return contactPersoonEmail;
-    }
-
-    public void setContactPersoonEmail(String contactPersoonEmail) {
-        this.contactPersoonEmail = contactPersoonEmail;
     }
 
     @Column(name = "Naam")
@@ -136,28 +79,6 @@ public class Werkgever implements Serializable {
         this.naam = naam;
     }
 
-    @Column(name = "NaamAfdeling")
-    private String naamAfdeling;
-
-    public String getNaamAfdeling() {
-        return naamAfdeling;
-    }
-
-    public void setNaamAfdeling(String naamAfdeling) {
-        this.naamAfdeling = naamAfdeling;
-    }
-
-    @Column(name = "Nummer")
-    private int nummer;
-
-    public int getNummer() {
-        return nummer;
-    }
-
-    public void setNummer(int nummer) {
-        this.nummer = nummer;
-    }
-
     @Column(name = "PatronaleBijdrage")
     private int patronaleBijdrage;
 
@@ -169,47 +90,6 @@ public class Werkgever implements Serializable {
         this.patronaleBijdrage = patronaleBijdrage;
     }
 
-    @Column(name = "Postcode")
-    private int postcode;
-
-    public int getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(int postcode) {
-        this.postcode = postcode;
-    }
-
-    @Column(name = "Straat")
-    private String straat;
-
-    public String getStraat() {
-        return straat;
-    }
-
-    public void setStraat(String straat) {
-        this.straat = straat;
-    }
-
-    @Column(name = "bus")
-    private String bus;
-
-    public String getBus() {
-        return bus;
-    }
-
-    public void setBus(String bus) {
-        this.bus = bus;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -217,7 +97,7 @@ public class Werkgever implements Serializable {
         return hash;
     }
 
-       @Transient
+    @Transient
     private BooleanProperty checked = new SimpleBooleanProperty(false);
 
     public ObservableBooleanValue isChecked() {
@@ -227,7 +107,7 @@ public class Werkgever implements Serializable {
     public void setChecked(Boolean checked) {
         this.checked.set(checked);
     }
-    
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

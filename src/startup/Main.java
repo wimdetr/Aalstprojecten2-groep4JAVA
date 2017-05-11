@@ -28,6 +28,8 @@ public class Main extends Application {
         LoginScherm ls = new LoginScherm(schermbeheer);
         schermbeheer.plaatsScherm(ls, "Kairos - Administrator login");
         schermbeheer.setMainStageResizable(false);
+
         //ScenicView.show(scene);
+
     }
 }
