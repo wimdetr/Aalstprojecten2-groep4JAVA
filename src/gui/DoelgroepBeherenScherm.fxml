@@ -12,9 +12,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="909.0" prefWidth="779.0" stylesheets="@../css/gebruikersbeherenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="909.0" prefWidth="779.0" stylesheets="@../css/middenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView fx:id="doelgroepTableView" editable="true" prefHeight="734.0" prefWidth="735.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -33,15 +32,12 @@
       </TableView>
    </center>
    <top>
-      <VBox alignment="BOTTOM_LEFT">
+      <VBox alignment="BOTTOM_LEFT" prefHeight="114.0" prefWidth="759.0">
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
          <children>
-            <Label text="Doelgroepen beheren" textFill="#85beb8">
-               <font>
-                  <Font name="Likhan" size="32.0" />
-               </font>
+            <Label styleClass="centerScreenLabel" text="Overzicht Doelgroepen">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -52,7 +48,7 @@
                   <Region prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="38.0" prefWidth="590.0" spacing="5.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#doelgroepToevoegen" styleClass="exportButton" text="Doelgroep toevoegen">
+                        <Button mnemonicParsing="false" onAction="#doelgroepToevoegen" styleClass="blueButton" text="Doelgroep toevoegen">
                            <graphic>
                               <ImageView fitHeight="21.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

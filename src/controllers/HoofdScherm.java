@@ -102,7 +102,8 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonEmailScherm(ActionEvent event) {
-
+        AdminMailScherm scherm = new AdminMailScherm(schermBeheer);
+        this.setCenter(scherm);
     }
 
 }

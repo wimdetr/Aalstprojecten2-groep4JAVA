@@ -9,9 +9,14 @@
     -fx-text-fill: white;
 }
 
+.titleLabel{
+    -fx-font: 32px "System";
+    -fx-text-fill: #337AB7;
+}
+
 .textlabel{
     -fx-font-size: 22px;
-    -fx-text-fill: rgba(133, 190, 184, 1);
+    -fx-text-fill: derive(#337AB7,10%);
 }
 
 .saveButton{

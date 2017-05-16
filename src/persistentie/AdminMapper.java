@@ -6,6 +6,7 @@
 package persistentie;
 
 import domein.Admin;
+import domein.AdminMail;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,10 +117,27 @@ public class AdminMapper {
     public void changePasswordForCurrentUser(String password) {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
-        Query changePw = em.createNativeQuery("SET PASSWORD = "+"?1");
+        Query changePw = em.createNativeQuery("SET PASSWORD = " + "?1");
         changePw.setParameter(1, password);
         changePw.executeUpdate();
         em.getTransaction().commit();
         em.close();
     }
+
+    public void deleteMail(AdminMail m) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.contains(m) ? m : em.merge(m));
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void modifyMail(AdminMail m) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        em.merge(m);
+        em.getTransaction().commit();
+        em.close();
+    }
+
 }

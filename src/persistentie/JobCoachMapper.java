@@ -40,6 +40,9 @@ public class JobCoachMapper {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
         em.remove(em.contains(j) ? j : em.merge(j));
+        Query q  = (Query) em.createNativeQuery("DELETE FROM aspnetusers WHERE username = ?1");
+        q.setParameter(1,j.getEmail());
+        q.executeUpdate();
         em.getTransaction().commit();
         em.close();
     }

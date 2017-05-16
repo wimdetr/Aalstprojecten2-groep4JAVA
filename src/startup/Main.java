@@ -8,7 +8,14 @@ package startup;
 import controllers.LoginScherm;
 import controllers.Schermbeheer;
 import domein.DomeinController;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -30,6 +37,5 @@ public class Main extends Application {
         schermbeheer.setMainStageResizable(false);
 
         //ScenicView.show(scene);
-
     }
 }

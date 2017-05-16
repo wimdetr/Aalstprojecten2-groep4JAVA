@@ -5,7 +5,9 @@
  */
 package controllers;
 
+import domein.Departement;
 import domein.Werkgever;
+import domein.repository.DepartementRepository;
 import domein.repository.WerkgeverRepository;
 import java.io.File;
 import java.io.IOException;
@@ -39,44 +41,44 @@ import javafx.stage.DirectoryChooser;
 public class WerkgeverBeherenScherm extends BorderPane {
 
     @FXML
-    private TableView<Werkgever> werkgeversTableView;
+    private TableView<Departement> werkgeversTableView;
 
     @FXML
-    private TableColumn<Werkgever, Boolean> checkboxCol;
+    private TableColumn<Departement, Boolean> checkboxCol;
 
     @FXML
-    private TableColumn<Werkgever, String> bedrijfCol;
+    private TableColumn<Departement, String> bedrijfCol;
 
     @FXML
-    private TableColumn<Werkgever, String> afdelingCol;
+    private TableColumn<Departement, String> afdelingCol;
 
     @FXML
-    private TableColumn<Werkgever, String> contactpersoonCol;
+    private TableColumn<Departement, String> contactpersoonCol;
 
     @FXML
-    private TableColumn<Werkgever, String> emailCol;
+    private TableColumn<Departement, String> emailCol;
 
     @FXML
-    private TableColumn<Werkgever, String> gemeenteCol;
+    private TableColumn<Departement, String> gemeenteCol;
 
     @FXML
-    private TableColumn<Werkgever, String> straatCol;
+    private TableColumn<Departement, String> straatCol;
 
     @FXML
-    private TableColumn<Werkgever, String> postcodeCol;
+    private TableColumn<Departement, String> postcodeCol;
 
     @FXML
     private TextField zoekTextField;
 
     @FXML
-    private ChoiceBox<Function<String, List<Werkgever>>> zoekChoiceBox;
+    private ChoiceBox<Function<String, List<Departement>>> zoekChoiceBox;
 
     @FXML
     private Button exporteerBtn;
 
     private Schermbeheer beheer;
 
-    private ObservableList<Werkgever> data;
+    private ObservableList<Departement> data;
 
     public WerkgeverBeherenScherm(Schermbeheer beheer) {
         this.beheer = beheer;
@@ -93,15 +95,19 @@ public class WerkgeverBeherenScherm extends BorderPane {
          */
         checkboxCol.setCellValueFactory(param -> param.getValue().isChecked());
         checkboxCol.setCellFactory(CheckBoxTableCell.forTableColumn(checkboxCol));
-        bedrijfCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getNaam()));
-//        afdelingCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getNaamAfdeling()));
-//        contactpersoonCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonVoornaam()
-//                + " " + e.getValue().getContactPersoonNaam()));
-//        emailCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonEmail()));
-//        gemeenteCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getGemeente()));
-//        straatCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getStraat() + e.getValue().getNummer()));
-//        postcodeCol.setCellValueFactory(e -> new SimpleStringProperty(Integer.toString(e.getValue().getPostcode())));
-        data = FXCollections.observableList(beheer.getDc().getBedrijfRepo().getLijst());
+        bedrijfCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getWerkgever().getNaam()));
+        afdelingCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getNaam()));
+        contactpersoonCol.setCellValueFactory(e -> {
+            String voornaam = e.getValue().getContactPersoonVoornaam() == null ? "" : e.getValue().getContactPersoonVoornaam();
+            String naam = e.getValue().getContactPersoonNaam() == null ? "" : e.getValue().getContactPersoonNaam();
+            return new SimpleStringProperty(voornaam
+                    + " " + naam);
+        });
+        emailCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactPersoonEmail()));
+        gemeenteCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getGemeente()));
+        straatCol.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getStraat() +" "+ e.getValue().getNummer()));
+        postcodeCol.setCellValueFactory(e -> new SimpleStringProperty(Integer.toString(e.getValue().getPostcode())));
+        data = FXCollections.observableList(beheer.getDc().getDepartementRepo().getLijst());
         werkgeversTableView.setItems(data);
         BooleanBinding checkBinding = new BooleanBinding() {
             {
@@ -118,7 +124,7 @@ public class WerkgeverBeherenScherm extends BorderPane {
         /*
         Zoekfunctie implementeren.
          */
-        WerkgeverRepository repo = beheer.getDc().getBedrijfRepo();
+        DepartementRepository repo = beheer.getDc().getDepartementRepo();
         zoekChoiceBox.getItems().add(createSearchOption(repo::zoekNaam, "Naam"));
         zoekChoiceBox.getItems().add(createSearchOption(repo::zoekAfdeling, "Afdeling"));
         zoekChoiceBox.getItems().add(createSearchOption(repo::zoekGemeente, "Gemeente"));
@@ -126,10 +132,10 @@ public class WerkgeverBeherenScherm extends BorderPane {
 
     }
 
-    private Function<String, List<Werkgever>> createSearchOption(Function<String, List<Werkgever>> func, String a) {
-        return new Function<String, List<Werkgever>>() {
+    private Function<String, List<Departement>> createSearchOption(Function<String, List<Departement>> func, String a) {
+        return new Function<String, List<Departement>>() {
             @Override
-            public List<Werkgever> apply(String t) {
+            public List<Departement> apply(String t) {
                 return func.apply(t);
             }
 
@@ -142,7 +148,7 @@ public class WerkgeverBeherenScherm extends BorderPane {
 
     @FXML
     void doExporteer(ActionEvent event) {
-        ObservableList<Werkgever> werkgevers = data.filtered(p -> p.isChecked().get() == true);
+        ObservableList<Departement> werkgevers = data.filtered(p -> p.isChecked().get() == true);
 
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Exporteer werkgevers");
@@ -160,25 +166,25 @@ public class WerkgeverBeherenScherm extends BorderPane {
                         .append("Organisatie;")
                         .append("Afdeling;")
                         .append("Gemeente;")
-                        .append("Straat")
+                        .append("Straat;")
                         .append("Nummer;")
                         .append("Postcode;")
                         .append("\n");
                 werkgevers.forEach((werkgever) -> {
-//                    csvBuilder.append(werkgever.getNaam())
-//                            .append(";")
-//                            .append(werkgever.getNaamAfdeling())
-//                            .append(";")
-//                            .append(werkgever.getGemeente())
-//                            .append(";")
-//                            .append(werkgever.getStraat())
-//                            .append(";")
-//                            .append(werkgever.getNummer())
-//                            .append(werkgever.getBus() == null ? "" : werkgever.getBus())
-//                            .append(";")
-//                            .append(werkgever.getPostcode())
-//                            .append(";")
-//                            .append("\n");
+                    csvBuilder.append(werkgever.getWerkgever().getNaam())
+                            .append(";")
+                            .append(werkgever.getNaam())
+                            .append(";")
+                            .append(werkgever.getGemeente())
+                            .append(";")
+                            .append(werkgever.getStraat())
+                            .append(";")
+                            .append(werkgever.getNummer())
+                            .append(werkgever.getBus() == null ? "" : werkgever.getBus())
+                            .append(";")
+                            .append(werkgever.getPostcode())
+                            .append(";")
+                            .append("\n");
                 });
                 String csvString = csvBuilder.toString();
                 String location = chosenDir.toString() + "/" + naamBestand;

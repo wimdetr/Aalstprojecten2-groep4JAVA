@@ -1,7 +1,9 @@
 package controllers;
 
 import domein.DomeinController;
+import domein.Email;
 import domein.JobCoach;
+import domein.repository.EmailRepository;
 import domein.repository.JobCoachRepository;
 import java.io.File;
 import java.io.IOException;
@@ -77,6 +79,9 @@ public class GebruikersBeherenScherm extends BorderPane {
     @FXML
     private Button exporteerBtn;
 
+    @FXML
+    private Button mailBtn;
+
     private ObservableList<JobCoach> data;
     private final DomeinController dc;
     private Schermbeheer schermBeheer;
@@ -95,7 +100,6 @@ public class GebruikersBeherenScherm extends BorderPane {
         data = FXCollections.observableList(dc.getJobCoachRepo().getLijst());
 
         gebruikersTableView.setPlaceholder(new Label("Geen gebruikers gevonden."));
-
         /*
         Cell factories
          */
@@ -126,7 +130,6 @@ public class GebruikersBeherenScherm extends BorderPane {
             return rij;
         });
 
-        
         gebruikersTableView.setItems(data);
         JobCoachRepository jcr = dc.getJobCoachRepo();
         zoekChoiceBox.getItems().add(createSearchOption(jcr::zoekVoornaam, "Voornaam"));
@@ -148,9 +151,10 @@ public class GebruikersBeherenScherm extends BorderPane {
                 return data.stream().noneMatch(c -> c.isChecked().get());
             }
         };
-        
+
         verwijderBtn.disableProperty().bind(checkBinding);
         exporteerBtn.disableProperty().bind(checkBinding);
+        mailBtn.disableProperty().bind(checkBinding);
 
     }
 
@@ -266,6 +270,12 @@ public class GebruikersBeherenScherm extends BorderPane {
                 }
             }
         }
+    }
+
+    @FXML
+    void doMail(ActionEvent event) {
+        ObservableList<JobCoach> coaches = gebruikersTableView.getItems().filtered(p -> p.isChecked().get() == true);
+        schermBeheer.plaatsPopUpScherm(new EmailVerzendenScherm(schermBeheer,coaches), "Mail Verzenden");
     }
 
     @FXML

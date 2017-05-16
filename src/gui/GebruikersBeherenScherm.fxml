@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -8,13 +9,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<fx:root stylesheets="@../css/gebruikersbeherenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView fx:id="gebruikersTableView" editable="true" prefHeight="734.0" prefWidth="580.0" BorderPane.alignment="CENTER">
         <columns>
@@ -24,8 +26,8 @@
             <TableColumn fx:id="organisatieCol" editable="false" prefWidth="109.0" text="Organisatie" />
             <TableColumn fx:id="straatCol" editable="false" prefWidth="59.0" text="Straat" />
             <TableColumn fx:id="gemeenteCol" editable="false" prefWidth="75.0" text="Gemeente" />
-            <TableColumn fx:id="emailCol" editable="false" prefWidth="133.0" text="Email" />
-            <TableColumn fx:id="postcodeCol" editable="false" prefWidth="35.0" text="Postcode" />
+            <TableColumn fx:id="emailCol" editable="false" prefWidth="182.0" text="Email" />
+            <TableColumn fx:id="postcodeCol" editable="false" prefWidth="201.0" text="Postcode" />
         </columns>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" />
@@ -41,10 +43,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
          <children>
-            <Label text="Gebruikersaccounts beheren" textFill="#85beb8">
-               <font>
-                  <Font name="Likhan" size="32.0" />
-               </font>
+            <Label styleClass="centerScreenLabel" text="Overzicht Jobcoaches">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -54,17 +53,54 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="590.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="zoekTextField" prefHeight="26.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />
-                        <ChoiceBox fx:id="zoekChoiceBox" prefWidth="150.0" />
-                        <Button mnemonicParsing="false" onAction="#doZoek" prefHeight="26.0" prefWidth="113.0" text="Zoek" />
+                        <TextField fx:id="zoekTextField" prefHeight="27.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />
+                        <ChoiceBox fx:id="zoekChoiceBox" prefHeight="13.0" prefWidth="150.0" styleClass="cb" />
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#doZoek" prefHeight="15.0" prefWidth="85.0" styleClass="blueButton" text="Zoeken">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/searchwhite.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </HBox>
                   <Region prefHeight="100.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="38.0" prefWidth="590.0" spacing="5.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#doSelectAll" styleClass="selectAllButton" text="Selecteer Alle" />
-                        <Button fx:id="exporteerBtn" mnemonicParsing="false" onAction="#doExporteer" styleClass="exportButton" text="Exporteer" />
-                        <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#doDelete" styleClass="deleteButton" text="Verwijder" />
+                        <Button mnemonicParsing="false" onAction="#doSelectAll" styleClass="blueButton" text="Selecteer Alle">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/checkmarkwhite.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="mailBtn" mnemonicParsing="false" onAction="#doMail" styleClass="blueButton" text="Mailen">
+                           <graphic>
+                              <ImageView fitHeight="15.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/mailwhite.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="exporteerBtn" mnemonicParsing="false" onAction="#doExporteer" styleClass="blueButton" text="Exporteer">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/export.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="verwijderBtn" mnemonicParsing="false" onAction="#doDelete" styleClass="redButton" text="Verwijder">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/deletewhite.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </HBox>
                </children>
@@ -75,4 +111,8 @@
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
+   <stylesheets>
+      <URL value="@../css/gebruikersbeherenscherm.css" />
+      <URL value="@../css/middenscherm.css" />
+   </stylesheets>
 </fx:root>

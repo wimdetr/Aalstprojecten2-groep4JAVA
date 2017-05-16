@@ -4,33 +4,35 @@
 */
 
 .topbar{
-    -fx-background-color:  #85BEB8;
+    -fx-background-color:  #337AB7;
 }
 
 .sidebar{
-    -fx-background-color: #DCDCDC;
+    -fx-background-color: #DDDBDD;
 }
 
 .sidebarbutton{
-    -fx-background-color: #DCDCDC;
+    -fx-background-color: #DDDBDD;
 }
 .sidebarbutton:hover{
     -fx-background-color: white;
 }
 
+.centerScreenLabel{
+    -fx-font: 32px "System";
+    -fx-text-fill: derive(#337AB7,10%);
+}
 
 .menu{
-    -fx-background-color:  #85BEB8;
+    -fx-background-color:  white;
 
 }
 .menu-button{
-    -fx-background-color:  #85BEB8;
-    -fx-text-fill: white;
-    -fx-border-color:black;
-
+    -fx-background-color:  white;
+    -fx-text-fill: #337AB7;
 }
 .menu-button .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #337AB7;
     -fx-font-size:16px;
 }
 .menu-item .label {
@@ -38,12 +40,12 @@
 }
 
 .menu-item:focused {
-    -fx-background-color: derive(#85BEB8,40%)
+    -fx-background-color: derive(#337AB7,40%)
 }
 
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-background-color: derive(#85BEB8,10%);
+    -fx-background-color: derive(#337AB7,10%);
     -fx-background-insets: 0, 1, 2;
     -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
     /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */

@@ -6,6 +6,9 @@
 package domein;
 
 import java.io.Serializable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +23,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -184,6 +188,17 @@ public class Departement implements Serializable {
 
     public void setStraat(String straat) {
         this.straat = straat;
+    }
+
+    @Transient
+    private BooleanProperty checked = new SimpleBooleanProperty(false);
+
+    public ObservableBooleanValue isChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked.set(checked);
     }
 
     @Override

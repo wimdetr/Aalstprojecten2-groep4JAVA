@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domein;
 
 import domein.repository.AdminRepository;
 import domein.repository.AnalyseRepository;
+import domein.repository.DepartementRepository;
 import domein.repository.DoelgroepRepository;
+import domein.repository.EmailRepository;
 import domein.repository.WerkgeverRepository;
 import domein.repository.JobCoachRepository;
 
@@ -25,8 +22,14 @@ public class DomeinController {
     private AnalyseRepository analyseRepo;
 
     private WerkgeverRepository bedrijfRepo;
+    private DepartementRepository departementRepo;
     private DoelgroepRepository doelgroepRepo;
+    private EmailRepository emailRepo;
     private Resultaat resultaat;
+
+    public DepartementRepository getDepartementRepo() {
+        return departementRepo;
+    }
 
     public WerkgeverRepository getBedrijfRepo() {
         return bedrijfRepo;
@@ -34,6 +37,14 @@ public class DomeinController {
 
     public DoelgroepRepository getDoelgroepRepo() {
         return doelgroepRepo;
+    }
+
+    public EmailRepository getEmailRepo() {
+        return emailRepo;
+    }
+
+    public void setEmailRepo(EmailRepository emailRepo) {
+        this.emailRepo = emailRepo;
     }
 
     public Resultaat getResultaat() {
@@ -69,8 +80,10 @@ public class DomeinController {
         adminRepo.setLijst(adminRepo.getAdminMapper().getAdmins());
         jobCoachRepo = new JobCoachRepository();
         analyseRepo = new AnalyseRepository();
+        departementRepo = new DepartementRepository();
         bedrijfRepo = new WerkgeverRepository();
         doelgroepRepo = new DoelgroepRepository();
+        emailRepo = new EmailRepository();
         resultaat = new Resultaat(doelgroepRepo.getLijst());
         berekenResultaten();
     }

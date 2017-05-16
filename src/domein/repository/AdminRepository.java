@@ -6,6 +6,7 @@
 package domein.repository;
 
 import domein.Admin;
+import domein.AdminMail;
 import java.util.ArrayList;
 import java.util.List;
 import persistentie.AdminMapper;
@@ -43,23 +44,32 @@ public class AdminRepository {
     public void setLijst(List<Admin> a) {
         lijst = a;
     }
-    
-    public void addAdmin(Admin a){
+
+    public void addAdmin(Admin a) {
         adminMapper.addAdmin(a);
         lijst.add(a);
     }
-    
-    public void deleteAdmin(Admin a){
+
+    public void deleteAdmin(Admin a) {
         adminMapper.deleteAdmin(a);
     }
 
-    public void changePasswordForCurrentUser(String password){
+    public void modifyMail(AdminMail m) {
+        adminMapper.modifyMail(m);
+    }
+
+    public void deleteMail(AdminMail m) {
+        adminMapper.deleteMail(m);
+    }
+
+    public void changePasswordForCurrentUser(String password) {
         adminMapper.changePasswordForCurrentUser(password);
     }
+
     private void fillUpWithDummyData() {
         /*
         Werd gebruikt voor dummydata zonder DB connectie.
-        */
+         */
         lijst.add(new Admin("De Troyer", "Wim", "wimdetroyer@gmail.com"));
         lijst.add(new Admin("De Witte", "Andreas", "andreasdewitte@gmail.com"));
         lijst.add(new Admin("De Bruyne", "Niels", "nielsdebruyne@gmail.com"));
