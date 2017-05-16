@@ -1,0 +1,66 @@
+
+
+.centerScreenLabel{
+    -fx-font: 32px "System";
+    -fx-text-fill: derive(#337AB7,10%);
+}
+
+.cb {
+    -fx-background-color: white;
+    -fx-mark-color:#337AB7;
+    -fx-text-fill: #337AB7;
+    -fx-border-color: grey;
+    -fx-border-radius: 4 4 4 4;
+}
+
+
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header .label,
+.table-view .column-header-background .filler{
+    -fx-background-color:  #337AB7;
+    -fx-text-fill: white;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+
+
+.table-view:focused {
+    -fx-background-color:transparent,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    -fx-padding: 1;
+}
+.table-row-cell{
+    -fx-table-cell-border-color: transparent;
+}
+.table-row-cell:selected {
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+    -fx-table-cell-border-color: transparent;
+
+}
+.table-row-cell:filled:selected {
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: -fx-table-cell-border-color, -fx-background ;
+    -fx-background-insets: 0, 0 0 0 0 ;
+}
+.table-row-cell:odd:filled:selected {
+    -fx-background: -fx-control-inner-background-alt ;
+}
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+    -fx-background-color: white;
+}
+
+.blueButton{
+    -fx-background-color: derive(#337AB7,10%);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+.redButton{
+    -fx-background-color: rgba(255, 0, 0, 0.8);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}

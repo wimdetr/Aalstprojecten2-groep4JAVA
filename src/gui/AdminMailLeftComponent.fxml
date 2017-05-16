@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#openMail" prefHeight="218.0" prefWidth="369.0" stylesheets="@../css/adminmailcomponent.css" type="VBox" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="headerBox" prefHeight="62.0" prefWidth="295.0" styleClass="topBarRead">
+         <children>
+            <Label fx:id="afzenderLabel" prefHeight="20.0" prefWidth="245.0" styleClass="authorLabel" text="Jean-Jacques De Gucht">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Region prefHeight="62.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="datumLabel" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="209.0" styleClass="dateLabel" text="19:03&#10;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <VBox prefHeight="200.0" prefWidth="317.0" spacing="5.0" styleClass="downBar">
+         <children>
+            <Label fx:id="onderwerpLabel" text="De app lukt niet zo goed :(">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="126.0" prefWidth="275.0">
+               <children>
+                  <Label fx:id="inhoudLabel" text="Label" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</fx:root>

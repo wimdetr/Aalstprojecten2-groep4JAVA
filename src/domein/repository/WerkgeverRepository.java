@@ -29,22 +29,4 @@ public class WerkgeverRepository {
         werkgeverMapper = new WerkgeverMapper();
         lijst = werkgeverMapper.getAll();
     }
-
-    public List<Werkgever> zoekNaam(String query) {
-        return lijst.stream()
-                .filter(p -> p.getNaam().toLowerCase().startsWith(query.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Werkgever> zoekAfdeling(String query) {
-        return lijst.stream()
- //               .filter(p -> p.getNaamAfdeling().toLowerCase().startsWith(query.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public List<Werkgever> zoekGemeente(String query) {
-        return lijst.stream()
-       //         .filter(p -> p.getGemeente().toLowerCase().startsWith(query.toLowerCase()))
-                .collect(Collectors.toList());
-    }
 }

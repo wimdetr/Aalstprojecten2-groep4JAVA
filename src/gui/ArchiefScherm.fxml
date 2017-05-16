@@ -8,17 +8,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<fx:root stylesheets="@../css/archiefscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../css/middenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefHeight="106.0" prefWidth="929.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Archief Analyses" textFill="#85beb8">
-               <font>
-                  <Font name="Likhan" size="32.0" />
-               </font>
-            </Label>
+            <Label styleClass="centerScreenLabel" text="Overzicht Analyses" />
             <Separator prefWidth="200.0" />
          </children>
       </VBox>

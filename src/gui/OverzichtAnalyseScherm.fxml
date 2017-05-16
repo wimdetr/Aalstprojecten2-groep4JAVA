@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -11,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root stylesheets="@../css/overzichtanalysescherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
          <children>
-            <Label fx:id="overzichtAnalyseTitel" prefHeight="47.0" prefWidth="1053.0" textFill="#85beb8">
+            <Label fx:id="overzichtAnalyseTitel" prefHeight="47.0" prefWidth="1053.0" styleClass="centerScreenLabel" textFill="#85beb8">
                <font>
                   <Font name="Likhan" size="32.0" />
                </font>
@@ -369,4 +370,8 @@
          </BorderPane.margin>
       </GridPane>
    </center>
+   <stylesheets>
+      <URL value="@../css/overzichtanalysescherm.css" />
+      <URL value="@../css/middenscherm.css" />
+   </stylesheets>
 </fx:root>

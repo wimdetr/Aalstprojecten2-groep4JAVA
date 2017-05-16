@@ -6,24 +6,21 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<fx:root stylesheets="@../css/adminbeherenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../css/middenscherm.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <top>
-      <VBox prefHeight="102.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="145.0" prefWidth="666.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Administrators" textFill="#85beb8">
-               <font>
-                  <Font name="Likhan" size="32.0" />
-               </font>
-            </Label>
+            <Label styleClass="centerScreenLabel" text="Overzicht Administrators" />
             <Separator prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -31,8 +28,22 @@
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="46.0" prefWidth="591.0" spacing="5.0">
                      <children>
-                        <Button fx:id="verwijderAdminBtn" mnemonicParsing="false" onAction="#verwijderAdmin" styleClass="deleteButton" text="Verwijder" />
-                        <Button fx:id="voegToeBtn" mnemonicParsing="false" onAction="#voegAdminToe" styleClass="addButton" text="Voeg Toe" />
+                        <Button fx:id="verwijderAdminBtn" mnemonicParsing="false" onAction="#verwijderAdmin" styleClass="redButton" text="Verwijder">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/deletewhite.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="voegToeBtn" mnemonicParsing="false" onAction="#voegAdminToe" styleClass="blueButton" text="Voeg Toe">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/icons/add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                      <padding>
                         <Insets bottom="5.0" right="1.0" />
@@ -44,12 +55,12 @@
       </VBox>
    </top>
    <center>
-      <TableView fx:id="adminTableView" editable="true" BorderPane.alignment="CENTER">
+      <TableView fx:id="adminTableView" editable="true" prefHeight="400.0" prefWidth="828.0" BorderPane.alignment="CENTER">
         <columns>
-            <TableColumn fx:id="checkboxColumn" prefWidth="29.0" sortable="false" />
-            <TableColumn fx:id="emailColumn" editable="false" minWidth="0.0" prefWidth="202.0" text="Email" />
-          <TableColumn fx:id="voornaamColumn" editable="false" prefWidth="196.0" text="Voornaam" />
-          <TableColumn fx:id="naamColumn" editable="false" minWidth="0.0" prefWidth="237.0" text="Naam" />
+            <TableColumn fx:id="checkboxColumn" prefWidth="23.0" sortable="false" />
+            <TableColumn fx:id="emailColumn" editable="false" minWidth="0.0" prefWidth="244.0" text="Email" />
+          <TableColumn fx:id="voornaamColumn" editable="false" prefWidth="140.0" text="Voornaam" />
+          <TableColumn fx:id="naamColumn" editable="false" minWidth="0.0" prefWidth="439.0" text="Naam" />
         </columns>
       </TableView>
    </center>

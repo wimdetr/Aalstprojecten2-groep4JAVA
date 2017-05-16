@@ -38,8 +38,7 @@ public class Resultaat {
     }
 
     public void berekenRij(KOBRij mijnRij) {
-       // int aantalWerkuren = analyse.getWerkgever().getAantalWerkuren();
-       int aantalWerkuren = 0;
+        int aantalWerkuren = analyse.getDepartement().getAantalWerkuren();
         switch (kostOfBaat.getFormule()) {
             case FORMULE_BAAT1:
                 if (aantalWerkuren == 0) {
@@ -71,13 +70,13 @@ public class Resultaat {
                     //todo, eigen divide by zero exception schrijven
                     //throw 
                 }
-    //            mijnRij.setResultaat((mijnRij.geefKOBVakMetNummer(3).geefDataAlsDouble() / aantalWerkuren * mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble()) * (1 + ((double) analyse.getWerkgever().getPatronaleBijdrage() / 100)));
+                mijnRij.setResultaat((mijnRij.geefKOBVakMetNummer(3).geefDataAlsDouble() / aantalWerkuren * mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble()) * (1 + ((double) analyse.getDepartement().getWerkgever().getPatronaleBijdrage() / 100)));
                 break;
             case FORMULE_GEEF_VAK2:
                 mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble());
                 break;
             case FORMULE_KOST6:
-   //             mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble() / 152 * mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble() * (1 + ((double) analyse.getWerkgever().getPatronaleBijdrage() / 100)));
+                mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble() / 152 * mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble() * (1 + ((double) analyse.getDepartement().getWerkgever().getPatronaleBijdrage() / 100)));
                 break;
             case FORMULE_GEEF_VAK1:
                 mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble());
@@ -86,7 +85,7 @@ public class Resultaat {
                 if (mijnRij.geefKOBVakMetNummer(1).getDataVak().trim().equals("")) {
                     mijnRij.setResultaat(0);
                 } else {
-     //               mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble() / aantalWerkuren * mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble() * (1 + ((double) analyse.getWerkgever().getPatronaleBijdrage() / 100)) * 13.92);
+                    mijnRij.setResultaat(mijnRij.geefKOBVakMetNummer(1).geefDataAlsDouble() / aantalWerkuren * mijnRij.geefKOBVakMetNummer(2).geefDataAlsDouble() * (1 + ((double) analyse.getDepartement().getWerkgever().getPatronaleBijdrage() / 100)) * 13.92);
                 }
                 break;
             case FORMULE_SOM_VAK_1_EN_2:
@@ -106,8 +105,8 @@ public class Resultaat {
             //??
         }
         rij.setResultaat(rij.geefKOBVakMetNummer(3).geefDataAlsDouble()
-                / aantalWerkuren * rij.geefKOBVakMetNummer(2).geefDataAlsDouble());
-        //        * (1 + (double) analyse.getWerkgever().getPatronaleBijdrage() / 100));
+                / aantalWerkuren * rij.geefKOBVakMetNummer(2).geefDataAlsDouble()
+                * (1 + (double) analyse.getDepartement().getWerkgever().getPatronaleBijdrage() / 100));
     }
 
     public KOBRij geefRijVanKost(int kostId, int rijId) {

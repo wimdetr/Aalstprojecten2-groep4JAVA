@@ -97,16 +97,6 @@ public class Werkgever implements Serializable {
         return hash;
     }
 
-    @Transient
-    private BooleanProperty checked = new SimpleBooleanProperty(false);
-
-    public ObservableBooleanValue isChecked() {
-        return checked;
-    }
-
-    public void setChecked(Boolean checked) {
-        this.checked.set(checked);
-    }
 
     @Override
     public boolean equals(Object object) {

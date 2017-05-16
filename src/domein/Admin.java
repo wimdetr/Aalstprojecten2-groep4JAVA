@@ -6,17 +6,22 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -40,8 +45,20 @@ public class Admin implements Serializable {
     protected Admin() {
     }
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "OntvangerMail", referencedColumnName = "Email")
+    public List<AdminMail> mails;
+
+    public List<AdminMail> getMails() {
+        return mails;
+    }
+
+    public void setMails(List<AdminMail> mails) {
+        this.mails = mails;
+    }
+
     @Transient
-    private final StringProperty email = new SimpleStringProperty(this,"email");
+    private final StringProperty email = new SimpleStringProperty(this, "email");
 
     @Id
     @Column(name = "Email")

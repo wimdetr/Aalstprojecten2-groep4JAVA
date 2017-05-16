@@ -43,6 +43,8 @@ public class Analyse implements Serializable, Comparable<Analyse> {
     @OneToOne(mappedBy = "analyse")
     private Departement departement;
 
+   
+
     public Departement getDepartement() {
         return departement;
     }

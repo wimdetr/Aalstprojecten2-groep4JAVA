@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 15, 2017, 9:05:31 PM
+    Author     : wimde
+*/
+
+.authorLabel{
+    -fx-text-fill: white;
+
+}
+
+.dateLabel{
+    -fx-text-fill: white;
+}
+
+.onderwerpLabel{
+
+}
+
+.inhoudLabel{
+
+}
+
+.topBarRead{
+    -fx-background-color: derive(#337AB7,-60%);
+}
+
+.topBarUnRead{
+    -fx-background-color: #337AB7;
+}
+
+.downBar{
+    -fx-background-color: white;
+}

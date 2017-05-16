@@ -1,20 +1,15 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : May 4, 2017, 6:39:04 PM
-    Author     : wimde
-*/
 
 .loginBtn{
-    -fx-background-color: rgba(0, 128, 0, 0.8);
+
+    -fx-background-color: derive(#337AB7,10%);
     -fx-background-insets: 0;
     -fx-text-fill: white;
+
 }
 
 .topbar{
-    -fx-background-color: lightgrey;
-    
+    -fx-background-color: #337AB7; 
+}
+.bottombar{
+    -fx-background-color: #F5F5F5;
 }
