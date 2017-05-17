@@ -48,8 +48,8 @@ public class EmailVerzendenScherm extends BorderPane {
 
     public EmailVerzendenScherm(Schermbeheer beheer, AdminMail mail) {
         this(beheer, Arrays.asList(mail.getAfzender()));
-        onderwerpVeld.setText("Re:"+mail.getOnderwerp());
-        inhoudVeld.setText(mail.getInhoud());
+        onderwerpVeld.setText("Re:" + mail.getOnderwerp());
+        inhoudVeld.setText("\n----------------\n" + mail.getInhoud());
     }
 
     public EmailVerzendenScherm(Schermbeheer beheer, List<JobCoach> coaches) {

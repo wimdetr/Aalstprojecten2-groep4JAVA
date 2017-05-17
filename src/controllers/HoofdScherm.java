@@ -84,6 +84,7 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     public void toonAnalyseScherm(ActionEvent event) {
+        
         ArchiefScherm scherm = new ArchiefScherm(schermBeheer);
         this.setCenter(scherm);
     }
@@ -102,8 +103,13 @@ public class HoofdScherm extends BorderPane {
 
     @FXML
     void toonEmailScherm(ActionEvent event) {
+        dc.getAdminRepo().updateEmailsVoorAdmin(dc.getAdmin());
         AdminMailScherm scherm = new AdminMailScherm(schermBeheer);
         this.setCenter(scherm);
     }
 
+    @FXML
+    void updateData(ActionEvent event) {
+        dc.refreshData();
+    }
 }

@@ -32,6 +32,9 @@ public class AdminRepository {
         lijst = new ArrayList<>();
         adminMapper = new AdminMapper();
     }
+    public void updateEmailsVoorAdmin(Admin a) {
+        adminMapper.updateEmailsVoorAdmin(a);
+    }
 
     public boolean controleerOfAdminKanInloggen(String username, String wachtwoord) {
         return adminMapper.controleerOfAdminKanInloggen(username, wachtwoord);

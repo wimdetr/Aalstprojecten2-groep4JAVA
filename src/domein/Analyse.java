@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
@@ -30,10 +31,6 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Analyse.findAll", query = "SELECT a FROM Analyse a")})
 public class Analyse implements Serializable, Comparable<Analyse> {
 
-    protected Analyse() {
-
-    }
-
     private static final long serialVersionUID = 1L;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -43,7 +40,10 @@ public class Analyse implements Serializable, Comparable<Analyse> {
     @OneToOne(mappedBy = "analyse")
     private Departement departement;
 
-   
+    //voor test
+    public Analyse() {
+        kostenEnBaten = new ArrayList<>();
+    }
 
     public Departement getDepartement() {
         return departement;
@@ -193,6 +193,11 @@ public class Analyse implements Serializable, Comparable<Analyse> {
     @Override
     public int compareTo(Analyse a) {
         return getLaatsteAanpasDatum().compareTo(a.getLaatsteAanpasDatum());
+    }
+
+    // voor testen :DDDDDDDDDDD
+    public void slaKostOfBaatOp(KostOfBaat e) {
+        kostenEnBaten.add(e);
     }
 
 }

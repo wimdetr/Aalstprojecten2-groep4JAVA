@@ -41,6 +41,17 @@ public class AdminMapper {
         return true;
     }
 
+    public void updateEmailsVoorAdmin(Admin a) {
+        EntityManager em = JPAUtil.getEmf().createEntityManager();
+        em.getTransaction().begin();
+        TypedQuery<AdminMail> q = em.createNamedQuery("AdminMail.findAll", AdminMail.class);
+        q.setParameter("ontvanger", a);
+        List<AdminMail> mails = q.getResultList();
+        em.getTransaction().commit();
+        em.close();
+        a.setMails(mails);
+    }
+
     public Admin geefAdmin(String username) {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         TypedQuery<Admin> q = em.createNamedQuery("Admin.findAdmin", Admin.class);

@@ -113,4 +113,8 @@ public class KOBRij implements Serializable {
         }
         return null;
     }
+    
+    public KOBRij(int vraag){
+        this.kOBRijId = vraag;
+    }
 }

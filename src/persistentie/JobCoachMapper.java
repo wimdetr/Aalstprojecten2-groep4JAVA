@@ -32,6 +32,11 @@ public class JobCoachMapper {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
         em.merge(j);
+        Query q = (Query) em.createNativeQuery("UPDATE aspnetusers SET Naam = ?1, Voornaam = ?2 WHERE NormalizedUsername = ?3");
+        q.setParameter(1, j.getNaam());
+        q.setParameter(2, j.getVoornaam());
+        q.setParameter(3, j.getEmail());
+        q.executeUpdate();
         em.getTransaction().commit();
         em.close();
     }
@@ -40,8 +45,8 @@ public class JobCoachMapper {
         EntityManager em = JPAUtil.getEmf().createEntityManager();
         em.getTransaction().begin();
         em.remove(em.contains(j) ? j : em.merge(j));
-        Query q  = (Query) em.createNativeQuery("DELETE FROM aspnetusers WHERE username = ?1");
-        q.setParameter(1,j.getEmail());
+        Query q = (Query) em.createNativeQuery("DELETE FROM aspnetusers WHERE username = ?1");
+        q.setParameter(1, j.getEmail());
         q.executeUpdate();
         em.getTransaction().commit();
         em.close();

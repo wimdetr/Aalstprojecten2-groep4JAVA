@@ -6,6 +6,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,10 +30,6 @@ import javax.persistence.Transient;
 @Table(name = "kostofbaat")
 public class KostOfBaat implements Serializable {
 
-    protected KostOfBaat() {
-
-    }
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +50,11 @@ public class KostOfBaat implements Serializable {
 
     @Transient
     private double resultaat;
+
+    // voor testen
+    public KostOfBaat() {
+        rijen = new ArrayList<>();
+    }
 
     public int getVraagId() {
         return vraagId;
@@ -154,6 +156,17 @@ public class KostOfBaat implements Serializable {
             sum *= 12;
         }
         resultaat = sum;
+    }
+
+    public KostOfBaat(int vraagId, double res, KOBEnum a) {
+        this.vraagId = vraagId;
+        this.resultaat = res;
+        this.kobEnum = a;
+    }
+
+    // voor test shizzle
+    public void addKOBRij(KOBRij rij) {
+        rijen.add(rij);
     }
 
 }

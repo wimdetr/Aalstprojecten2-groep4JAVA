@@ -29,6 +29,10 @@ public class JobCoachRepository {
     public JobCoachRepository() {
         lijst = new ArrayList<>();
         jobCoachMapper = new JobCoachMapper();
+        getAll();
+    }
+
+    public void getAll() {
         lijst = jobCoachMapper.getAll();
     }
 

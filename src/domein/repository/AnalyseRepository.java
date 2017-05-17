@@ -10,6 +10,7 @@ import domein.Werkgever;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +44,6 @@ public class AnalyseRepository {
         if(n >= lijst.size()){
             n = lijst.size();
         }
-        return lijst.stream().sorted().limit(n).collect(Collectors.toList());
+        return lijst.stream().sorted(Comparator.reverseOrder()).limit(n).collect(Collectors.toList());
     }
 }

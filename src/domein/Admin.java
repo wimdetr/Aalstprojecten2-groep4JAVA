@@ -45,8 +45,7 @@ public class Admin implements Serializable {
     protected Admin() {
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "OntvangerMail", referencedColumnName = "Email")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ontvanger")
     public List<AdminMail> mails;
 
     public List<AdminMail> getMails() {
