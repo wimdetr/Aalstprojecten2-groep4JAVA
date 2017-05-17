@@ -7,6 +7,8 @@ package controllers;
 
 import domein.Analyse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,7 +86,8 @@ public class AnalyseCard extends VBox {
         kostenLabel.setText(NumberUtil.formatDouble(kosten));
         batenLabel.setText(NumberUtil.formatDouble(baten));
         resultaatLabel.setText(NumberUtil.formatDouble(resultaat));
-
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+        datumLabel.setText(dateFormat.format(analyse.getLaatsteAanpasDatum()));
         if (resultaat >= 0) {
             resultBox.getStyleClass().add("resultBoxPositive");
         } else {

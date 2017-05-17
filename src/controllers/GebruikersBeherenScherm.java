@@ -87,6 +87,7 @@ public class GebruikersBeherenScherm extends BorderPane {
     private Schermbeheer schermBeheer;
 
     public GebruikersBeherenScherm(Schermbeheer schermbeheer) {
+        System.out.println("hi");
         this.schermBeheer = schermbeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikersBeherenScherm.fxml"));
         loader.setRoot(this);

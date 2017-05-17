@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,6 +29,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "adminmail")
+@NamedQueries({
+    @NamedQuery(name = "AdminMail.findAll", query = "SELECT a FROM AdminMail a where a.ontvanger = :ontvanger")
+})
 public class AdminMail implements Serializable, Comparable<AdminMail> {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +48,18 @@ public class AdminMail implements Serializable, Comparable<AdminMail> {
     @Column(name = "VerzendDatum")
     @Temporal(TemporalType.TIMESTAMP)
     private Date verzendDatum;
+
+    @ManyToOne
+    @JoinColumn(name = "OntvangerMail")
+    private Admin ontvanger;
+
+    public Admin getOntvanger() {
+        return ontvanger;
+    }
+
+    public void setOntvanger(Admin ontvanger) {
+        this.ontvanger = ontvanger;
+    }
 
     @ManyToOne
     @JoinColumn(name = "AfzenderMail")

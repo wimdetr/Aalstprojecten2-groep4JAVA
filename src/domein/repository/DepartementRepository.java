@@ -19,7 +19,12 @@ public class DepartementRepository {
     public DepartementRepository() {
         lijst = new ArrayList<>();
         mapper = new DepartementMapper();
+        getAll();
+    }
+
+    public void getAll() {
         lijst = mapper.getAll();
+
     }
 
     public List<Departement> getLijst() {

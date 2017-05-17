@@ -54,7 +54,7 @@
                      <children>
                         <TextField fx:id="zoekTextField" prefHeight="26.0" prefWidth="296.0" promptText="Vul een zoekfilter in..." />
                         <ChoiceBox fx:id="zoekChoiceBox" prefWidth="150.0" styleClass="cb" />
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#doZoek" prefHeight="27.0" prefWidth="76.0" styleClass="blueButton" text="Zoek">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#doZoek" prefHeight="27.0" prefWidth="88.0" styleClass="blueButton" text="Zoeken">
                            <graphic>
                               <ImageView fitHeight="57.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

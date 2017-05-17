@@ -88,6 +88,13 @@ public class DomeinController {
         berekenResultaten();
     }
 
+    public void refreshData() {
+        jobCoachRepo.getAll();
+        departementRepo.getAll();
+        analyseRepo.getAll();
+        berekenResultaten(); // onperformant
+    }
+
     public void logAdminUit() {
         admin = null;
     }

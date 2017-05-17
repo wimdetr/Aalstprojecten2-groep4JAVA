@@ -28,9 +28,9 @@
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
    <left>
-      <ScrollPane fx:id="emailScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="482.0" prefWidth="372.0" styleClass="scrollPane" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="emailScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="482.0" prefWidth="386.0" styleClass="scrollPane" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="emailBox" prefHeight="481.0" prefWidth="388.0" />
+            <VBox fx:id="emailBox" prefHeight="481.0" prefWidth="359.0" />
          </content>
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" />
