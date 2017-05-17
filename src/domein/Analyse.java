@@ -65,8 +65,7 @@ public class Analyse implements Serializable, Comparable<Analyse> {
     @Column(name = "AnalyseId")
     private int id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "AnalyseId", referencedColumnName = "AnalyseId")
+    @OneToMany(mappedBy = "analyse",fetch = FetchType.EAGER)
     private List<KostOfBaat> kostenEnBaten;
 
     @Transient

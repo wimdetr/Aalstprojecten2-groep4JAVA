@@ -37,6 +37,11 @@ public class Resultaat {
         analyse = a;
     }
 
+    public void clear() {
+        kostOfBaat = null;
+        analyse = null;
+    }
+
     public void berekenRij(KOBRij mijnRij) {
         int aantalWerkuren = analyse.getDepartement().getAantalWerkuren();
         switch (kostOfBaat.getFormule()) {

@@ -87,7 +87,6 @@ public class GebruikersBeherenScherm extends BorderPane {
     private Schermbeheer schermBeheer;
 
     public GebruikersBeherenScherm(Schermbeheer schermbeheer) {
-        System.out.println("hi");
         this.schermBeheer = schermbeheer;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/GebruikersBeherenScherm.fxml"));
         loader.setRoot(this);
@@ -276,7 +275,7 @@ public class GebruikersBeherenScherm extends BorderPane {
     @FXML
     void doMail(ActionEvent event) {
         ObservableList<JobCoach> coaches = gebruikersTableView.getItems().filtered(p -> p.isChecked().get() == true);
-        schermBeheer.plaatsPopUpScherm(new EmailVerzendenScherm(schermBeheer,coaches), "Mail Verzenden");
+        schermBeheer.plaatsPopUpScherm(new EmailVerzendenScherm(schermBeheer, coaches), "Mail Verzenden");
     }
 
     @FXML

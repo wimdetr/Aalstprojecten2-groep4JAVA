@@ -38,6 +38,9 @@ public class AnalyseCard extends VBox {
     private Label jobcoachLabel;
 
     @FXML
+    private Label locatieLabel;
+
+    @FXML
     private Label datumLabel;
 
     @FXML
@@ -86,6 +89,8 @@ public class AnalyseCard extends VBox {
         kostenLabel.setText(NumberUtil.formatDouble(kosten));
         batenLabel.setText(NumberUtil.formatDouble(baten));
         resultaatLabel.setText(NumberUtil.formatDouble(resultaat));
+        jobcoachLabel.setText(analyse.getJobcoach().getVoornaam() + " " + analyse.getJobcoach().getNaam());
+        locatieLabel.setText(analyse.getDepartement().getGemeente());
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
         datumLabel.setText(dateFormat.format(analyse.getLaatsteAanpasDatum()));
         if (resultaat >= 0) {

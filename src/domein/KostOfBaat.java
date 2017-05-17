@@ -18,6 +18,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -35,6 +36,19 @@ public class KostOfBaat implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "AnalyseId")
+    private Analyse analyse;
+
+    public Analyse getAnalyse() {
+        return analyse;
+    }
+
+    public void setAnalyse(Analyse analyse) {
+        this.analyse = analyse;
+    }
+    
+    
     @Column(name = "VraagId")
     private int vraagId;
 
@@ -44,8 +58,7 @@ public class KostOfBaat implements Serializable {
     @Column(name = "Formule")
     private Formule formule;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "KostOfBaatid", referencedColumnName = "id")
+    @OneToMany(mappedBy = "kostOfBaat",fetch = FetchType.EAGER)
     private List<KOBRij> rijen;
 
     @Transient

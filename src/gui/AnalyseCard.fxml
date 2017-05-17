@@ -141,7 +141,7 @@
                                     <Font name="System Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="236.0" text="Aalst" />
+                              <Label fx:id="locatieLabel" alignment="CENTER" prefHeight="16.0" prefWidth="236.0" text="Aalst" />
                            </children>
                         </VBox>
                         <VBox prefHeight="52.0" prefWidth="149.0" spacing="5.0">

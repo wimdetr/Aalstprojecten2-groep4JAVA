@@ -35,13 +35,12 @@ public class AnalyseRepository {
         getAll();
     }
 
-    
-    public void getAll(){
+    public void getAll() {
         lijst = analyseMapper.getAll();
     }
-    
-    public List<Analyse> getNthMostRecent(int n){
-        if(n >= lijst.size()){
+
+    public List<Analyse> getNthMostRecent(int n) {
+        if (n >= lijst.size()) {
             n = lijst.size();
         }
         return lijst.stream().sorted(Comparator.reverseOrder()).limit(n).collect(Collectors.toList());
