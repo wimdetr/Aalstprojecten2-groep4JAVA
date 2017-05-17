@@ -92,6 +92,7 @@ public class DomeinController {
         jobCoachRepo.getAll();
         departementRepo.getAll();
         analyseRepo.getAll();
+        resultaat.clear();
         berekenResultaten(); // onperformant
     }
 

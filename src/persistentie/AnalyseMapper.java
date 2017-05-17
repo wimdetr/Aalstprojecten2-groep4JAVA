@@ -6,6 +6,7 @@
 package persistentie;
 
 import domein.Analyse;
+import domein.KostOfBaat;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -29,5 +30,6 @@ public class AnalyseMapper {
         em.close();
         return results;
     }
+
 
 }

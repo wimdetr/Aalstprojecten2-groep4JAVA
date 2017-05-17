@@ -8,9 +8,12 @@ package domein;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +28,18 @@ public class KOBVak implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "KOBRijid")
+    public KOBRij kobrij;
+
+    public KOBRij getKobrij() {
+        return kobrij;
+    }
+
+    public void setKobrij(KOBRij kobrij) {
+        this.kobrij = kobrij;
+    }
 
     @Column(name = "KOBVakId")
     private int kobVakId;
@@ -81,8 +96,7 @@ public class KOBVak implements Serializable {
         return "persistence.KOBVak[ id=" + id + " ]";
     }
 
-    public double geefDataAlsDouble(){
+    public double geefDataAlsDouble() {
         return Double.parseDouble(dataVak.replace(",", "."));
     }
 }
-

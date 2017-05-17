@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -32,8 +33,19 @@ public class KOBRij implements Serializable {
     }
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "KOBRijid", referencedColumnName = "id")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "KostOfBaatid")
+    private KostOfBaat kostOfBaat;
+
+    public KostOfBaat getKostOfBaat() {
+        return kostOfBaat;
+    }
+
+    public void setKostOfBaat(KostOfBaat kostOfBaat) {
+        this.kostOfBaat = kostOfBaat;
+    }
+
+    @OneToMany(mappedBy = "kobrij",fetch = FetchType.EAGER)
     private List<KOBVak> vakken;
 
     @Transient
@@ -113,8 +125,8 @@ public class KOBRij implements Serializable {
         }
         return null;
     }
-    
-    public KOBRij(int vraag){
+
+    public KOBRij(int vraag) {
         this.kOBRijId = vraag;
     }
 }
