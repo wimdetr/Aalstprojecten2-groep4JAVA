@@ -6,6 +6,7 @@
 package domein;
 
 import java.io.Serializable;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,6 +21,8 @@ import javax.persistence.Table;
  *
  * @author wimde
  */
+@Cacheable(false)
+
 @Entity
 @Table(name = "kostofbaatvak")
 public class KOBVak implements Serializable {

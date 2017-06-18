@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,8 @@ import javax.persistence.Transient;
 @Table(name = "analyse")
 @NamedQueries({
     @NamedQuery(name = "Analyse.findAll", query = "SELECT a FROM Analyse a")})
+@Cacheable(false)
+
 public class Analyse implements Serializable, Comparable<Analyse> {
 
     private static final long serialVersionUID = 1L;
@@ -78,7 +81,7 @@ public class Analyse implements Serializable, Comparable<Analyse> {
     private double resultaatKosten;
 
     @Column(name = "LaatsteAanpasDatum")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date laatsteAanpasDatum;
 
     public Analyse(int i, Date date) {

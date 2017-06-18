@@ -7,6 +7,7 @@ package domein;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +27,8 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "kostofbaatrij")
+@Cacheable(false)
+
 public class KOBRij implements Serializable {
 
     protected KOBRij() {
